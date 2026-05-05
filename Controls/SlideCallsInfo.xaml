@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="MovieIntro.Controls.SlideCallsInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="#000000">
+
+    <Grid>
+        <Grid.RenderTransform>
+            <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+        </Grid.RenderTransform>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="700">
+            <!-- Простая иконка телефона (символ Unicode) -->
+            <TextBlock x:Name="IconText"
+                       Text="📞"
+                       FontFamily="Segoe UI Emoji"
+                       FontSize="64"
+                       Foreground="#FFFFFF"
+                       HorizontalAlignment="Center"
+                       Opacity="0"
+                       Margin="0,0,0,30">
+                <TextBlock.RenderTransform>
+                    <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
+            <!-- Основной текст -->
+            <TextBlock x:Name="MainText"
+                       Text="ИНТЕГРАЦИЯ КОНТРОЛЯ ЗВОНКОВ"
+                       FontFamily="Segoe UI"
+                       FontSize="32"
+                       FontWeight="Light"
+                       Foreground="#FFFFFF"
+                       HorizontalAlignment="Center"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"
+                       Opacity="0">
+                <TextBlock.RenderTransform>
+                    <ScaleTransform ScaleX="0.9" ScaleY="0.9"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
+            <!-- Вторая строка -->
+            <TextBlock x:Name="SubText"
+                       Text="В 1С"
+                       FontFamily="Segoe UI"
+                       FontSize="48"
+                       FontWeight="SemiBold"
+                       Foreground="#FFFFFF"
+                       HorizontalAlignment="Center"
+                       Margin="0,20,0,0"
+                       Opacity="0">
+                <TextBlock.RenderTransform>
+                    <ScaleTransform ScaleX="0.9" ScaleY="0.9"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
+            <!-- Анимированная точка внизу -->
+            <Ellipse x:Name="PulseDot" Width="6" Height="6" Fill="#FFFFFF" Opacity="0"
+                     HorizontalAlignment="Center" Margin="0,30,0,0">
+                <Ellipse.RenderTransform>
+                    <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+        </StackPanel>
+    </Grid>
+</UserControl>

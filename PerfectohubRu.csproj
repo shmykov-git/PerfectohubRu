@@ -129,6 +129,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\Slide1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Slide2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Slide3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SlideAddAts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SlideCallsInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -138,6 +158,23 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AppConfigCode.cs" />
+    <Compile Include="Controls\ISlide.cs" />
+    <Compile Include="Controls\Slide1.xaml.cs">
+      <DependentUpon>Slide1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Slide2.xaml.cs">
+      <DependentUpon>Slide2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Slide3.xaml.cs">
+      <DependentUpon>Slide3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SlideAddAts.xaml.cs">
+      <DependentUpon>SlideAddAts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SlideAddAts.xaml.slide.cs" />
+    <Compile Include="Controls\SlideCallsInfo.xaml.cs">
+      <DependentUpon>SlideCallsInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\EmbededResourceExtenstions.cs" />
     <Compile Include="Extensions\JsonExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
@@ -174,6 +211,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\System.ValueTuple.4.6.2\build\net471\System.ValueTuple.targets" Condition="Exists('packages\System.ValueTuple.4.6.2\build\net471\System.ValueTuple.targets')" />

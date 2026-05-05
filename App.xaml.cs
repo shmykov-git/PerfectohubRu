@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MovieIntro;
 using PerfectohubRu.Extensions;
 using PerfectohubRu.Model;
 using System;
