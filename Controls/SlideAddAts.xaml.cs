@@ -115,9 +115,8 @@ namespace MovieIntro.Controls
 
         private async void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            //var helpDialog = new HelpDialog();
-            //helpDialog.Owner = Window.GetWindow(this);
-            //helpDialog.ShowDialog();
+            var mainWindow = Window.GetWindow(this) as MainWindow;
+            mainWindow.ShowDialog<AtsHelpDialog>();
         }
 
         private async void SubmitButton_Click(object sender, RoutedEventArgs e)

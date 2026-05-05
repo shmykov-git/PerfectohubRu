@@ -1,4 +1,5 @@
-﻿using MovieIntro.Controls;
+﻿using Microsoft.Extensions.DependencyInjection;
+using MovieIntro.Controls;
 using PerfectohubRu.Controls;
 using System;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace MovieIntro
         private int currentSlideIndex = 0;
         private DispatcherTimer slideTimer;
         private readonly ISlide[] slides;
+        private readonly IServiceProvider sp;
 
         public MainWindow()
         {
@@ -33,6 +35,18 @@ namespace MovieIntro
             this.KeyUp += (s, e) => SkipIntro();
 
             StartIntroSequence();
+        }
+
+        public MainWindow(IServiceProvider sp) : this()
+        {
+            this.sp = sp;
+        }
+
+        public void ShowDialog<TWindow>() where TWindow : Window
+        {
+            var window = sp.GetRequiredService<TWindow>();
+            window.Owner = this;
+            window.ShowDialog();
         }
 
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)

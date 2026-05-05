@@ -30,6 +30,7 @@ namespace PerfectohubRu
             // Регистрация окон
             services
                 .AddSingleton<MainWindow>()
+                .AddTransient<AtsHelpDialog>()
                 ;
 
             Services = services.BuildServiceProvider();
