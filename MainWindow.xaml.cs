@@ -47,7 +47,7 @@ namespace MovieIntro
         private async void StartIntroSequence()
         {
             slideTimer = new DispatcherTimer();
-            slideTimer.Interval = TimeSpan.FromSeconds(10); // 3 секунды на слайд
+            slideTimer.Interval = TimeSpan.FromSeconds(5); // 3 секунды на слайд
 
             await ShowSlide(0);
             slideTimer.Tick += SlideTimer_Tick;

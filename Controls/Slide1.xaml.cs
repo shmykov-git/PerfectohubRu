@@ -17,13 +17,13 @@ namespace MovieIntro.Controls
 
         public async Task PlayEnterAnimation()
         {
-            return;
             // Анимация для картинки
-            var imgFadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.8));
-            var imgScaleX = new DoubleAnimation(0.5, 1, TimeSpan.FromSeconds(0.8));
-            var imgScaleY = new DoubleAnimation(0.5, 1, TimeSpan.FromSeconds(0.8));
+            var imgFadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(4));
+            var imgScaleX = new DoubleAnimation(0.5, 2, TimeSpan.FromSeconds(4));
+            var imgScaleY = new DoubleAnimation(0.5, 2, TimeSpan.FromSeconds(4));
 
             LogoImage.BeginAnimation(UIElement.OpacityProperty, imgFadeIn);
+
             if (LogoImage.RenderTransform is ScaleTransform imgScale)
             {
                 imgScale.BeginAnimation(ScaleTransform.ScaleXProperty, imgScaleX);
@@ -33,9 +33,9 @@ namespace MovieIntro.Controls
             await Task.Delay(200);
 
             // Анимация для текста
-            var textFadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(1.2));
-            var textScaleX = new DoubleAnimation(0.8, 1, TimeSpan.FromSeconds(1.2));
-            var textScaleY = new DoubleAnimation(0.8, 1, TimeSpan.FromSeconds(1.2));
+            var textFadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(2.5));
+            var textScaleX = new DoubleAnimation(0.8, 1, TimeSpan.FromSeconds(2.5));
+            var textScaleY = new DoubleAnimation(0.8, 1, TimeSpan.FromSeconds(2.5));
 
             TitleText.BeginAnimation(UIElement.OpacityProperty, textFadeIn);
             if (TitleText.RenderTransform is ScaleTransform textScale)

@@ -10,58 +10,9 @@ namespace MovieIntro.Controls
 {
     public partial class SlideCallsInfo : UserControl, ISlide
     {
-        private Storyboard pulseStoryboard;
-
         public SlideCallsInfo()
         {
             InitializeComponent();
-            CreatePulseAnimation();
-        }
-
-        private void CreatePulseAnimation()
-        {
-            pulseStoryboard = new Storyboard();
-
-            var pulseAnimation = new DoubleAnimation
-            {
-                From = 0.2,
-                To = 1,
-                Duration = TimeSpan.FromSeconds(1),
-                AutoReverse = true,
-                RepeatBehavior = RepeatBehavior.Forever
-            };
-
-            Storyboard.SetTarget(pulseAnimation, PulseDot);
-            Storyboard.SetTargetProperty(pulseAnimation, new PropertyPath(UIElement.OpacityProperty));
-            pulseStoryboard.Children.Add(pulseAnimation);
-
-            var scaleAnimation = new DoubleAnimation
-            {
-                From = 0.5,
-                To = 1.5,
-                Duration = TimeSpan.FromSeconds(1),
-                AutoReverse = true,
-                RepeatBehavior = RepeatBehavior.Forever
-            };
-
-            Storyboard.SetTarget(scaleAnimation, PulseDot);
-            Storyboard.SetTargetProperty(scaleAnimation,
-                new PropertyPath("(UIElement.RenderTransform).(ScaleTransform.ScaleX)"));
-            pulseStoryboard.Children.Add(scaleAnimation);
-
-            var scaleYAnimation = new DoubleAnimation
-            {
-                From = 0.5,
-                To = 1.5,
-                Duration = TimeSpan.FromSeconds(1),
-                AutoReverse = true,
-                RepeatBehavior = RepeatBehavior.Forever
-            };
-
-            Storyboard.SetTarget(scaleYAnimation, PulseDot);
-            Storyboard.SetTargetProperty(scaleYAnimation,
-                new PropertyPath("(UIElement.RenderTransform).(ScaleTransform.ScaleY)"));
-            pulseStoryboard.Children.Add(scaleYAnimation);
         }
 
         public async Task PlayEnterAnimation()
@@ -120,24 +71,10 @@ namespace MovieIntro.Controls
                 subScale.BeginAnimation(ScaleTransform.ScaleXProperty, subScaleX);
                 subScale.BeginAnimation(ScaleTransform.ScaleYProperty, subScaleY);
             }
-
-            await Task.Delay(200);
-
-            // Анимация линии
-            //var lineFade = new DoubleAnimation(0, 0.3, TimeSpan.FromSeconds(0.6));
-            //Line.BeginAnimation(UIElement.OpacityProperty, lineFade);
-
-            //await Task.Delay(300);
-
-            // Запуск пульсации
-            PulseDot.Opacity = 1;
-            pulseStoryboard.Begin();
         }
 
         public async Task PlayExitAnimation()
         {
-            pulseStoryboard?.Stop();
-
             var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.5));
             this.BeginAnimation(UIElement.OpacityProperty, fadeOut);
             await Task.Delay(500);

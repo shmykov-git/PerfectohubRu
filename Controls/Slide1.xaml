@@ -7,11 +7,14 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <!-- Картинка из embedded ресурса -->
             <Image x:Name="LogoImage" 
-                   Source="/Controls/logo.png"
+                   Source="/Assets/logo.png"
                    Width="120" Height="120"
                    Margin="0,0,0,30"
-                   Opacity="1"
+                   Opacity="0"
                    RenderTransformOrigin="0.5,0.5">
+                <Image.CacheMode>
+                    <BitmapCache />
+                </Image.CacheMode>
                 <Image.RenderTransform>
                     <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
                 </Image.RenderTransform>

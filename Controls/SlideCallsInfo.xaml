@@ -53,14 +53,6 @@
                     <ScaleTransform ScaleX="0.9" ScaleY="0.9"/>
                 </TextBlock.RenderTransform>
             </TextBlock>
-
-            <!-- Анимированная точка внизу -->
-            <Ellipse x:Name="PulseDot" Width="6" Height="6" Fill="#FFFFFF" Opacity="0"
-                     HorizontalAlignment="Center" Margin="0,30,0,0">
-                <Ellipse.RenderTransform>
-                    <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
-                </Ellipse.RenderTransform>
-            </Ellipse>
         </StackPanel>
     </Grid>
 </UserControl>
