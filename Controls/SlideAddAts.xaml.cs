@@ -61,9 +61,9 @@ namespace MovieIntro.Controls
         private async Task ShowImages()
         {
             // Появление большой картинки
-            var imgFadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.6));
-            var imgScaleX = new DoubleAnimation(0.8, 1, TimeSpan.FromSeconds(0.6));
-            var imgScaleY = new DoubleAnimation(0.8, 1, TimeSpan.FromSeconds(0.6));
+            var imgFadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(1.6));
+            var imgScaleX = new DoubleAnimation(0.3, 1, TimeSpan.FromSeconds(1.6));
+            var imgScaleY = new DoubleAnimation(0.3, 1, TimeSpan.FromSeconds(1.6));
 
             ResultImage.BeginAnimation(UIElement.OpacityProperty, imgFadeIn);
             if (ResultImage.RenderTransform is ScaleTransform imgScale)
@@ -75,11 +75,12 @@ namespace MovieIntro.Controls
             await Task.Delay(300);
 
             // Появление картинки-стрелки
-            var arrowFadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.4));
-            var arrowScaleX = new DoubleAnimation(0.8, 1, TimeSpan.FromSeconds(0.4));
-            var arrowScaleY = new DoubleAnimation(0.8, 1, TimeSpan.FromSeconds(0.4));
+            var arrowFadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(1.6));
+            var arrowScaleX = new DoubleAnimation(0.3, 1, TimeSpan.FromSeconds(1.6));
+            var arrowScaleY = new DoubleAnimation(0.3, 1, TimeSpan.FromSeconds(1.6));
 
             ArrowImage.BeginAnimation(UIElement.OpacityProperty, arrowFadeIn);
+
             if (ArrowImage.RenderTransform is ScaleTransform arrowScale)
             {
                 arrowScale.BeginAnimation(ScaleTransform.ScaleXProperty, arrowScaleX);
@@ -123,7 +124,7 @@ namespace MovieIntro.Controls
         {
             if (string.IsNullOrWhiteSpace(TokenTextBox.Text))
             {
-                await ShowError("АТС токен точно нужен");
+                await ShowError("Нужен токен облачной АТС");
                 return;
             }
 

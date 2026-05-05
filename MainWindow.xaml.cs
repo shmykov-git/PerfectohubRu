@@ -30,6 +30,7 @@ namespace MovieIntro
 
             // Клик по окну для пропуска вступления
             this.MouseLeftButtonDown += (s, e) => SkipIntro();
+            this.KeyUp += (s, e) => SkipIntro();
 
             StartIntroSequence();
         }
@@ -65,13 +66,15 @@ namespace MovieIntro
             await SwitchToNextSlide();
         }
 
-        private async Task SwitchToNextSlide()
+        private Task SwitchToNextSlide() => SwitchToSlide(currentSlideIndex + 1);
+
+        private async Task SwitchToSlide(int index)
         {
             // Анимируем выход текущего слайда
             await ExitCurrentSlide();
 
             // Переключаем на следующий
-            currentSlideIndex++;
+            currentSlideIndex = index;
             await ShowSlide(currentSlideIndex);
         }
 
@@ -133,19 +136,9 @@ namespace MovieIntro
             if (slideTimer != null && slideTimer.IsEnabled)
             {
                 slideTimer.Stop();
+                slideTimer.IsEnabled = false;
 
-                var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.3));
-                SlidesContainer.BeginAnimation(UIElement.OpacityProperty, fadeOut);
-                await Task.Delay(300);
-
-                // Показываем сразу 4-й слайд
-                foreach (var slide in slides.Take(slides.Length - 1))
-                    slide.Visibility = Visibility.Collapsed;
-
-                SlidesContainer.Opacity = 1;
-
-                currentSlideIndex = slides.Length - 1;
-                await ShowSlide(currentSlideIndex);
+                await SwitchToSlide(slides.Length - 1);
             }
         }
     }
