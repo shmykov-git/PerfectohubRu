@@ -21,7 +21,7 @@
             </Image>
 
             <TextBlock x:Name="TitleText"
-                       Text="PERFECTO"
+                       Text="perfecto"
                        FontFamily="Segoe UI"
                        FontSize="52"
                        FontWeight="Light"

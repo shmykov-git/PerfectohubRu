@@ -1,12 +1,16 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MovieIntro.Controls;
 using PerfectohubRu.Controls;
+using PerfectohubRu.Tools;
 using System;
+using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
@@ -49,6 +53,31 @@ namespace MovieIntro
             window.ShowDialog();
         }
 
+        private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ButtonState == MouseButtonState.Pressed)
+            {
+                e.Handled = true;
+                this.DragMove();
+            }
+        }
+
+        private void ChatButton_Click(object sender, RoutedEventArgs e)
+        {
+            var supportChat = sp.GetRequiredService<SupportChat>();
+            supportChat.Owner = this;
+
+            if (!supportChat.IsVisible)
+            {
+                supportChat.PositionToRightOfOwner();
+                supportChat.Show();
+            }
+            else
+            {
+                supportChat.Activate();
+            }
+        }
+
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
@@ -57,6 +86,11 @@ namespace MovieIntro
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void Hyperlink_Click(object sender, MouseButtonEventArgs e)
+        {
+            UrlHelper.OpenUrl("https://perfectohub.ru");
         }
 
         private async void StartIntroSequence()
@@ -129,6 +163,13 @@ namespace MovieIntro
                 }
 
                 i++;
+            }
+
+            if (activeIndex >= 4)
+            {
+                var showAnimate = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(2));
+                Logo.BeginAnimation(Ellipse.OpacityProperty, showAnimate);
+                Support.BeginAnimation(Ellipse.OpacityProperty, showAnimate);
             }
         }
 

@@ -111,6 +111,11 @@
                                    FontSize="13"
                                    Foreground="#AAAAAA"
                                    Margin="0,3,0,3"/>
+                        <TextBlock Text="✓ Интегрируем с 1С"
+                                   FontFamily="Segoe UI"
+                                   FontSize="13"
+                                   Foreground="#AAAAAA"
+                                   Margin="0,3,0,3"/>
                     </StackPanel>
 
                     <!-- Разделитель -->
@@ -125,7 +130,7 @@
                                Margin="0,0,0,20"/>
 
                     <!-- Карточки провайдеров -->
-                    <Grid Margin="0,20,0,20">
+                    <Grid Margin="0,10,0,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="20"/>
@@ -155,7 +160,7 @@
                                 <TextBlock Text="📞" 
                                            FontSize="48" 
                                            HorizontalAlignment="Center"
-                                           Foreground="#AA3333"
+                                           Foreground="#DD3333"
                                            Margin="0,0,0,10"/>
                                 <TextBlock Text="БИЛАЙН"
                                            FontFamily="Segoe UI"
@@ -195,7 +200,7 @@
                                 <TextBlock Text="📞" 
                                            FontSize="48" 
                                            HorizontalAlignment="Center"
-                                           Foreground="#AA3333"
+                                           Foreground="#DD3333"
                                            Margin="0,0,0,10"/>
                                 <TextBlock Text="TELE2"
                                            FontFamily="Segoe UI"
@@ -213,7 +218,7 @@
                         </Border>
                     </Grid>
 
-                    <TextBlock Text="Нажмите на логотип провайдера для перехода на сайт"
+                    <TextBlock Text="Выберете провайдера, настройте, подключите API, скопируйте токен (access token)"
                                FontFamily="Segoe UI"
                                FontSize="11"
                                Foreground="#666666"

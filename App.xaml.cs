@@ -31,6 +31,7 @@ namespace PerfectohubRu
             services
                 .AddSingleton<MainWindow>()
                 .AddTransient<AtsHelpDialog>()
+                .AddSingleton<SupportChat>()
                 ;
 
             Services = services.BuildServiceProvider();

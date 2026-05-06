@@ -16,7 +16,7 @@
                        Margin="0,0,0,15"/>
 
             <TextBlock x:Name="MainText"
-                       Text="HUB.RU"
+                       Text="hub.ru"
                        FontFamily="Segoe UI"
                        FontSize="48"
                        FontWeight="SemiBold"

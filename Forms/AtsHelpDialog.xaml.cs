@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PerfectohubRu.Tools;
+using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
@@ -29,33 +30,14 @@ namespace MovieIntro
         {
             // Замените URL на актуальную ссылку на облачную АТС Билайн
             string url = "https://moskva.beeline.ru/business/telephony/cloud-ats/";
-            OpenUrl(url);
+            UrlHelper.OpenUrl(url);
         }
 
         private void Tele2Link_Click(object sender, MouseButtonEventArgs e)
         {
             // Замените URL на актуальную ссылку на облачную АТС Tele2
             string url = "https://msk.t2.ru/";
-            OpenUrl(url);
-        }
-
-        private void OpenUrl(string url)
-        {
-            try
-            {
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = url,
-                    UseShellExecute = true
-                });
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Не удалось открыть ссылку: {ex.Message}",
-                               "Ошибка",
-                               MessageBoxButton.OK,
-                               MessageBoxImage.Error);
-            }
+            UrlHelper.OpenUrl(url);
         }
     }
 }
