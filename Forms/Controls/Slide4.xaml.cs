@@ -8,9 +8,9 @@ using System.Windows.Media.Animation;
 
 namespace MovieIntro.Controls
 {
-    public partial class SlideCallsInfo : UserControl, ISlide
+    public partial class Slide4 : UserControl, ISlide
     {
-        public SlideCallsInfo()
+        public Slide4()
         {
             InitializeComponent();
         }

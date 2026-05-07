@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace PerfectohubRu.Extensions
 {
-    internal static class EmbededResourceExtenstions
+    public static class EmbededResourceExtenstions
     {
         public static IConfigurationRoot AddJsonEmbededResourceAndBuild(this IConfigurationBuilder builder, string resourceName)
         {

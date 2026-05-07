@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PerfectohubRu.Model
 {
-    internal class AppSettings
+    public class AppSettings
     {
         public string test {  get; set; }
     }

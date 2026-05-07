@@ -1,9 +1,14 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Mapster;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MovieIntro;
 using PerfectohubRu.Extensions;
+using PerfectohubRu.Forms.ViewModles;
 using PerfectohubRu.Model;
+using PerfectohubRu.Tools;
+using Shared.Extensions;
 using System;
+using System.Reflection;
 using System.Windows;
 
 namespace PerfectohubRu
@@ -25,7 +30,11 @@ namespace PerfectohubRu
             // Регстрация сервисов
             services
                 .Configure<AppSettings>(configuration)
-                .AddSingleton(configuration);
+                .AddSingleton<IConfiguration>(configuration)
+                .AddSingleton<ClientDataProvider>()
+                .AddCallsHttpClients(configuration)
+                .AddSharedMapster(Assembly.GetExecutingAssembly())
+                ;
 
             // Регистрация окон
             services
@@ -34,7 +43,16 @@ namespace PerfectohubRu
                 .AddSingleton<SupportChat>()
                 ;
 
+            // Регистрация моделей окон
+            services
+                .AddSingleton<MainViewModel>()
+                ;
+
             Services = services.BuildServiceProvider();
+
+            Services
+                .UseMapster(Assembly.GetExecutingAssembly())
+                ;
         }
 
         protected override void OnStartup(StartupEventArgs e)

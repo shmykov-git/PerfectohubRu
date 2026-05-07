@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using Newtonsoft.Json;
@@ -32,42 +33,42 @@ namespace Perfecto.Deploy.Extensions
             return settings;
         }
 
-        //public static string ToJsonQueryStr(this object queryArgs)
-        //{
-        //    List<(string name, string value)> query = new();
+        public static string ToJsonQueryStr(this object queryArgs)
+        {
+            List<(string, string)> query = new List<(string, string)>();
 
-        //    foreach (var p in queryArgs.GetType().GetProperties())
-        //    {
-        //        var value = p.GetValue(queryArgs);
+            foreach (var p in queryArgs.GetType().GetProperties())
+            {
+                var value = p.GetValue(queryArgs);
 
-        //        if (value == null)
-        //            continue;
+                if (value == null)
+                    continue;
 
-        //        var attribute = (JsonPropertyAttribute?)p.GetCustomAttributes(false).FirstOrDefault(a => a.GetType() == typeof(JsonPropertyAttribute));
-        //        var type = p.PropertyType!;
-        //        var name = attribute?.PropertyName ?? p.Name;
+                var attribute = (JsonPropertyAttribute)p.GetCustomAttributes(false).FirstOrDefault(a => a.GetType() == typeof(JsonPropertyAttribute));
+                var type = p.PropertyType;
+                var name = attribute?.PropertyName ?? p.Name;
 
-        //        if (value is object[] valueArr)
-        //        {
-        //            name += Uri.EscapeDataString("[]");
+                if (value is object[] valueArr)
+                {
+                    name += Uri.EscapeDataString("[]");
 
-        //            foreach (var valueItem in valueArr)
-        //                query.Add((name, valueItem.ToString()!));
-        //        }
-        //        else if (type.IsValueType || type == typeof(string))
-        //        {
-        //            query.Add((name, value.ToString()!));
-        //        }
-        //        else
-        //        {
-        //            query.Add((name, value.ToJsonInLine()));
-        //        }
-        //    }
+                    foreach (var valueItem in valueArr)
+                        query.Add((name, valueItem.ToString()));
+                }
+                else if (type.IsValueType || type == typeof(string))
+                {
+                    query.Add((name, value.ToString()));
+                }
+                else
+                {
+                    query.Add((name, value.ToJsonInLine()));
+                }
+            }
 
-        //    var queryStr = query.Select(v => $"{v.name}={Uri.EscapeDataString(v.value)}").SJoin("&");
+            var queryStr = query.Select(v => $"{v.Item1}={Uri.EscapeDataString(v.Item2)}").SJoin("&");
 
-        //    return queryStr;
-        //}
+            return queryStr;
+        }
 
         public static string ToQueryStr<T>(this T value) => typeof(T)
             .GetProperties()
@@ -86,6 +87,9 @@ namespace Perfecto.Deploy.Extensions
 
         public static string ToJsonStr<T>(this T value, Formatting formatting = Formatting.Indented)
         {
+            if (value == null)
+                return null;
+
             return typeof(T) == typeof(object)
                 ? JsonConvert.SerializeObject(value, value.GetType(), formatting, _jsonSettings)
                 : JsonConvert.SerializeObject(value, formatting, _jsonSettings);

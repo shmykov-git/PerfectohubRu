@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace PerfectohubRu.Tools
 {
-    internal static class UrlHelper
+    public static class UrlHelper
     {
         public static void OpenUrl(string url)
         {

@@ -4,19 +4,23 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using System.Windows.Media;
+using PerfectohubRu.Controls;
+using PerfectohubRu.Forms.ViewModles;
 
 namespace MovieIntro.Controls
 {
-    public partial class SlideAddAts : UserControl
+    public partial class SlideAddAts : UserControl, ISlide
     {
-        public event EventHandler<string> TokenSubmitted;
-
         public SlideAddAts()
         {
             InitializeComponent();
             SubmitButton.Click += SubmitButton_Click;
             TokenTextBox.TextChanged += TokenTextBox_TextChanged;
         }
+
+        public MainViewModel Model => DataContext as MainViewModel;
+
+        public async Task PlayExitAnimation() { }
 
         public async Task PlayEnterAnimation()
         {
@@ -113,10 +117,11 @@ namespace MovieIntro.Controls
             }
         }
 
+        private MainWindow ParentWindow => Window.GetWindow(this) as MainWindow;
+
         private async void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            var mainWindow = Window.GetWindow(this) as MainWindow;
-            mainWindow.ShowDialog<AtsHelpDialog>();
+            ParentWindow.ShowDialog<AtsHelpDialog>();
         }
 
         private async void SubmitButton_Click(object sender, RoutedEventArgs e)
@@ -127,11 +132,16 @@ namespace MovieIntro.Controls
                 return;
             }
 
-            // Анимация нажатия
-            var shrink = new DoubleAnimation(0.95, 1, TimeSpan.FromSeconds(0.2));
-            SubmitButton.BeginAnimation(Button.RenderTransformProperty, shrink);
+            var result = await Model.ValidateAndSaveAtsToken();
 
-            TokenSubmitted?.Invoke(this, TokenTextBox.Text);
+            if (result.Success)
+            {
+                await ParentWindow.SwitchToNextSlide();
+            }
+            else
+            {
+                await ShowError(result.Error);
+            }
         }
 
         private async Task ShowError(string message)

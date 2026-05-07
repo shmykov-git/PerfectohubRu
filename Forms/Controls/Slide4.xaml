@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="MovieIntro.Controls.SlideCallsInfo"
+﻿<UserControl x:Class="MovieIntro.Controls.Slide4"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              Background="#000000">

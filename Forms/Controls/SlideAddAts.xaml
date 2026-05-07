@@ -45,6 +45,7 @@
                             CornerRadius="3">
                         <Grid>
                             <TextBox x:Name="TokenTextBox"
+                                     Text="{Binding AtsToken, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                      FontFamily="Segoe UI"
                                      FontSize="16"
                                      Foreground="#FFFFFF"

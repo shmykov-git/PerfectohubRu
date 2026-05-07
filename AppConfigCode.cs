@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PerfectohubRu
 {
-    internal class AppConfigCode
+    public class AppConfigCode
     {
         public static void Apply()
         {

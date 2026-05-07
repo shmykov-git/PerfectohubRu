@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MovieIntro.Controls;
 using PerfectohubRu.Controls;
+using PerfectohubRu.Forms.ViewModles;
+using PerfectohubRu.Model;
 using PerfectohubRu.Tools;
 using System;
 using System.Data;
@@ -23,16 +25,14 @@ namespace MovieIntro
         private DispatcherTimer slideTimer;
         private readonly ISlide[] slides;
         private readonly IServiceProvider sp;
+        private readonly MainViewModel model;
 
         public MainWindow()
         {
             InitializeComponent();
 
             // Получаем ссылки на контролы
-            slides = new ISlide[] { Slide1Control, Slide2Control, Slide3Control, SlideCallsInfoControl, SlideAddAtsControl };
-
-            // Подписываемся на событие отправки токена
-            SlideAddAtsControl.TokenSubmitted += SlideAddAts_TokenSubmitted;
+            slides = new ISlide[] { Slide1Control, Slide2Control, Slide3Control, SlideCallsInfoControl, SlideAddAtsControl, SlideArrangeMessageControl };
 
             // Клик по окну для пропуска вступления
             this.MouseLeftButtonDown += (s, e) => SkipIntro();
@@ -41,9 +41,13 @@ namespace MovieIntro
             StartIntroSequence();
         }
 
-        public MainWindow(IServiceProvider sp) : this()
+        public MainWindow(IServiceProvider sp, MainViewModel model) : this()
         {
             this.sp = sp;
+            this.model = model;
+
+            foreach (UserControl slide in slides)
+                slide.DataContext = model;
         }
 
         public void ShowDialog<TWindow>() where TWindow : Window
@@ -105,7 +109,7 @@ namespace MovieIntro
 
         private async void SlideTimer_Tick(object sender, EventArgs e)
         {
-            if (currentSlideIndex == slides.Length - 1) // После 4-го слайда останавливаем таймер
+            if (currentSlideIndex == slides.Length - 1)
             {
                 slideTimer.Stop();
                 return;
@@ -114,7 +118,20 @@ namespace MovieIntro
             await SwitchToNextSlide();
         }
 
-        private Task SwitchToNextSlide() => SwitchToSlide(currentSlideIndex + 1);
+        public Task SwitchToNextSlide()
+        {
+            if (currentSlideIndex == 4 && model.ClientData.State == ClientState.New)
+            {
+                return SwitchToSlide(currentSlideIndex + 1);
+            }
+            else
+            {
+                if (model.ClientData.State == ClientState.HasAts)
+                    return SwitchToSlide(currentSlideIndex + 2);
+            }
+
+            return SwitchToSlide(currentSlideIndex + 1);
+        }
 
         private async Task SwitchToSlide(int index)
         {
@@ -171,19 +188,6 @@ namespace MovieIntro
                 Logo.BeginAnimation(Ellipse.OpacityProperty, showAnimate);
                 Support.BeginAnimation(Ellipse.OpacityProperty, showAnimate);
             }
-        }
-
-        private async void SlideAddAts_TokenSubmitted(object sender, string token)
-        {
-            // Здесь обрабатываем полученный токен
-            MessageBox.Show($"Токен получен: {token}", "Успешно",
-                           MessageBoxButton.OK, MessageBoxImage.Information);
-
-            // Можно добавить анимацию успеха и закрыть окно
-            var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.5));
-            SlidesContainer.BeginAnimation(UIElement.OpacityProperty, fadeOut);
-            await Task.Delay(500);
-            Close();
         }
 
         private async void SkipIntro()

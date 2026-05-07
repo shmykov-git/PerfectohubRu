@@ -5,7 +5,7 @@ using System.Windows.Media.Animation;
 
 namespace PerfectohubRu.Controls
 {
-    internal interface ISlide
+    public interface ISlide
     {
         Visibility Visibility { get; set; }
         Task PlayEnterAnimation();
