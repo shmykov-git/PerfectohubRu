@@ -10,12 +10,12 @@ namespace Calls.Entities.Mapster
     {
         public void Register(TypeAdapterConfig config)
         {
-            config.NewConfig<AtsBeelineAbonent, KnownPhone>()
+            config.NewConfig<AtsBeelineAbonent, ActivePhone>()
                 .Map(d => d.Phone, s => s.phone.ToSystemPhone())
                 .Map(d => d.Name, s => $"{s.firstName} {s.lastName}")
                 ;
 
-            config.NewConfig<AtsTele2Abonent, KnownPhone>()
+            config.NewConfig<AtsTele2Abonent, ActivePhone>()
                 .Map(d => d.Phone, s => s.FullNumber.ToSystemPhone())
                 .Map(d => d.Name, s => s.Name)
                 ;

@@ -169,6 +169,7 @@
     <Compile Include="Extensions\MapsterExtensions.cs" />
     <Compile Include="Extensions\OptionsExtensions.cs" />
     <Compile Include="Extensions\PhoneExtensions.cs" />
+    <Compile Include="Extensions\StringSplitExtensions.cs" />
     <Compile Include="Forms\Controls\SlideArrangeMessage.xaml.cs">
       <DependentUpon>SlideArrangeMessage.xaml</DependentUpon>
     </Compile>
@@ -190,7 +191,7 @@
     <Compile Include="HttpClients\Options\BeelineAtsApiOptions.cs" />
     <Compile Include="HttpClients\Options\Tele2AtsApiOptions.cs" />
     <Compile Include="HttpClients\Tele2AtsHttpClient.cs" />
-    <Compile Include="Model\Ats\KnownPhone.cs" />
+    <Compile Include="Model\Ats\ActivePhone.cs" />
     <Compile Include="Model\Ats\AtsCall.cs" />
     <Compile Include="Model\Ats\AtsPassportCall.cs" />
     <Compile Include="Model\Ats\Beeline\AtsBeelineAbonent.cs" />
@@ -212,7 +213,10 @@
     <Compile Include="Model\OperationResult.cs" />
     <Compile Include="Model\Options\ClientOptions.cs" />
     <Compile Include="Model\Options\CronOptions.cs" />
+    <Compile Include="Model\UniqueCall.cs" />
+    <Compile Include="Tools\CallsManager.cs" />
     <Compile Include="Tools\ClientDataProvider.cs" />
+    <Compile Include="Tools\Filters.cs" />
     <Compile Include="Tools\UrlHelper.cs" />
     <Compile Include="Tools\Values.cs" />
     <Page Include="Forms\Controls\Slide1.xaml">

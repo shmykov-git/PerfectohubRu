@@ -6,7 +6,8 @@ namespace PerfectohubRu.Forms.ViewModles
     public partial class MainViewModel : INotifyPropertyChanged
     {
         private string _atsToken;
-        private bool _isWatermarkVisible = true;
+        private string _callsMessage;
+        private string _knowns;
 
         public string AtsToken
         {
@@ -17,19 +18,31 @@ namespace PerfectohubRu.Forms.ViewModles
                 {
                     _atsToken = value;
                     OnPropertyChanged();
-                    IsWatermarkVisible = string.IsNullOrEmpty(value);
                 }
             }
         }
 
-        public bool IsWatermarkVisible
+        public string Knowns
         {
-            get => _isWatermarkVisible;
+            get => _knowns;
             set
             {
-                if (_isWatermarkVisible != value)
+                if (_knowns != value)
                 {
-                    _isWatermarkVisible = value;
+                    _knowns = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string CallsMessage
+        {
+            get => _callsMessage;
+            set
+            {
+                if (_callsMessage != value)
+                {
+                    _callsMessage = value;
                     OnPropertyChanged();
                 }
             }

@@ -1,4 +1,6 @@
 ﻿using Calls.Model.Ats;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace PerfectohubRu.Model
 {
@@ -11,7 +13,9 @@ namespace PerfectohubRu.Model
         public string Tele2AtsRefreshToken { get; set; }
 
 
-        public KnownPhone[] Knowns { get; set; }
-        public string[] Actives { get; set; }
+        public ActivePhone[] Actives { get; set; } = new ActivePhone[0];
+        public string[] Knowns { get; set; } = new string[0];
+
+        [JsonIgnore] public HashSet<string> AllKnowns { get; set; }
     }
 }

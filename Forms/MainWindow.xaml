@@ -147,16 +147,16 @@
                         Margin="20,20,20,20"
                         Opacity="0">
                 <TextBlock Text="perfectohub.ru" 
-           Foreground="#FFFFFF" 
-            Opacity="0.5"
-           Background="Transparent"
-           FontFamily="Segoe UI"
-           FontSize="14"
-           Cursor="Hand"
-           TextDecorations="Underline"
-           HorizontalAlignment="Center"
-           VerticalAlignment="Center"
-           MouseLeftButtonDown="Hyperlink_Click"/>
+                   Foreground="#FFFFFF" 
+                   Background="Transparent"
+                   FontFamily="Segoe UI"
+                   FontSize="14"
+                   Cursor="Hand"
+                   TextDecorations="Underline"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   MouseLeftButtonDown="Hyperlink_Click"
+                   Opacity="0.8" />
             </StackPanel>
 
             <!-- support -->
@@ -172,7 +172,7 @@
                 BorderThickness="0"
                 Cursor="Hand"
                 Click="ChatButton_Click">
-                    <Image Source="/Assets/chat.png" Width="25" Height="25" Opacity="0.5"/>
+                    <Image Source="/Assets/chat.png" Width="25" Height="25" Opacity="0.8"/>
                 </Button>
             </StackPanel>
         </Grid>

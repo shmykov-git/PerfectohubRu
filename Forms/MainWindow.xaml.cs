@@ -21,7 +21,7 @@ namespace MovieIntro
 {
     public partial class MainWindow : Window
     {
-        private int currentSlideIndex = 0;
+        private int currentSlideIndex = 5; // 4-atsToken, 5-arrangeMessage
         private DispatcherTimer slideTimer;
         private readonly ISlide[] slides;
         private readonly IServiceProvider sp;
@@ -102,7 +102,7 @@ namespace MovieIntro
             slideTimer = new DispatcherTimer();
             slideTimer.Interval = TimeSpan.FromSeconds(5); // 3 секунды на слайд
 
-            await ShowSlide(0);
+            await ShowSlide(currentSlideIndex);
             slideTimer.Tick += SlideTimer_Tick;
             slideTimer.Start();
         }

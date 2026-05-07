@@ -7,6 +7,7 @@ using PerfectohubRu.Forms.ViewModles;
 using PerfectohubRu.Model;
 using PerfectohubRu.Tools;
 using Shared.Extensions;
+using Shared.Model.Options;
 using System;
 using System.Reflection;
 using System.Windows;
@@ -34,6 +35,8 @@ namespace PerfectohubRu
                 .AddSingleton<ClientDataProvider>()
                 .AddCallsHttpClients(configuration)
                 .AddSharedMapster(Assembly.GetExecutingAssembly())
+                .ConfigurePerfectoOptions<ClientOptions>(configuration)
+                .AddSingleton<CallsManager>()
                 ;
 
             // Регистрация окон

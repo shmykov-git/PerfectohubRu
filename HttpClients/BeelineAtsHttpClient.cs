@@ -41,7 +41,7 @@ namespace Calls.HttpClients
 
         public async Task<AtsBeelineAbonent[]> GetBeelineAbonents()
         {
-            var token = clientStateProvider.State.BeelineAtsToken;
+            var token = clientStateProvider.Data.BeelineAtsToken;
 
             return await GetAsync<AtsBeelineAbonent[]>(new MethodArgs
             {
@@ -52,10 +52,10 @@ namespace Calls.HttpClients
             });
         }
 
-        public async Task<KnownPhone[]> GetAbonents()
+        public async Task<ActivePhone[]> GetAbonents()
         {
             var beelineAbonents = await GetBeelineAbonents();
-            var abonents = beelineAbonents.Select(mapper.Map<KnownPhone>).ToArray();
+            var abonents = beelineAbonents.Select(mapper.Map<ActivePhone>).ToArray();
 
             return abonents;
         }
@@ -85,7 +85,7 @@ namespace Calls.HttpClients
             // todo: logger.LogDebug($"{ServiceName} request {todayUtc.ToString("yyyy.MM.dd")} data");
             Debug.WriteLine($"{ServiceName} request {todayUtc.ToString("yyyy.MM.dd")} data");
 
-            var token = clientStateProvider.State.BeelineAtsToken;
+            var token = clientStateProvider.Data.BeelineAtsToken;
 
             var query = new
             {

@@ -4,9 +4,11 @@ using Calls.HttpClients.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using PerfectohubRu.Tools;
 using Shared.Extensions;
 using Shared.HttpClients.Options.Base;
 using Shared.Libraries;
+using Shared.Model.Enums;
 using System;
 using System.Net.Http;
 
@@ -19,6 +21,20 @@ namespace PerfectohubRu.Extensions
             return services
                 .ConfigureHttpClient<IBeelineAtsHttpClient, BeelineAtsHttpClient, BeelineAtsApiOptions>(configuration)
                 .ConfigureHttpClient<ITele2AtsHttpClient, Tele2AtsHttpClient, Tele2AtsApiOptions>(configuration)
+                .AddSingleton<IAtsHttpClient>(sp =>
+                {
+                    var data = sp.GetRequiredService<ClientDataProvider>().Data;
+
+                    switch (data.GetAtsType()) 
+                    {
+                        case AtsType.Beeline:
+                            return sp.GetRequiredService<IBeelineAtsHttpClient>();
+                        case AtsType.Tele2:
+                            return sp.GetRequiredService<ITele2AtsHttpClient>();
+                        default:
+                            throw new NotSupportedException();
+                    }
+                })
                 ;
         }
 
@@ -28,7 +44,7 @@ namespace PerfectohubRu.Extensions
             where TClient : class, TClientKey
         {
             ss
-                .ConfigureSharedOptions<TClientOptions>(configuration, Values.ConfigurationSection.HttpClients)
+                .ConfigurePerfectoOptions<TClientOptions>(configuration, Values.ConfigurationSection.HttpClients)
                 .AddHttpClient<TClient>((services, client) =>
                 {
                     var options = services.GetRequiredService<IOptions<TClientOptions>>().Value;

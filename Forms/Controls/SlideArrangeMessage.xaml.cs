@@ -1,4 +1,5 @@
 ﻿using PerfectohubRu.Controls;
+using PerfectohubRu.Forms.ViewModles;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
@@ -10,12 +11,21 @@ namespace MovieIntro.Controls
 {
     public partial class SlideArrangeMessage : UserControl, ISlide
     {
-        public event EventHandler<string> MessageCompleted;
+        private MainWindow ParentWindow => Window.GetWindow(this) as MainWindow;
+        private MainViewModel Model => DataContext as MainViewModel;
 
         public SlideArrangeMessage()
         {
             InitializeComponent();
             InputTextBox.TextChanged += InputTextBox_TextChanged;
+            this.Loaded += SlideArrangeMessage_Loaded;
+        }
+
+        private async void SlideArrangeMessage_Loaded(object sender, RoutedEventArgs e)
+        {
+            await FadeInElement(InfoMessageText);
+            Model.RefreshCallsMessage();
+            await AnimateIndicators();
         }
 
         // Установка информационного сообщения
@@ -34,6 +44,21 @@ namespace MovieIntro.Controls
         public void ClearInput()
         {
             InputTextBox.Clear();
+        }
+
+        private async Task FadeInElement(UIElement element, double seconds = 1.5)
+        {
+            var fadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(seconds));
+            element.BeginAnimation(UIElement.OpacityProperty, fadeIn);
+        }
+
+        private async Task AnimateIndicators()
+        {
+            await FadeInElement(LeftIndicatorButton);
+            await FadeInElement(RightIndicatorButton);
+            await Task.Delay(2000);
+            await FadeInElement(RefreshMessageButton);
+            await FadeInElement(SaveKnownsButton);            
         }
 
         public async Task PlayEnterAnimation()
@@ -62,9 +87,9 @@ namespace MovieIntro.Controls
             await Task.Delay(200);
 
             // Появление левой панели (информация)
-            var infoFadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.6));
-            var infoScaleX = new DoubleAnimation(0.95, 1, TimeSpan.FromSeconds(0.6));
-            var infoScaleY = new DoubleAnimation(0.95, 1, TimeSpan.FromSeconds(0.6));
+            var infoFadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(1.6));
+            var infoScaleX = new DoubleAnimation(0.5, 1, TimeSpan.FromSeconds(1.6));
+            var infoScaleY = new DoubleAnimation(0.5, 1, TimeSpan.FromSeconds(1.6));
 
             InfoMessageText.BeginAnimation(UIElement.OpacityProperty, infoFadeIn);
             if (InfoMessageText.RenderTransform is ScaleTransform infoScale)
@@ -76,9 +101,9 @@ namespace MovieIntro.Controls
             await Task.Delay(100);
 
             // Появление правой панели (ввод)
-            var inputFadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.6));
-            var inputScaleX = new DoubleAnimation(0.95, 1, TimeSpan.FromSeconds(0.6));
-            var inputScaleY = new DoubleAnimation(0.95, 1, TimeSpan.FromSeconds(0.6));
+            var inputFadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(1.6));
+            var inputScaleX = new DoubleAnimation(0.5, 1, TimeSpan.FromSeconds(1.6));
+            var inputScaleY = new DoubleAnimation(0.5, 1, TimeSpan.FromSeconds(1.6));
 
             InputTextBox.BeginAnimation(UIElement.OpacityProperty, inputFadeIn);
             if (InputTextBox.RenderTransform is ScaleTransform inputScale)
@@ -125,12 +150,14 @@ namespace MovieIntro.Controls
                 return;
             }
 
-            // Анимация нажатия
-            var shrink = new DoubleAnimation(0.95, 1, TimeSpan.FromSeconds(0.2));
-            DoneButton.BeginAnimation(Button.RenderTransformProperty, shrink);
 
-            // Вызываем событие с введенным текстом
-            MessageCompleted?.Invoke(this, InputTextBox.Text);
+
+            //// Анимация нажатия
+            //var shrink = new DoubleAnimation(0.95, 1, TimeSpan.FromSeconds(0.2));
+            //DoneButton.BeginAnimation(Button.RenderTransformProperty, shrink);
+
+            //// Вызываем событие с введенным текстом
+            //MessageCompleted?.Invoke(this, InputTextBox.Text);
         }
 
         private async Task AnimateEmptyInput()
@@ -152,7 +179,7 @@ namespace MovieIntro.Controls
             if (parent != null && parent.Parent is Border border)
             {
                 var originalBrush = border.BorderBrush;
-                border.BorderBrush = System.Windows.Media.Brushes.Red;
+                border.BorderBrush = Brushes.Red;
                 await Task.Delay(500);
                 border.BorderBrush = originalBrush;
             }
@@ -163,6 +190,19 @@ namespace MovieIntro.Controls
             var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.5));
             this.BeginAnimation(UIElement.OpacityProperty, fadeOut);
             await Task.Delay(500);
+        }
+
+        private async void RefreshMessageButton_Click(object sender, RoutedEventArgs e)
+        {
+            await FadeInElement(InfoMessageText);
+            Model.RefreshCallsMessage();
+        }
+
+        private async void SaveKnownsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Model.SaveKnowns();
+            await FadeInElement(InfoMessageText);
+            Model.RefreshCallsMessage();
         }
     }
 }

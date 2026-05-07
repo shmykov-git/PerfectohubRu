@@ -4,6 +4,8 @@ namespace Shared.Libraries
 {
     public static class Values
     {
+        public const string UnknownPhone = "+71111111111";
+
         public static class ConfigurationSection
         {
             public const string HttpClients = "HttpClients";

@@ -13,7 +13,7 @@ namespace Shared.Model.Options
         public string KnownMarks { get; set; }
 
         public int RecallClientLimit { get; set; }
-
+        public int MaxMessageSize { get; set; }
         public AtsType AtsType { get; set; }
 
 

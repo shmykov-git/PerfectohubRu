@@ -22,12 +22,12 @@ namespace PerfectohubRu.Tools
             Directory.CreateDirectory(Folder);
         }
 
-        public void SaveClientState()
+        public void Save()
         {
-            File.WriteAllText(DataFileName, State.ToJsonStr());
+            File.WriteAllText(DataFileName, Data.ToJsonStr());
         }
 
-        public ClientData State => _clientState ?? ( _clientState = GetClientState());
+        public ClientData Data => _clientState ?? ( _clientState = GetClientState());
 
         private ClientData GetClientState() 
         {

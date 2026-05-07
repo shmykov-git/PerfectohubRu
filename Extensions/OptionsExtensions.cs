@@ -18,7 +18,7 @@ namespace Shared.Extensions
             return section.Get<TOptions>();
         }
 
-        public static IServiceCollection ConfigureSharedOptions<TOptions>(this IServiceCollection services, IConfiguration configuration, string parentSectionName = null) where TOptions : class
+        public static IServiceCollection ConfigurePerfectoOptions<TOptions>(this IServiceCollection services, IConfiguration configuration, string parentSectionName = null) where TOptions : class
         {
             var sectionName = GetOptionsSectionName<TOptions>(parentSectionName);
             var section = configuration.GetSection(sectionName);

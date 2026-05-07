@@ -42,7 +42,7 @@ namespace Calls.HttpClients
 
         public async Task<AtsTele2Abonent[]> GetTele2Abonents()
         {
-            var token = clientStateProvider.State.Tele2AtsToken;
+            var token = clientStateProvider.Data.Tele2AtsToken;
 
             return await GetAsync<AtsTele2Abonent[]>(new MethodArgs
             {
@@ -53,10 +53,10 @@ namespace Calls.HttpClients
             });
         }
 
-        public async Task<KnownPhone[]> GetAbonents()
+        public async Task<ActivePhone[]> GetAbonents()
         {
             var beelineAbonents = await GetTele2Abonents();
-            var abonents = beelineAbonents.Select(mapper.Map<KnownPhone>).ToArray();
+            var abonents = beelineAbonents.Select(mapper.Map<ActivePhone>).ToArray();
 
             return abonents;
         }
@@ -85,7 +85,7 @@ namespace Calls.HttpClients
         {
             Debug.WriteLine($"{ServiceName} request {todayUtc.ToString("yyyy.MM.dd")} data");
 
-            var token = clientStateProvider.State.Tele2AtsToken;
+            var token = clientStateProvider.Data.Tele2AtsToken;
 
             var query = new
             {

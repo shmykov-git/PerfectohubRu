@@ -1,4 +1,6 @@
 ﻿using Calls.HttpClients.Abstractions;
+using Microsoft.Extensions.DependencyInjection;
+using Perfecto.Deploy.Extensions;
 using PerfectohubRu.Extensions;
 using PerfectohubRu.Model;
 using PerfectohubRu.Tools;
@@ -14,25 +16,27 @@ namespace PerfectohubRu.Forms.ViewModles
 {
     public partial class MainViewModel
     {
-        private readonly IBeelineAtsHttpClient beelineAtsHttpClient;
-        private readonly ITele2AtsHttpClient tele2AtsHttpClient;
+        private readonly IAtsHttpClient httpClient;
+        private readonly CallsManager callsManager;
         private readonly ClientDataProvider clientDataProvider;
-        private ClientData clientData;
+        private readonly IServiceProvider sp;
+        private ClientData data;
 
         public MainViewModel(
-            IBeelineAtsHttpClient beelineAtsHttpClient, 
-            ITele2AtsHttpClient tele2AtsHttpClient,
-            ClientDataProvider clientDataProvider
-            )
+            CallsManager callsManager,
+            ClientDataProvider clientDataProvider,
+            IServiceProvider sp)
         {
-            this.beelineAtsHttpClient = beelineAtsHttpClient;
-            this.tele2AtsHttpClient = tele2AtsHttpClient;
+            this.callsManager = callsManager;
             this.clientDataProvider = clientDataProvider;
-            clientData = clientDataProvider.State;
-            AtsToken = clientData.GetAtsToken();
+            this.sp = sp;
+            data = clientDataProvider.Data;
+            AtsToken = data.GetAtsToken();
+            Knowns = data.Knowns.SJoin("\r\n");
         }
 
-        public ClientData ClientData => clientData;
+        public ClientData ClientData => data;
+        public IServiceProvider Sp => sp;
 
         private AtsType GetTokenAtsType(string token)
         {
@@ -45,17 +49,17 @@ namespace PerfectohubRu.Forms.ViewModles
             return AtsType.Beeline;
         }
 
-        public IAtsHttpClient GetAtsHttpClient()
+        public async void RefreshCallsMessage()
         {
-            switch (clientData.GetAtsType())
-            {
-                case AtsType.Tele2:
-                    return tele2AtsHttpClient;
-                case AtsType.Beeline:
-                    return beelineAtsHttpClient;
-                default:
-                    throw new ArgumentException("Unknonw http client");
-            }
+            CallsMessage = (await callsManager.GetUniqueCallsMessage(false, false, false, default)).First();
+        }
+
+        public void SaveKnowns()
+        {
+            var phones = Knowns.Replace("\r", "").Split('\n');
+            ClientData.Knowns = phones;
+            clientDataProvider.Save();
+            RefreshCallsMessage();
         }
 
         public async Task<OperationResult> ValidateAndSaveAtsToken()
@@ -66,37 +70,37 @@ namespace PerfectohubRu.Forms.ViewModles
             switch (atsType) 
             {
                 case AtsType.Beeline:
-                    clientData.BeelineAtsToken = token;
+                    data.BeelineAtsToken = token;
                     break;
 
                 case AtsType.Tele2:
-                    clientData.Tele2AtsToken = token;
+                    data.Tele2AtsToken = token;
                     break;
 
                 default:
                     return new OperationResult { Error = "Не удалось определить тип токена" };
             }
 
-            clientDataProvider.SaveClientState();
+            clientDataProvider.Save();
 
-            var httpClient = GetAtsHttpClient();
+            var httpClient = sp.GetRequiredService<IAtsHttpClient>();
 
             try
             {
-                var knowns = await httpClient.GetAbonents();
-                clientData.Knowns = knowns;
+                var actives = await httpClient.GetAbonents();
+                data.Actives = actives;
 
-                if (knowns.Length == 0)
+                if (actives.Length == 0)
                     return new OperationResult { Error = $"Требуется настроить список абонентов в АТС" };
 
-                clientData.State = ClientState.HasAts;
-                clientDataProvider.SaveClientState();
+                data.State = ClientState.HasAts;
+                clientDataProvider.Save();
 
                 return OperationResult.Successfull();
             }
             catch (HttpClientException)
             {
-                return new OperationResult { Error = $"Не удается установить подключение к {clientData.GetAtsName()}" };
+                return new OperationResult { Error = $"Не удается установить подключение к {data.GetAtsName()}" };
             }
         }
     }
