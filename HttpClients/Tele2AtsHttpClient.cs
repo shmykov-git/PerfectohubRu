@@ -79,7 +79,7 @@ namespace Calls.HttpClients
             return passportCalls;
         }
 
-        public Task<AtsTele2Call[]> GetTele2Calls(DateTime fromUtc, DateTime toUtc) => GetHttpDayCalls(fromUtc.Date.KindOfUtc());
+        public Task<AtsTele2Call[]> GetTele2Calls(DateTime fromUtc, DateTime toUtc) => GetHttpDayCalls(fromUtc);
 
         protected override async Task<AtsTele2Call[]> GetHttpDayCalls(DateTime todayUtc)
         {

@@ -78,7 +78,7 @@ namespace Calls.HttpClients
             return passportCalls;
         }
 
-        public Task<AtsBeelineView.AtsBeelineCall[]> GetBeelineCalls(DateTime fromUtc, DateTime toUtc) => GetHttpDayCalls(fromUtc.Date.KindOfUtc());
+        public Task<AtsBeelineView.AtsBeelineCall[]> GetBeelineCalls(DateTime fromUtc, DateTime toUtc) => GetHttpDayCalls(fromUtc);
 
         protected override async Task<AtsBeelineView.AtsBeelineCall[]> GetHttpDayCalls(DateTime todayUtc)
         {

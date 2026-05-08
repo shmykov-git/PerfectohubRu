@@ -175,6 +175,69 @@
                     <Image Source="/Assets/chat.png" Width="25" Height="25" Opacity="0.8"/>
                 </Button>
             </StackPanel>
+
+            <Button x:Name="MovePrevButton"
+                                    Width="24"
+                                    Height="24"
+                                    HorizontalAlignment="Left"
+                                    Margin="100,20,20,20"
+                                    Opacity="0"
+                                    Cursor="Help"
+                                    Click="MovePrevButton_Click"
+                                    ToolTipService.InitialShowDelay="300">
+                <Button.ToolTip>
+                    <!-- Здесь ваш собственный сложный ToolTip -->
+                    <ToolTip Background="#333333" 
+                                             BorderBrush="#555555"
+                                             BorderThickness="1"
+                                             Padding="10"
+                                             MaxWidth="300">
+                        <StackPanel>
+                            <TextBlock Text="🠜 к предыдущему слайду" 
+                                FontWeight="Bold" 
+                                Foreground="#FFFFFF"
+                                FontSize="16"
+                                Margin="0,0,0,5"/>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="#555555"
+                                                            CornerRadius="12"
+                                                            BorderBrush="#777777"
+                                                            BorderThickness="1">
+                                        <ContentPresenter HorizontalAlignment="Center"
+                                                                          VerticalAlignment="Center"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#777777"/>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter Property="Background" Value="#444444"/>
+                                            <Setter Property="RenderTransform">
+                                                <Setter.Value>
+                                                    <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="FontFamily" Value="Segoe UI"/>
+                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="Foreground" Value="#FFFFFF"/>
+                        <Setter Property="Content" Value="🠜"/>
+                    </Style>
+                </Button.Style>
+            </Button>
+
         </Grid>
     </Border>
 </Window>

@@ -132,13 +132,10 @@ namespace PerfectohubRu.Tools
             }
         }
 
-        public async Task<UniqueCall[]> GetUniqueCalls(DateTime now, CancellationToken token)
+        public async Task<UniqueCall[]> GetUniqueCalls(DateTime nowUtc, CancellationToken token)
         {
-            var nDay = 1;
-            var nowClient = clientOptions.GetClientTime(now).RoundToNearestSecond();
-            var today = nowClient.Date;
-            var todayFromClientUtc = today.ToUniversalTime().RoundToNearestSecond();
-            var view = await httpClient.GetCalls(todayFromClientUtc.AddDays(1 - nDay), todayFromClientUtc.AddDays(1));
+            var todayUtc = nowUtc.ToLocalTime().Date.ToUniversalTime();
+            var view = await httpClient.GetCalls(todayUtc, todayUtc.AddDays(1));
             var calls = await GetUniqueSkippedCalls(view);
 
             return calls;
@@ -146,7 +143,7 @@ namespace PerfectohubRu.Tools
 
         private async Task<UniqueCall[]> GetUniqueSkippedCalls(AtsCall[] atsCalls)
         {
-            var actives = data.Actives.Select(x => x.Phone).Concat(new string[] { Values.UnknownPhone }).ToHashSet();
+            var actives = data.Actives.Select(x => x.Phone).Concat(data.Commons).Concat(new string[] { Values.UnknownPhone }).ToHashSet();
             var allKnowns = data.Knowns.Concat(actives).ToHashSet();
             data.AllKnowns = allKnowns;
 
@@ -242,7 +239,15 @@ namespace PerfectohubRu.Tools
 
             var active = data.Actives.FirstOrDefault(v=>v.Phone == phone);
 
-            return active?.Name ?? phone;
+            if (active != null)
+                return active.Name;
+
+            var common = data.Commons.FirstOrDefault(v => v == phone);
+
+            if (common != null)
+                return $"Общий номер {common}";
+
+            return phone;
         }
     }
 }

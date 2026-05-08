@@ -162,6 +162,7 @@
     </ApplicationDefinition>
     <Compile Include="Exceptions\Cases\HttpClientCase.cs" />
     <Compile Include="Exceptions\HttpClientException.cs" />
+    <Compile Include="Extensions\AnimationExtensions.cs" />
     <Compile Include="Extensions\HttpClientExtensions.cs" />
     <Compile Include="Extensions\ClientOptionsExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />

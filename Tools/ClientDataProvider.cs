@@ -19,25 +19,48 @@ namespace PerfectohubRu.Tools
 
         public ClientDataProvider()
         {
-            Directory.CreateDirectory(Folder);
+            try
+            {
+                Directory.CreateDirectory(Folder);
+            }
+            catch (Exception ex) 
+            {
+                Data.CriticalError = ex.Message;
+            }
         }
 
         public void Save()
         {
-            File.WriteAllText(DataFileName, Data.ToJsonStr());
+            try
+            {
+                File.WriteAllText(DataFileName, Data.ToJsonStr());
+            }
+            catch (Exception ex)
+            {
+                Data.CriticalError = ex.Message;
+            }
         }
 
         public ClientData Data => _clientState ?? ( _clientState = GetClientState());
 
         private ClientData GetClientState() 
         {
-            if (!File.Exists(DataFileName)) 
-                return new ClientData();
+            try
+            {
+                if (!File.Exists(DataFileName))
+                    return new ClientData();
 
-            var dataText = File.ReadAllText(DataFileName);
-            var data = dataText.FromJsonStr<ClientData>();
+                var dataText = File.ReadAllText(DataFileName);
+                var data = dataText.FromJsonStr<ClientData>();
 
-            return data; 
+                return data;
+            }
+            catch (Exception ex)
+            {
+                var data = new ClientData() { CriticalError = ex.Message };
+
+                return data;
+            }
         }
     }
 }

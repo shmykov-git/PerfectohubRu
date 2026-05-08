@@ -18,7 +18,7 @@ namespace PerfectohubRu.Forms.ViewModles
     {
         private readonly IAtsHttpClient httpClient;
         private readonly CallsManager callsManager;
-        private readonly ClientDataProvider clientDataProvider;
+        private readonly ClientDataProvider dataProvider;
         private readonly IServiceProvider sp;
         private ClientData data;
 
@@ -28,11 +28,12 @@ namespace PerfectohubRu.Forms.ViewModles
             IServiceProvider sp)
         {
             this.callsManager = callsManager;
-            this.clientDataProvider = clientDataProvider;
+            this.dataProvider = clientDataProvider;
             this.sp = sp;
             data = clientDataProvider.Data;
             AtsToken = data.GetAtsToken();
             Knowns = data.Knowns.SJoin("\r\n");
+            Commons = data.Commons.SJoin("\r\n");
         }
 
         public ClientData ClientData => data;
@@ -51,14 +52,35 @@ namespace PerfectohubRu.Forms.ViewModles
 
         public async void RefreshCallsMessage()
         {
-            CallsMessage = (await callsManager.GetUniqueCallsMessage(false, false, false, default)).First();
+            await Task.Run(async () =>
+            {
+                try
+                {
+                    CallsMessage = (await GetCallsMessage()).First();
+                }
+                catch (Exception ex)
+                {
+                    data.CriticalError = ex.Message;
+                    dataProvider.Save();
+                }
+            });
         }
+
+        private Task<string[]> GetCallsMessage() => callsManager.GetUniqueCallsMessage(false, false, false, default);
 
         public void SaveKnowns()
         {
-            var phones = Knowns.Replace("\r", "").Split('\n');
+            var phones = Knowns.Replace("\r", "").Split('\n').Select(v => v.Trim()).ToArray();
             ClientData.Knowns = phones;
-            clientDataProvider.Save();
+            dataProvider.Save();
+            RefreshCallsMessage();
+        }
+
+        public void SaveCommons()
+        {
+            var phones = Commons.Replace("\r", "").Split('\n').Select(v => v.Trim()).ToArray();
+            ClientData.Commons = phones;
+            dataProvider.Save();
             RefreshCallsMessage();
         }
 
@@ -81,7 +103,7 @@ namespace PerfectohubRu.Forms.ViewModles
                     return new OperationResult { Error = "Не удалось определить тип токена" };
             }
 
-            clientDataProvider.Save();
+            dataProvider.Save();
 
             var httpClient = sp.GetRequiredService<IAtsHttpClient>();
 
@@ -94,7 +116,7 @@ namespace PerfectohubRu.Forms.ViewModles
                     return new OperationResult { Error = $"Требуется настроить список абонентов в АТС" };
 
                 data.State = ClientState.HasAts;
-                clientDataProvider.Save();
+                dataProvider.Save();
 
                 return OperationResult.Successfull();
             }

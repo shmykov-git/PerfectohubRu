@@ -4,6 +4,7 @@
     {
         New,
         HasAts,
-        HasBot
+        HasBot,
+        HasIntegration
     }
 }

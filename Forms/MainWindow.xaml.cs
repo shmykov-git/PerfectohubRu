@@ -187,6 +187,7 @@ namespace MovieIntro
                 var showAnimate = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(2));
                 Logo.BeginAnimation(Ellipse.OpacityProperty, showAnimate);
                 Support.BeginAnimation(Ellipse.OpacityProperty, showAnimate);
+                
             }
         }
 
@@ -199,6 +200,11 @@ namespace MovieIntro
 
                 await SwitchToSlide(slides.Length - 1);
             }
+        }
+
+        private async void MovePrevButton_Click(object sender, RoutedEventArgs e)
+        {
+            await ShowSlide(currentSlideIndex - 1);
         }
     }
 }
