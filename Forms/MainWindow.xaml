@@ -177,12 +177,14 @@
             </StackPanel>
 
             <Button x:Name="MovePrevButton"
-                                    Width="24"
-                                    Height="24"
+                                    Width="30"
+                                    Height="30"
                                     HorizontalAlignment="Left"
-                                    Margin="100,20,20,20"
+                                    VerticalAlignment="Center"
+                                    Margin="5,20,20,20"
                                     Opacity="0"
                                     Cursor="Help"
+                                    IsEnabled="false"
                                     Click="MovePrevButton_Click"
                                     ToolTipService.InitialShowDelay="300">
                 <Button.ToolTip>
@@ -206,8 +208,8 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
-                                    <Border Background="#555555"
-                                                            CornerRadius="12"
+                                    <Border x:Name="b" Background="#000000"
+                                                            CornerRadius="30"
                                                             BorderBrush="#777777"
                                                             BorderThickness="1">
                                         <ContentPresenter HorizontalAlignment="Center"
@@ -215,11 +217,11 @@
                                     </Border>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#777777"/>
+                                            <Setter TargetName="b" Property="Background" Value="#777777"/>
                                         </Trigger>
                                         <Trigger Property="IsPressed" Value="True">
-                                            <Setter Property="Background" Value="#444444"/>
-                                            <Setter Property="RenderTransform">
+                                            <Setter TargetName="b" Property="Background" Value="#444444"/>
+                                            <Setter TargetName="b" Property="RenderTransform">
                                                 <Setter.Value>
                                                     <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
                                                 </Setter.Value>

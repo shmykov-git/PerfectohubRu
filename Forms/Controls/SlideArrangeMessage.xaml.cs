@@ -23,47 +23,32 @@ namespace MovieIntro.Controls
 
         private void SlideArrangeMessage_Loaded(object sender, RoutedEventArgs e)
         {
-            InfoMessageText.AnimateFadeIn();
             Model.RefreshCallsMessage();
-            AnimateIndicators();
-        }
-
-        // Установка информационного сообщения
-        public void SetInfoMessage(string message)
-        {
-            InfoMessageText.Text = message;
-        }
-
-        // Получение введенного текста
-        public string GetInputText()
-        {
-            return KnownsTextBox.Text;
-        }
-
-        private void AnimateIndicators()
-        {
-            LeftIndicatorButton.AnimateFadeIn();
-            KnownsIndicatorButton.AnimateFadeIn();
-            CommonsIndicatorButton.AnimateFadeIn();
-            RefreshMessageButton.AnimateFadeIn(delay:2);
-            SaveKnownsButton.AnimateFadeIn(delay: 2);
-            SaveCommonsButton.AnimateFadeIn(delay: 2);
         }
 
         public async Task PlayEnterAnimation()
         {
             //this.Opacity = 0;
             this.Visibility = Visibility.Visible;
+            this.AnimateFadeIn();
 
-            TitleText.AnimateFadeIn(2);
+            TitleText.AnimateFadeIn(2, 1);
 
-            var d1 = 0.2;
+            var d1 = 1.2;
             InfoMessageText.AnimateFadeIn(1.6, d1);
             InfoMessageText.AnimateScale((0.5, 1), 2, d1);
             KnownsTextBox.AnimateFadeIn(1.6, d1);
             KnownsTextBox.AnimateScale((0.5, 1), d1);
             CommonsTextBox.AnimateFadeIn(1.6, d1);
             CommonsTextBox.AnimateScale((0.5, 1), d1);
+
+            var d2 = 3;
+            LeftIndicatorButton.AnimateFadeIn(delay: d1);
+            KnownsIndicatorButton.AnimateFadeIn(delay: d1);
+            CommonsIndicatorButton.AnimateFadeIn(delay: d1);
+            RefreshMessageButton.AnimateFadeIn(delay: d2);
+            SaveKnownsButton.AnimateFadeIn(delay: d2);
+            SaveCommonsButton.AnimateFadeIn(delay: d2);
 
             // Появление кнопки
             DoneButton.AnimateFadeIn(0.5, 1);
@@ -79,9 +64,14 @@ namespace MovieIntro.Controls
 
         public async Task PlayExitAnimation()
         {
-            var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(0.5));
-            this.BeginAnimation(UIElement.OpacityProperty, fadeOut);
-            await Task.Delay(500);
+            this.AnimateFadeOut();
+
+            LeftIndicatorButton.AnimateFadeOut();
+            KnownsIndicatorButton.AnimateFadeOut();
+            CommonsIndicatorButton.AnimateFadeOut();
+            RefreshMessageButton.AnimateFadeOut();
+            SaveKnownsButton.AnimateFadeOut();
+            SaveCommonsButton.AnimateFadeOut();
         }
 
         private async void RefreshMessageButton_Click(object sender, RoutedEventArgs e)

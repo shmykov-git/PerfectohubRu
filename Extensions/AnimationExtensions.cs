@@ -103,5 +103,16 @@ namespace PerfectohubRu.Extensions
                 scaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, scale);
             }
         }
+
+        public static async void AnimatePulse(this UIElement element, (double from, double to) range, double duration = 0.8, double delay = 0)
+        {
+            await Task.Delay(TimeSpan.FromSeconds(delay));
+
+            var pulse = new DoubleAnimation(range.from, range.to, TimeSpan.FromSeconds(duration));
+            pulse.AutoReverse = true;
+            pulse.RepeatBehavior = new RepeatBehavior(2);
+
+            element.BeginAnimation(UIElement.OpacityProperty, pulse);
+        }
     }
 }

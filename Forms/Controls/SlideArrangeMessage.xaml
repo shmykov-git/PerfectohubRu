@@ -52,8 +52,8 @@
                         <Grid Grid.Row="0" Height="0">
                             <!-- Левый индикатор - кнопка с "!" над текстом -->
                             <Button x:Name="LeftIndicatorButton"
-                                    Width="24"
-                                    Height="24"
+                                    Width="28"
+                                    Height="28"
                                     HorizontalAlignment="Left"
                                     Margin="5,-40,0,0"
                                     Opacity="0"
@@ -96,8 +96,8 @@
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="Button">
-                                                    <Border Background="#555555"
-                                                            CornerRadius="12"
+                                                    <Border x:Name="b" Background="#000000"
+                                                            CornerRadius="28"
                                                             BorderBrush="#777777"
                                                             BorderThickness="1">
                                                         <ContentPresenter HorizontalAlignment="Center"
@@ -105,15 +105,7 @@
                                                     </Border>
                                                     <ControlTemplate.Triggers>
                                                         <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter Property="Background" Value="#777777"/>
-                                                        </Trigger>
-                                                        <Trigger Property="IsPressed" Value="True">
-                                                            <Setter Property="Background" Value="#444444"/>
-                                                            <Setter Property="RenderTransform">
-                                                                <Setter.Value>
-                                                                    <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
-                                                                </Setter.Value>
-                                                            </Setter>
+                                                            <Setter TargetName="b" Property="Background" Value="#777777"/>
                                                         </Trigger>
                                                     </ControlTemplate.Triggers>
                                                 </ControlTemplate>
@@ -129,8 +121,8 @@
                             </Button>
                             
                             <Button x:Name="RefreshMessageButton"
-                                    Width="24"
-                                    Height="24"
+                                    Width="28"
+                                    Height="28"
                                     HorizontalAlignment="Left"
                                     Margin="35,-40,0,0"
                                     Opacity="0"                                    
@@ -158,8 +150,8 @@
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="Button">
-                                                    <Border Background="#555555"
-                                                            CornerRadius="12"
+                                                    <Border x:Name="b" Background="#000000"
+                                                            CornerRadius="28"
                                                             BorderBrush="#777777"
                                                             BorderThickness="1">
                                                         <ContentPresenter HorizontalAlignment="Center"
@@ -167,17 +159,17 @@
                                                     </Border>
                                                     <ControlTemplate.Triggers>
                                                         <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter Property="Background" Value="#DD3333"/>
+                                                            <Setter TargetName="b" Property="Background" Value="#777777"/>
                                                         </Trigger>
                                                         <Trigger Property="IsPressed" Value="True">
-                                                            <Setter Property="Background" Value="#444444"/>
-                                                            <Setter Property="RenderTransform">
+                                                            <Setter TargetName="b" Property="Background" Value="#444444"/>
+                                                            <Setter TargetName="b" Property="RenderTransform">
                                                                 <Setter.Value>
                                                                     <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
                                                                 </Setter.Value>
                                                             </Setter>
                                                         </Trigger>
-                                                    </ControlTemplate.Triggers>
+                                                    </ControlTemplate.Triggers>                                                
                                                 </ControlTemplate>
                                             </Setter.Value>
                                         </Setter>
@@ -235,8 +227,8 @@
                         <Grid Grid.Row="0" Height="0">
                             <!-- Правый индикатор - кнопка с "!" над текстом -->
                             <Button x:Name="CommonsIndicatorButton"
-                                    Width="24"
-                                    Height="24"
+                                    Width="28"
+                                    Height="28"
                                     HorizontalAlignment="Right"
                                     Margin="0,-40,5,0"
                                     Opacity="0"
@@ -279,8 +271,8 @@
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="Button">
-                                                    <Border Background="#555555"
-                                                            CornerRadius="12"
+                                                    <Border x:Name="b" Background="#000000"
+                                                            CornerRadius="28"
                                                             BorderBrush="#777777"
                                                             BorderThickness="1">
                                                         <ContentPresenter HorizontalAlignment="Center"
@@ -288,15 +280,7 @@
                                                     </Border>
                                                     <ControlTemplate.Triggers>
                                                         <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter Property="Background" Value="#777777"/>
-                                                        </Trigger>
-                                                        <Trigger Property="IsPressed" Value="True">
-                                                            <Setter Property="Background" Value="#444444"/>
-                                                            <Setter Property="RenderTransform">
-                                                                <Setter.Value>
-                                                                    <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
-                                                                </Setter.Value>
-                                                            </Setter>
+                                                            <Setter TargetName="b" Property="Background" Value="#777777"/>
                                                         </Trigger>
                                                     </ControlTemplate.Triggers>
                                                 </ControlTemplate>
@@ -312,8 +296,8 @@
                             </Button>
                             
                             <Button x:Name="SaveCommonsButton"
-                                    Width="24"
-                                    Height="24"
+                                    Width="28"
+                                    Height="28"
                                     HorizontalAlignment="Right"
                                     Margin="0,-40,35,0"
                                     Opacity="0"
@@ -341,8 +325,8 @@
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="Button">
-                                                    <Border Background="#555555"
-                                                            CornerRadius="12"
+                                                    <Border x:Name="b" Background="#000000"
+                                                            CornerRadius="28"
                                                             BorderBrush="#777777"
                                                             BorderThickness="1">
                                                         <ContentPresenter HorizontalAlignment="Center"
@@ -350,11 +334,11 @@
                                                     </Border>
                                                     <ControlTemplate.Triggers>
                                                         <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter Property="Background" Value="#777777"/>
+                                                            <Setter TargetName="b" Property="Background" Value="#777777"/>
                                                         </Trigger>
                                                         <Trigger Property="IsPressed" Value="True">
-                                                            <Setter Property="Background" Value="#444444"/>
-                                                            <Setter Property="RenderTransform">
+                                                            <Setter TargetName="b" Property="Background" Value="#444444"/>
+                                                            <Setter TargetName="b" Property="RenderTransform">
                                                                 <Setter.Value>
                                                                     <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
                                                                 </Setter.Value>
@@ -460,8 +444,8 @@
                         <Grid Grid.Row="0" Height="0">
                             <!-- Правый индикатор - кнопка с "!" над текстом -->
                             <Button x:Name="KnownsIndicatorButton"
-                                    Width="24"
-                                    Height="24"
+                                    Width="28"
+                                    Height="28"
                                     HorizontalAlignment="Right"
                                     Margin="0,-40,5,0"
                                     Opacity="0"
@@ -504,8 +488,8 @@
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="Button">
-                                                    <Border Background="#555555"
-                                                            CornerRadius="12"
+                                                    <Border x:Name="b" Background="#000000"
+                                                            CornerRadius="28"
                                                             BorderBrush="#777777"
                                                             BorderThickness="1">
                                                         <ContentPresenter HorizontalAlignment="Center"
@@ -513,15 +497,7 @@
                                                     </Border>
                                                     <ControlTemplate.Triggers>
                                                         <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter Property="Background" Value="#777777"/>
-                                                        </Trigger>
-                                                        <Trigger Property="IsPressed" Value="True">
-                                                            <Setter Property="Background" Value="#444444"/>
-                                                            <Setter Property="RenderTransform">
-                                                                <Setter.Value>
-                                                                    <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
-                                                                </Setter.Value>
-                                                            </Setter>
+                                                            <Setter TargetName="b" Property="Background" Value="#777777"/>
                                                         </Trigger>
                                                     </ControlTemplate.Triggers>
                                                 </ControlTemplate>
@@ -537,8 +513,8 @@
                             </Button>
 
                             <Button x:Name="SaveKnownsButton"
-                                    Width="24"
-                                    Height="24"
+                                    Width="28"
+                                    Height="28"
                                     HorizontalAlignment="Right"
                                     Margin="0,-40,35,0"
                                     Opacity="0"
@@ -566,8 +542,8 @@
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="Button">
-                                                    <Border Background="#555555"
-                                                            CornerRadius="12"
+                                                    <Border x:Name="b" Background="#000000"
+                                                            CornerRadius="28"
                                                             BorderBrush="#777777"
                                                             BorderThickness="1">
                                                         <ContentPresenter HorizontalAlignment="Center"
@@ -575,11 +551,11 @@
                                                     </Border>
                                                     <ControlTemplate.Triggers>
                                                         <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter Property="Background" Value="#777777"/>
+                                                            <Setter TargetName="b" Property="Background" Value="#777777"/>
                                                         </Trigger>
                                                         <Trigger Property="IsPressed" Value="True">
-                                                            <Setter Property="Background" Value="#444444"/>
-                                                            <Setter Property="RenderTransform">
+                                                            <Setter TargetName="b" Property="Background" Value="#444444"/>
+                                                            <Setter TargetName="b" Property="RenderTransform">
                                                                 <Setter.Value>
                                                                     <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
                                                                 </Setter.Value>
@@ -685,7 +661,8 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
-                                    <Border Background="{TemplateBinding Background}"
+                                    <Border x:Name="BorderElement"
+                                            Background="{TemplateBinding Background}"
                                             BorderBrush="{TemplateBinding BorderBrush}"
                                             BorderThickness="{TemplateBinding BorderThickness}"
                                             CornerRadius="3">
@@ -694,16 +671,17 @@
                                     </Border>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#333333"/>
-                                            <Setter Property="BorderBrush" Value="#666666"/>
+                                            <Setter TargetName="BorderElement" Property="Background" Value="#333333"/>
+                                            <Setter TargetName="BorderElement" Property="BorderBrush" Value="#666666"/>
                                         </Trigger>
                                         <Trigger Property="IsPressed" Value="True">
                                             <Setter Property="Background" Value="#0A0A0A"/>
                                             <Setter Property="RenderTransform">
                                                 <Setter.Value>
-                                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                                    <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
                                                 </Setter.Value>
                                             </Setter>
+                                            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
                                         </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>

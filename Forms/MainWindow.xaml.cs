@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MovieIntro.Controls;
 using PerfectohubRu.Controls;
+using PerfectohubRu.Extensions;
 using PerfectohubRu.Forms.ViewModles;
 using PerfectohubRu.Model;
 using PerfectohubRu.Tools;
@@ -120,17 +121,21 @@ namespace MovieIntro
 
         public Task SwitchToNextSlide()
         {
-            if (currentSlideIndex == 4 && model.ClientData.State == ClientState.New)
+            if (currentSlideIndex == 3)
             {
-                return SwitchToSlide(currentSlideIndex + 1);
-            }
-            else
-            {
+                if (model.ClientData.State == ClientState.New)
+                    return SwitchToSlide(currentSlideIndex + 1);
+
                 if (model.ClientData.State == ClientState.HasAts)
                     return SwitchToSlide(currentSlideIndex + 2);
             }
 
             return SwitchToSlide(currentSlideIndex + 1);
+        }
+
+        public Task SwitchToPrevSlide()
+        {
+            return SwitchToSlide(currentSlideIndex - 1);
         }
 
         private async Task SwitchToSlide(int index)
@@ -150,6 +155,23 @@ namespace MovieIntro
             slide.Visibility = Visibility.Visible;
             await slide.PlayEnterAnimation();
             UpdateIndicator(index);
+
+            if (index >= 5)
+            {
+                if (!MovePrevButton.IsEnabled)
+                {
+                    MovePrevButton.IsEnabled = true;
+                    MovePrevButton.AnimateFadeIn(1, 3);
+                }
+            }
+            else
+            {
+                if (MovePrevButton.IsEnabled)
+                {
+                    MovePrevButton.IsEnabled = false;
+                    MovePrevButton.AnimateFadeOut(0.3);
+                }
+            }
         }
 
         private async Task ExitCurrentSlide()
@@ -168,26 +190,15 @@ namespace MovieIntro
                 indicator.Opacity = i == activeIndex ? 1.0 : 0.2;
 
                 if (i == activeIndex)
-                {
-                    var pulse = new DoubleAnimation(0.5, 1, TimeSpan.FromSeconds(0.8));
-                    pulse.AutoReverse = true;
-                    pulse.RepeatBehavior = new RepeatBehavior(2);
-                    indicator.BeginAnimation(Ellipse.OpacityProperty, pulse);
-                }
-                else
-                {
-                    indicator.BeginAnimation(Ellipse.OpacityProperty, null);
-                }
+                    indicator.AnimatePulse((0.5, 1), 0.8);
 
                 i++;
             }
 
             if (activeIndex >= 4)
             {
-                var showAnimate = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(2));
-                Logo.BeginAnimation(Ellipse.OpacityProperty, showAnimate);
-                Support.BeginAnimation(Ellipse.OpacityProperty, showAnimate);
-                
+                Logo.AnimateFadeIn(2);
+                Support.AnimateFadeIn(2);
             }
         }
 
@@ -204,7 +215,7 @@ namespace MovieIntro
 
         private async void MovePrevButton_Click(object sender, RoutedEventArgs e)
         {
-            await ShowSlide(currentSlideIndex - 1);
+            await SwitchToPrevSlide();
         }
     }
 }
