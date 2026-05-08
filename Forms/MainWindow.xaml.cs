@@ -177,7 +177,7 @@ namespace MovieIntro
                 if (!MoveNextButton.IsEnabled)
                 {
                     MoveNextButton.IsEnabled = true;
-                    MoveNextButton.AnimateFadeIn(1, 3);
+                    MoveNextButton.AnimateFadeIn(1, 1);
                 }
             }
             else
@@ -211,9 +211,10 @@ namespace MovieIntro
             var indicators = Indicators.Children.Select(e => e as Ellipse).ToArray();
 
             foreach (Ellipse indicator in indicators)
-                indicator.AnimateFade((indicator.Opacity, 0.2), 1);
+                if (indicator.Opacity > 0.2)
+                    indicator.AnimateFade((indicator.Opacity, 0.2), 1);
 
-            indicators[index].AnimatePulse((0.5, 1), 0.8, 5);
+            indicators[index].AnimatePulse((0.2, 1), 0.4, 3);
         }
 
         private async void SkipIntro()

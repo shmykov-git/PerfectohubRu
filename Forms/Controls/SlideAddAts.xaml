@@ -4,14 +4,10 @@
              Background="#000000">
 
     <Grid>
-        <Grid.RenderTransform>
-            <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
-        </Grid.RenderTransform>
-
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <!-- Основной контент -->
@@ -26,7 +22,7 @@
                            FontWeight="Light"
                            Foreground="#FFFFFF"
                            HorizontalAlignment="Center"
-                           Margin="0,50,0,40"
+                           Margin="0,60,0,60"
                            Opacity="0"/>
 
                 <!-- Поле ввода с круглой кнопкой подсказки -->
@@ -99,7 +95,7 @@
                     <!-- Круглая кнопка подсказки -->
                     <Button x:Name="HelpButton"
                             Grid.Column="1"
-                            Width="55" Height="55"
+                            Width="40" Height="40"
                             Margin="10,0,0,0"
                             Cursor="Hand"
                             Click="HelpButton_Click">
@@ -109,10 +105,10 @@
                                     <Setter.Value>
                                         <ControlTemplate TargetType="Button">
                                             <Border x:Name="border"
-                                                    Background="#1A1A1A"
-                                                    BorderBrush="#333333"
-                                                    BorderThickness="1"
-                                                    CornerRadius="27.5">
+                                                    Background="#000000"
+                                                    BorderBrush="#555555"
+                                                    BorderThickness="2"
+                                                    CornerRadius="40">
                                                 <ContentPresenter HorizontalAlignment="Center"
                                                                   VerticalAlignment="Center"/>
                                             </Border>
@@ -161,13 +157,14 @@
                         BorderBrush="#333333"
                         BorderThickness="1"
                         Cursor="Hand"
+                        Click="SubmitButton_Click"
                         Opacity="0">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}"
+                                        <Border x:Name="b" Background="{TemplateBinding Background}"
                                                 BorderBrush="{TemplateBinding BorderBrush}"
                                                 BorderThickness="{TemplateBinding BorderThickness}"
                                                 CornerRadius="3">
@@ -176,12 +173,12 @@
                                         </Border>
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="#333333"/>
-                                                <Setter Property="BorderBrush" Value="#666666"/>
+                                                <Setter TargetName="b" Property="Background" Value="#333333"/>
+                                                <Setter TargetName="b" Property="BorderBrush" Value="#666666"/>
                                             </Trigger>
                                             <Trigger Property="IsPressed" Value="True">
-                                                <Setter Property="Background" Value="#0A0A0A"/>
-                                                <Setter Property="RenderTransform">
+                                                <Setter TargetName="b" Property="Background" Value="#0A0A0A"/>
+                                                <Setter TargetName="b" Property="RenderTransform">
                                                     <Setter.Value>
                                                         <ScaleTransform ScaleX="0.98" ScaleY="0.98"/>
                                                     </Setter.Value>
@@ -208,8 +205,8 @@
             <!-- Две картинки в правом нижнем углу -->
             <Border Grid.Row="1"
                     HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom"
-                    Margin="0,0,10,10">
+                    VerticalAlignment="Top"
+                    Margin="0,0,0,0">
 
                 <!-- Картинка-стрелочка (маленькая, указывает на большую) -->
                 <Grid>
@@ -217,13 +214,9 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
 
                     <!-- Маленькая картинка-стрелка -->
-                    <Image Grid.Column="0" Grid.Row="0" x:Name="ArrowImage"
+                    <Image Grid.Column="0" x:Name="ArrowImage"
                            Source="/Assets/arrow.png"
                            Width="60" Height="60"
                            HorizontalAlignment="Left"
@@ -236,7 +229,7 @@
                     </Image>
 
                     <!-- Большая картинка (результат после подключения) -->
-                    <Image Grid.Column="1" Grid.Row="1" x:Name="ResultImage"
+                    <Image Grid.Column="1" x:Name="ResultImage"
                            Source="/Assets/message_example.png"
                            Width="300"
                            Height="200"

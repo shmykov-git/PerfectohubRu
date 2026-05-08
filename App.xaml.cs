@@ -44,6 +44,7 @@ namespace PerfectohubRu
                 .AddSingleton<MainWindow>()
                 .AddTransient<AtsHelpDialog>()
                 .AddSingleton<SupportChat>()
+                .AddTransient<BotHelpDialog>()
                 ;
 
             // Регистрация моделей окон

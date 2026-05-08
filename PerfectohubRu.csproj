@@ -172,6 +172,9 @@
     <Compile Include="Extensions\PhoneExtensions.cs" />
     <Compile Include="Extensions\StringSplitExtensions.cs" />
     <Compile Include="Extensions\UIElementCollectionExtensions.cs" />
+    <Compile Include="Forms\BotHelpDialog.xaml.cs">
+      <DependentUpon>BotHelpDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Controls\SlideAddBot.xaml.cs">
       <DependentUpon>SlideAddBot.xaml</DependentUpon>
     </Compile>
@@ -224,6 +227,10 @@
     <Compile Include="Tools\Filters.cs" />
     <Compile Include="Tools\UrlHelper.cs" />
     <Compile Include="Tools\Values.cs" />
+    <Page Include="Forms\BotHelpDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Forms\Controls\Slide1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -337,7 +344,13 @@
   <ItemGroup>
     <Resource Include="Assets\chat.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\users_message.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\max_icon_b.png" />
+    <Resource Include="Assets\telegram_icon_b.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\System.ValueTuple.4.6.2\build\net471\System.ValueTuple.targets" Condition="Exists('packages\System.ValueTuple.4.6.2\build\net471\System.ValueTuple.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

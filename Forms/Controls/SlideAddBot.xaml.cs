@@ -1,11 +1,12 @@
-﻿using System;
+﻿using PerfectohubRu.Controls;
+using PerfectohubRu.Extensions;
+using PerfectohubRu.Forms.ViewModles;
+using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Animation;
 using System.Windows.Media;
-using PerfectohubRu.Controls;
-using PerfectohubRu.Forms.ViewModles;
+using System.Windows.Media.Animation;
 
 namespace MovieIntro.Controls
 {
@@ -14,82 +15,37 @@ namespace MovieIntro.Controls
         public SlideAddBot()
         {
             InitializeComponent();
-            SubmitButton.Click += SubmitButton_Click;
             TokenTextBox.TextChanged += TokenTextBox_TextChanged;
         }
 
         public MainViewModel Model => DataContext as MainViewModel;
 
-        public async Task PlayExitAnimation() { }
-
         public async Task PlayEnterAnimation()
         {
-            this.Opacity = 0;
             this.Visibility = Visibility.Visible;
 
-            // Анимация появления всего слайда
-            var scaleAnim = new DoubleAnimation(0.95, 1, TimeSpan.FromSeconds(0.8));
-            if (this.RenderTransform is ScaleTransform scale)
-            {
-                scale.BeginAnimation(ScaleTransform.ScaleXProperty, scaleAnim);
-                scale.BeginAnimation(ScaleTransform.ScaleYProperty, scaleAnim);
-            }
+            this.AnimateFadeIn();
+            WelcomeText.AnimateFadeIn();
+            TokenTextBox.AnimateFadeIn();
+            SubmitButton.AnimateFadeIn();
 
-            var fadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.6));
-            this.BeginAnimation(UIElement.OpacityProperty, fadeIn);
-
-            await Task.Delay(200);
-
-            // Появление заголовка
-            var textFade = new DoubleAnimation(0, 0.9, TimeSpan.FromSeconds(0.8));
-            WelcomeText.BeginAnimation(UIElement.OpacityProperty, textFade);
-
-            await Task.Delay(300);
-
-            // Появление поля ввода
-            var inputFade = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.5));
-            TokenTextBox.BeginAnimation(UIElement.OpacityProperty, inputFade);
-
-            await Task.Delay(200);
-
-            // Появление кнопки
-            var buttonFade = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(0.5));
-            SubmitButton.BeginAnimation(UIElement.OpacityProperty, buttonFade);
-
-            await Task.Delay(500);
-
-            // Появление картинок
-            await ShowImages();
+            ArrowImage.AnimateFadeIn();
+            ArrowImage.AnimateScale((0.3, 1), 1.6);
+            ResultImage.AnimateFadeIn();
+            ResultImage.AnimateScale((0.3, 1), 1.6);
         }
 
-        private async Task ShowImages()
+        public async Task PlayExitAnimation()
         {
-            // Появление большой картинки
-            var imgFadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(1.6));
-            var imgScaleX = new DoubleAnimation(0.3, 1, TimeSpan.FromSeconds(1.6));
-            var imgScaleY = new DoubleAnimation(0.3, 1, TimeSpan.FromSeconds(1.6));
+            this.AnimateFadeOut();
+            WelcomeText.AnimateFadeOut();
+            TokenTextBox.AnimateFadeOut();
+            SubmitButton.AnimateFadeOut();
 
-            ResultImage.BeginAnimation(UIElement.OpacityProperty, imgFadeIn);
-            if (ResultImage.RenderTransform is ScaleTransform imgScale)
-            {
-                imgScale.BeginAnimation(ScaleTransform.ScaleXProperty, imgScaleX);
-                imgScale.BeginAnimation(ScaleTransform.ScaleYProperty, imgScaleY);
-            }
-
-            await Task.Delay(300);
-
-            // Появление картинки-стрелки
-            var arrowFadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(1.6));
-            var arrowScaleX = new DoubleAnimation(0.3, 1, TimeSpan.FromSeconds(1.6));
-            var arrowScaleY = new DoubleAnimation(0.3, 1, TimeSpan.FromSeconds(1.6));
-
-            ArrowImage.BeginAnimation(UIElement.OpacityProperty, arrowFadeIn);
-
-            if (ArrowImage.RenderTransform is ScaleTransform arrowScale)
-            {
-                arrowScale.BeginAnimation(ScaleTransform.ScaleXProperty, arrowScaleX);
-                arrowScale.BeginAnimation(ScaleTransform.ScaleYProperty, arrowScaleY);
-            }
+            ArrowImage.AnimateFadeOut();
+            ArrowImage.AnimateScale((1, 0.3), 1.6);
+            ResultImage.AnimateFadeOut();
+            ResultImage.AnimateScale((1, 0.3), 1.6);
         }
 
         private void TokenTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -121,7 +77,7 @@ namespace MovieIntro.Controls
 
         private async void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            ParentWindow.ShowDialog<AtsHelpDialog>();
+            ParentWindow.ShowDialog<BotHelpDialog>();
         }
 
         private async void SubmitButton_Click(object sender, RoutedEventArgs e)

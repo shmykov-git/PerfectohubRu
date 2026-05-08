@@ -18,19 +18,14 @@ namespace MovieIntro.Controls
         public SlideArrangeMessage()
         {
             InitializeComponent();
-            this.Loaded += SlideArrangeMessage_Loaded;
-        }
-
-        private void SlideArrangeMessage_Loaded(object sender, RoutedEventArgs e)
-        {
-            Model.RefreshCallsMessage();
         }
 
         public async Task PlayEnterAnimation()
         {
-            //this.Opacity = 0;
+            Model.RefreshCallsMessage();
+
             this.Visibility = Visibility.Visible;
-            this.AnimateFadeIn();
+            this.AnimateFadeIn(0.3);
 
             TitleText.AnimateFadeIn(2, 1);
 

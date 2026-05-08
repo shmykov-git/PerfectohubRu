@@ -6,6 +6,7 @@ namespace PerfectohubRu.Forms.ViewModles
     public partial class MainViewModel : INotifyPropertyChanged
     {
         private string _atsToken = "";
+        private string _botToken = "";
         private string _callsMessage = "";
         private string _knowns = "";
         private string _commons = "";
@@ -18,6 +19,19 @@ namespace PerfectohubRu.Forms.ViewModles
                 if (_atsToken != value)
                 {
                     _atsToken = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string BotToken
+        {
+            get => _botToken;
+            set
+            {
+                if (_botToken != value)
+                {
+                    _botToken = value;
                     OnPropertyChanged();
                 }
             }
