@@ -28,6 +28,7 @@
                 <controls:Slide4 x:Name="SlideCallsInfoControl" Visibility="Collapsed"/>
                 <controls:SlideAddAts x:Name="SlideAddAtsControl" Visibility="Collapsed"/>
                 <controls:SlideArrangeMessage x:Name="SlideArrangeMessageControl" Visibility="Collapsed"/>
+                <controls:SlideAddBot x:Name="SlideAddBotControl" Visibility="Collapsed"/>
             </Grid>
 
             <!-- Заголовок для перетаскивания (область без кнопок) -->
@@ -137,6 +138,7 @@
                 <Ellipse x:Name="Indicator4" Width="8" Height="8" Fill="#FFFFFF" Opacity="0.2" Margin="5"/>
                 <Ellipse x:Name="Indicator5" Width="8" Height="8" Fill="#FFFFFF" Opacity="0.2" Margin="5"/>
                 <Ellipse x:Name="Indicator6" Width="8" Height="8" Fill="#FFFFFF" Opacity="0.2" Margin="5"/>
+                <Ellipse x:Name="Indicator7" Width="8" Height="8" Fill="#FFFFFF" Opacity="0.2" Margin="5"/>
             </StackPanel>
 
             <!-- perfectohub.ru -->
@@ -183,7 +185,7 @@
                                     VerticalAlignment="Center"
                                     Margin="5,20,20,20"
                                     Opacity="0"
-                                    Cursor="Help"
+                                    Cursor="Hand"
                                     IsEnabled="false"
                                     Click="MovePrevButton_Click"
                                     ToolTipService.InitialShowDelay="300">
@@ -236,6 +238,70 @@
                         <Setter Property="FontWeight" Value="Bold"/>
                         <Setter Property="Foreground" Value="#FFFFFF"/>
                         <Setter Property="Content" Value="🠜"/>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button x:Name="MoveNextButton"
+                                    Width="30"
+                                    Height="30"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Margin="20,20,5,20"
+                                    Opacity="0"
+                                    Cursor="Hand"
+                                    IsEnabled="false"
+                                    Click="MoveNextButton_Click"
+                                    ToolTipService.InitialShowDelay="300">
+                <Button.ToolTip>
+                    <!-- Здесь ваш собственный сложный ToolTip -->
+                    <ToolTip Background="#333333" 
+                                             BorderBrush="#555555"
+                                             BorderThickness="1"
+                                             Padding="10"
+                                             MaxWidth="300">
+                        <StackPanel>
+                            <TextBlock Text="к следующему слайду 🠞" 
+                                FontWeight="Bold" 
+                                Foreground="#FFFFFF"
+                                FontSize="16"
+                                Margin="0,0,0,5"/>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="b" Background="#000000"
+                                                            CornerRadius="30"
+                                                            BorderBrush="#777777"
+                                                            BorderThickness="1">
+                                        <ContentPresenter HorizontalAlignment="Center"
+                                                                          VerticalAlignment="Center"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="b" Property="Background" Value="#777777"/>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="b" Property="Background" Value="#444444"/>
+                                            <Setter TargetName="b" Property="RenderTransform">
+                                                <Setter.Value>
+                                                    <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="FontFamily" Value="Segoe UI"/>
+                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="Foreground" Value="#FFFFFF"/>
+                        <Setter Property="Content" Value="🠞"/>
                     </Style>
                 </Button.Style>
             </Button>

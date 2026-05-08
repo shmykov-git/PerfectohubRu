@@ -12,7 +12,7 @@ namespace MovieIntro.Controls
 {
     public partial class SlideArrangeMessage : UserControl, ISlide
     {
-        private MainWindow ParentWindow => Window.GetWindow(this) as MainWindow;
+        private MainWindow MainWindow => Window.GetWindow(this) as MainWindow;
         private MainViewModel Model => DataContext as MainViewModel;
 
         public SlideArrangeMessage()
@@ -57,11 +57,6 @@ namespace MovieIntro.Controls
             CommonsTextBox.Focus();
         }
 
-        private async void DoneButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         public async Task PlayExitAnimation()
         {
             this.AnimateFadeOut();
@@ -72,6 +67,12 @@ namespace MovieIntro.Controls
             RefreshMessageButton.AnimateFadeOut();
             SaveKnownsButton.AnimateFadeOut();
             SaveCommonsButton.AnimateFadeOut();
+        }
+
+        private async void DoneButton_Click(object sender, RoutedEventArgs e)
+        {
+            await Model.ApproveMessage();
+            await MainWindow.SwitchToNextSlide();
         }
 
         private async void RefreshMessageButton_Click(object sender, RoutedEventArgs e)

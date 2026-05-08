@@ -2,8 +2,9 @@
 {
     public enum ClientState
     {
-        New,
+        New = 0,
         HasAts,
+        HasMessage,
         HasBot,
         HasIntegration
     }

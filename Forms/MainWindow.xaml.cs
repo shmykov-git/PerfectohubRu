@@ -33,13 +33,12 @@ namespace MovieIntro
             InitializeComponent();
 
             // Получаем ссылки на контролы
-            slides = new ISlide[] { Slide1Control, Slide2Control, Slide3Control, SlideCallsInfoControl, SlideAddAtsControl, SlideArrangeMessageControl };
+            slides = SlidesContainer.Children.Select(e => e as ISlide).ToArray();
 
             // Клик по окну для пропуска вступления
             this.MouseLeftButtonDown += (s, e) => SkipIntro();
             this.KeyUp += (s, e) => SkipIntro();
-
-            StartIntroSequence();
+            this.Loaded += (s, e) => StartIntroSequence();
         }
 
         public MainWindow(IServiceProvider sp, MainViewModel model) : this()
@@ -110,7 +109,7 @@ namespace MovieIntro
 
         private async void SlideTimer_Tick(object sender, EventArgs e)
         {
-            if (currentSlideIndex == slides.Length - 1)
+            if (currentSlideIndex >= 4)
             {
                 slideTimer.Stop();
                 return;
@@ -128,6 +127,9 @@ namespace MovieIntro
 
                 if (model.ClientData.State == ClientState.HasAts)
                     return SwitchToSlide(currentSlideIndex + 2);
+
+                if (model.ClientData.State == ClientState.HasMessage)
+                    return SwitchToSlide(currentSlideIndex + 3);
             }
 
             return SwitchToSlide(currentSlideIndex + 1);
@@ -151,17 +153,14 @@ namespace MovieIntro
         private async Task ShowSlide(int index)
         {
             var slide = slides[index];
-
             slide.Visibility = Visibility.Visible;
-            await slide.PlayEnterAnimation();
-            UpdateIndicator(index);
 
             if (index >= 5)
             {
                 if (!MovePrevButton.IsEnabled)
                 {
                     MovePrevButton.IsEnabled = true;
-                    MovePrevButton.AnimateFadeIn(1, 3);
+                    MovePrevButton.AnimateFadeIn(0.3);
                 }
             }
             else
@@ -172,6 +171,32 @@ namespace MovieIntro
                     MovePrevButton.AnimateFadeOut(0.3);
                 }
             }
+
+            if (index >= 4 && (index - 4) < (int)model.ClientData.State)
+            {
+                if (!MoveNextButton.IsEnabled)
+                {
+                    MoveNextButton.IsEnabled = true;
+                    MoveNextButton.AnimateFadeIn(1, 3);
+                }
+            }
+            else
+            {
+                if (MoveNextButton.IsEnabled)
+                {
+                    MoveNextButton.IsEnabled = false;
+                    MoveNextButton.AnimateFadeOut(0.3);
+                }
+            }
+
+            if (index >= 4)
+            {
+                Logo.AnimateFadeIn(2);
+                Support.AnimateFadeIn(2);
+            }
+
+            UpdateIndicator(index);
+            await slide.PlayEnterAnimation();
         }
 
         private async Task ExitCurrentSlide()
@@ -181,25 +206,14 @@ namespace MovieIntro
             slide.Visibility = Visibility.Collapsed;
         }
 
-        private void UpdateIndicator(int activeIndex)
+        private async void UpdateIndicator(int index)
         {
-            var i = 0;
+            var indicators = Indicators.Children.Select(e => e as Ellipse).ToArray();
 
-            foreach (Ellipse indicator in Indicators.Children)
-            {
-                indicator.Opacity = i == activeIndex ? 1.0 : 0.2;
+            foreach (Ellipse indicator in indicators)
+                indicator.AnimateFade((indicator.Opacity, 0.2), 1);
 
-                if (i == activeIndex)
-                    indicator.AnimatePulse((0.5, 1), 0.8);
-
-                i++;
-            }
-
-            if (activeIndex >= 4)
-            {
-                Logo.AnimateFadeIn(2);
-                Support.AnimateFadeIn(2);
-            }
+            indicators[index].AnimatePulse((0.5, 1), 0.8, 5);
         }
 
         private async void SkipIntro()
@@ -216,6 +230,11 @@ namespace MovieIntro
         private async void MovePrevButton_Click(object sender, RoutedEventArgs e)
         {
             await SwitchToPrevSlide();
+        }
+
+        private async void MoveNextButton_Click(object sender, RoutedEventArgs e)
+        {
+            await SwitchToNextSlide();
         }
     }
 }

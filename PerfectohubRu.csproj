@@ -171,6 +171,10 @@
     <Compile Include="Extensions\OptionsExtensions.cs" />
     <Compile Include="Extensions\PhoneExtensions.cs" />
     <Compile Include="Extensions\StringSplitExtensions.cs" />
+    <Compile Include="Extensions\UIElementCollectionExtensions.cs" />
+    <Compile Include="Forms\Controls\SlideAddBot.xaml.cs">
+      <DependentUpon>SlideAddBot.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Controls\SlideArrangeMessage.xaml.cs">
       <DependentUpon>SlideArrangeMessage.xaml</DependentUpon>
     </Compile>
@@ -231,6 +235,10 @@
     <Page Include="Forms\Controls\Slide3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Controls\SlideAddBot.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Forms\Controls\SlideAddAts.xaml">
       <SubType>Designer</SubType>

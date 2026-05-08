@@ -11,6 +11,7 @@ using System.Windows.Shapes;
 
 namespace PerfectohubRu.Extensions
 {
+
     public static class AnimationExtensions
     {
         //private static void WithStoryboard(this UIElement element, AnimationTimeline animation, int fps, params string[] properties)
@@ -43,6 +44,13 @@ namespace PerfectohubRu.Extensions
             await Task.Delay(TimeSpan.FromSeconds(delay));
             var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(duration));
             element.BeginAnimation(UIElement.OpacityProperty, fadeOut);
+        }
+
+        public static async void AnimateFade(this UIElement element, (double from, double to) range, double duration = 1.5, double delay = 0)
+        {
+            await Task.Delay(TimeSpan.FromSeconds(delay));
+            var fade = new DoubleAnimation(range.from, range.to, TimeSpan.FromSeconds(duration));
+            element.BeginAnimation(UIElement.OpacityProperty, fade);
         }
 
         public static async void AnimateShake(this UIElement element, double scale = 1, double delay = 0)
@@ -104,15 +112,18 @@ namespace PerfectohubRu.Extensions
             }
         }
 
-        public static async void AnimatePulse(this UIElement element, (double from, double to) range, double duration = 0.8, double delay = 0)
+        public static async void AnimatePulse(this UIElement element, (double from, double to) range, double duration = 0.8, int repeat = 2, double delay = 0)
         {
             await Task.Delay(TimeSpan.FromSeconds(delay));
 
             var pulse = new DoubleAnimation(range.from, range.to, TimeSpan.FromSeconds(duration));
             pulse.AutoReverse = true;
-            pulse.RepeatBehavior = new RepeatBehavior(2);
-
+            pulse.RepeatBehavior = new RepeatBehavior(repeat);
             element.BeginAnimation(UIElement.OpacityProperty, pulse);
+
+            await Task.Delay(TimeSpan.FromSeconds(duration * repeat + 0.1));
+            element.BeginAnimation(UIElement.OpacityProperty, null);
+            element.Opacity = range.to;
         }
     }
 }

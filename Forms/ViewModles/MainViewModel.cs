@@ -84,6 +84,12 @@ namespace PerfectohubRu.Forms.ViewModles
             RefreshCallsMessage();
         }
 
+        public async Task ApproveMessage()
+        {
+            data.State = ClientState.HasMessage;
+            dataProvider.Save();
+        }
+
         public async Task<OperationResult> ValidateAndSaveAtsToken()
         {
             var token = AtsToken;
