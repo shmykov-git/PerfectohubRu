@@ -73,11 +73,11 @@ namespace MovieIntro.Controls
             }
         }
 
-        private MainWindow ParentWindow => Window.GetWindow(this) as MainWindow;
+        private MainWindow MainWindow => Window.GetWindow(this) as MainWindow;
 
         private async void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            ParentWindow.ShowDialog<BotHelpDialog>();
+            MainWindow.ShowDialog<BotHelpDialog>();
         }
 
         private async void SubmitButton_Click(object sender, RoutedEventArgs e)
@@ -92,7 +92,7 @@ namespace MovieIntro.Controls
 
             if (result.Success)
             {
-                await ParentWindow.SwitchToNextSlide();
+                await MainWindow.SwitchToNextSlide();
             }
             else
             {

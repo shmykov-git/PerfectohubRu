@@ -1,4 +1,5 @@
 ﻿using PerfectohubRu.Controls;
+using PerfectohubRu.Forms.ViewModles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,8 @@ namespace MovieIntro.Controls
     /// </summary>
     public partial class SlideTestBot : UserControl, ISlide
     {
+        public MainViewModel Model => DataContext as MainViewModel;
+
         public SlideTestBot()
         {
             InitializeComponent();
@@ -28,12 +31,21 @@ namespace MovieIntro.Controls
 
         public async Task PlayEnterAnimation()
         {
-            
         }
 
         public async Task PlayExitAnimation()
         {
             
+        }
+
+        private void DoneButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private async void ScheduleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            await Model.SaveSchedule(ScheduleComboBox.SelectedItem as ScheduleItem);
         }
     }
 }

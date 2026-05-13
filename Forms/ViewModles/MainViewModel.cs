@@ -40,12 +40,24 @@ namespace PerfectohubRu.Forms.ViewModles
             Knowns = data.Knowns.SJoin("\r\n");
             Commons = data.Commons.SJoin("\r\n");
 
+            ScheduleItems = new ScheduleItem[]
+            {
+                new ScheduleItem { Name = "Каждую минуту", IntervalMinutes = 1 },
+                new ScheduleItem { Name = "Каждые 5 минут", IntervalMinutes = 5 },
+                new ScheduleItem { Name = "Каждые 10 минут", IntervalMinutes = 10 },
+                new ScheduleItem { Name = "Каждые 15 минут", IntervalMinutes = 15 },
+                new ScheduleItem { Name = "Каждые 30 минут", IntervalMinutes = 30 },
+                new ScheduleItem { Name = "Каждый час", IntervalMinutes = 60 },
+                new ScheduleItem { Name = "Каждые 2 часа", IntervalMinutes = 120 },
+            };
+
+            SelectedSchedule = ScheduleItems.FirstOrDefault(i => i.IntervalMinutes == data.ScheduleIntervalMinutes) ?? ScheduleItems[4];
+
             if (data.BotToken != null)
                 _ = Task.Run(botManager.Restart);
         }
 
-        public ClientData ClientData => data;
-        public IServiceProvider Sp => sp;
+        public ClientData Data => data;
 
         private AtsType GetTokenAtsType(string token)
         {
@@ -93,7 +105,7 @@ namespace PerfectohubRu.Forms.ViewModles
         public void SaveKnowns()
         {
             var phones = Knowns.Replace("\r", "").Split('\n').Select(v => v.Trim()).ToArray();
-            ClientData.Knowns = phones;
+            Data.Knowns = phones;
             dataProvider.Save();
             RefreshCallsMessage();
         }
@@ -101,7 +113,7 @@ namespace PerfectohubRu.Forms.ViewModles
         public void SaveCommons()
         {
             var phones = Commons.Replace("\r", "").Split('\n').Select(v => v.Trim()).ToArray();
-            ClientData.Commons = phones;
+            Data.Commons = phones;
             dataProvider.Save();
             RefreshCallsMessage();
         }
@@ -177,6 +189,12 @@ namespace PerfectohubRu.Forms.ViewModles
             {
                 return new OperationResult { Error = $"Не удается запустить бота" };
             }
+        }
+
+        public async Task SaveSchedule(ScheduleItem item)
+        {
+            data.ScheduleIntervalMinutes = item.IntervalMinutes;
+            dataProvider.Save();
         }
     }
 }

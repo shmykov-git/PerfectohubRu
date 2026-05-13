@@ -204,6 +204,7 @@
     </Compile>
     <Compile Include="Forms\ViewModles\MainViewModel.cs" />
     <Compile Include="Forms\ViewModles\MainViewModel.NotifyPropertyChanged.cs" />
+    <Compile Include="Model\ScheduleItem.cs" />
     <Compile Include="HttpClients\Abstractions\IAtsHttpClient.cs" />
     <Compile Include="HttpClients\Abstractions\IBeelineAtsHttpClient.cs" />
     <Compile Include="HttpClients\Abstractions\ITele2AtsHttpClient.cs" />

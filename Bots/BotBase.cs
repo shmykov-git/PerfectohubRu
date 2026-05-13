@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Perfecto.Deploy.Extensions;
+using PerfectohubRu.Model;
+using PerfectohubRu.Tools;
 using Shared.Model.Enums;
 using Shared.Model.Options;
 using System;
@@ -22,6 +24,9 @@ namespace Calls.Api.Bots
         protected ClientOptions clientOptions;
         private readonly IServiceProvider sp;
         protected IConfiguration configuration;
+        private ClientDataProvider dataProvider;
+        private ClientData data;
+
         protected string ClientId { get; private set; }
 
         protected Dictionary<string, Chat> chats = new Dictionary<string, Chat>();
@@ -89,6 +94,7 @@ namespace Calls.Api.Bots
                 };
 
                 chats.Add(chatId, chat);
+                dataProvider.Save();
             }
 
             var chatCount = chats.Values.Count(c => c.BotType == BotType);
@@ -107,6 +113,9 @@ namespace Calls.Api.Bots
             this.sp = sp;
             this.clientOptions = sp.GetRequiredService<IOptions<ClientOptions>>().Value;
             this.configuration = sp.GetRequiredService<IConfiguration>();
+            this.dataProvider = sp.GetRequiredService<ClientDataProvider>();
+            this.data = dataProvider.Data;
+            this.chats = data.Chats;
         }
     }
 }

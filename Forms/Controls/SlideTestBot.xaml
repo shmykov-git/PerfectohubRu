@@ -1,12 +1,365 @@
 ﻿<UserControl x:Class="MovieIntro.Controls.SlideTestBot"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MovieIntro.Controls"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             Background="#000000">
+
+    <Grid Margin="80,30,80,30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock x:Name="TitleText"
+                   Grid.Row="0"
+                   Text="ТЕСТИРУЕМ БОТА"
+                   FontFamily="Segoe UI"
+                   FontSize="28"
+                   FontWeight="Light"
+                   Foreground="#FFFFFF"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,40"/>
+
+        <!-- Пункт 1 -->
+        <Grid Grid.Row="1" Margin="0,0,0,20" x:Name="Row1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0"
+                    Width="28" Height="28"
+                    CornerRadius="14"
+                    Background="#1A1A1A"
+                    BorderBrush="#333333"
+                    BorderThickness="1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+                <TextBlock Text="1" 
+                           FontFamily="Segoe UI"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           Foreground="#FF3333"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Border>
+
+            <TextBlock Grid.Column="1"
+                       Text="В диалоге бота введите '/start'"
+                       FontFamily="Segoe UI"
+                       FontSize="18"
+                       Foreground="#CCCCCC"
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Center"
+                       Margin="10,0,0,0"/>
+        </Grid>
+
+        <!-- Пункт 2 -->
+        <Grid Grid.Row="2" Margin="0,0,0,20" x:Name="Row2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0"
+                    Width="28" Height="28"
+                    CornerRadius="14"
+                    Background="#1A1A1A"
+                    BorderBrush="#333333"
+                    BorderThickness="1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+                <TextBlock Text="2" 
+                           FontFamily="Segoe UI"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           Foreground="#FF3333"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Border>
+
+            <TextBlock Grid.Column="1"
+                       Text="В появившемся меню проверьте работу сообщения"
+                       FontFamily="Segoe UI"
+                       FontSize="18"
+                       Foreground="#CCCCCC"
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Center"
+                       Margin="10,0,0,0"/>
+        </Grid>
+
+        <!-- Пункт 3 -->
+        <Grid Grid.Row="3" Margin="0,0,0,20" x:Name="Row3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0"
+                    Width="28" Height="28"
+                    CornerRadius="14"
+                    Background="#1A1A1A"
+                    BorderBrush="#333333"
+                    BorderThickness="1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+                <TextBlock Text="3" 
+                           FontFamily="Segoe UI"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           Foreground="#FF3333"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Border>
+
+            <TextBlock Grid.Column="1"
+                       Text="Создайте группу контроля и добавьте в нее бота как администратора (для Max)"
+                       FontFamily="Segoe UI"
+                       FontSize="18"
+                       Foreground="#CCCCCC"
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Center"
+                       Margin="10,0,0,0"/>
+        </Grid>
+
+        <!-- Пункт 4 -->
+        <Grid Grid.Row="4" Margin="0,0,0,20" x:Name="Row4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0"
+                    Width="28" Height="28"
+                    CornerRadius="14"
+                    Background="#1A1A1A"
+                    BorderBrush="#333333"
+                    BorderThickness="1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+                <TextBlock Text="4" 
+                           FontFamily="Segoe UI"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           Foreground="#FF3333"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Border>
+
+            <TextBlock Grid.Column="1"
+                       Text="Установите расписание получения сообщений"
+                       FontFamily="Segoe UI"
+                       FontSize="18"
+                       Foreground="#CCCCCC"
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Center"
+                       Margin="10,0,0,0"/>
+        </Grid>
+
+        <!-- Комбобокс с расписанием -->
+        <Grid Grid.Row="5" Margin="0,0,0,30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0"
+                       Text="Расписание:"
+                       FontFamily="Segoe UI"
+                       FontSize="18"
+                       Foreground="#CCCCCC"
+                       VerticalAlignment="Center"
+                       Margin="50,0,15,0"/>
+
+            <ComboBox x:Name="ScheduleComboBox"
+                      Grid.Column="1"
+                      Width="200"
+                      Height="35"
+                      FontFamily="Segoe UI"
+                      FontSize="14"
+                      Foreground="#FFFFFF"
+                      ItemsSource="{Binding ScheduleItems}"
+                      SelectedItem="{Binding SelectedSchedule, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      SelectionChanged="ScheduleComboBox_SelectionChanged"
+                      Cursor="Hand">
+                <ComboBox.Style>
+                    <Style TargetType="ComboBox">
+                        <Setter Property="Background" Value="#000000"/>
+                        <Setter Property="BorderBrush" Value="#333333"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Setter Property="SnapsToDevicePixels" Value="True"/>
+                        <Setter Property="OverridesDefaultStyle" Value="True"/>
+                        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+                        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+                        <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ComboBox">
+                                    <Grid>
+                                        <ToggleButton x:Name="ToggleButton"
+                                                      Background="#000000"
+                                                      BorderBrush="#333333"
+                                                      BorderThickness="1"
+                                                      Focusable="False"
+                                                      IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                      ClickMode="Press">
+                                            <ToggleButton.Style>
+                                                <Style TargetType="ToggleButton">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="ToggleButton">
+                                                                <Border x:Name="Border"
+                                                                        Background="#000000"
+                                                                        BorderBrush="#333333"
+                                                                        BorderThickness="1"
+                                                                        CornerRadius="3">
+                                                                    <Grid>
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="*"/>
+                                                                            <ColumnDefinition Width="30"/>
+                                                                        </Grid.ColumnDefinitions>
+
+                                                                        <TextBlock Grid.Column="0"
+                                                                                   x:Name="SelectedText"
+                                                                                   Text="{Binding SelectedItem.Name, RelativeSource={RelativeSource AncestorType=ComboBox}}"
+                                                                                   Foreground="#FFFFFF"
+                                                                                   VerticalAlignment="Center"
+                                                                                   Margin="10,0,0,0"/>
+
+                                                                        <Path Grid.Column="1"
+                                                                              x:Name="Arrow"
+                                                                              Data="M0,0 L5,5 L10,0 Z"
+                                                                              Fill="#666666"
+                                                                              HorizontalAlignment="Center"
+                                                                              VerticalAlignment="Center"
+                                                                              Margin="0,2,0,0"/>
+                                                                    </Grid>
+                                                                </Border>
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter TargetName="Border" Property="Background" Value="#1A1A1A"/>
+                                                                        <Setter TargetName="Arrow" Property="Fill" Value="#999999"/>
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </ToggleButton.Style>
+                                        </ToggleButton>
+
+                                        <Popup x:Name="Popup"
+                                               IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                                               Placement="Bottom"
+                                               AllowsTransparency="True"
+                                               Focusable="False"
+                                               Width="200"
+                                               PopupAnimation="Fade">
+                                            <Border Background="#000000"
+                                                    BorderBrush="#333333"
+                                                    BorderThickness="1"
+                                                    CornerRadius="3"
+                                                    Margin="0,2,0,0">
+                                                <ScrollViewer x:Name="ScrollViewer"
+                                                              MaxHeight="200"
+                                                              Background="#000000">
+                                                    <ItemsPresenter/>
+                                                </ScrollViewer>
+                                            </Border>
+                                        </Popup>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ComboBox.Style>
+
+                <!-- Шаблон для отображения элементов -->
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" 
+                                   Foreground="#FFFFFF" 
+                                   Background="#000000"
+                                   Padding="10,5"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+
+                <!-- Шаблон для выбранного элемента -->
+                <ComboBox.ItemContainerStyle>
+                    <Style TargetType="ComboBoxItem">
+                        <Setter Property="Background" Value="#000000"/>
+                        <Setter Property="Foreground" Value="#FFFFFF"/>
+                        <Setter Property="Height" Value="30"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsHighlighted" Value="True">
+                                <Setter Property="Background" Value="#333333"/>
+                                <Setter Property="Foreground" Value="#FFFFFF"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#1A1A1A"/>
+                                <Setter Property="Foreground" Value="#FFFFFF"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ComboBox.ItemContainerStyle>
+            </ComboBox>
+        </Grid>
+
+        <!-- Кнопка Готово -->
+        <Button     x:Name="DoneButton"
+                    Grid.Row="6"
+                    Content="ГОТОВО"
+                    Width="200" Height="45"
+                    FontFamily="Segoe UI"
+                    FontSize="16"
+                    FontWeight="SemiBold"
+                    Foreground="#FFFFFF"
+                    Background="#1A1A1A"
+                    BorderBrush="#333333"
+                    BorderThickness="1"
+                    Cursor="Hand"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,0"
+                    Click="DoneButton_Click">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="BorderElement"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="3">
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                                          VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="BorderElement" Property="Background" Value="#333333"/>
+                                        <Setter TargetName="BorderElement" Property="BorderBrush" Value="#666666"/>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter Property="Background" Value="#0A0A0A"/>
+                                        <Setter Property="RenderTransform">
+                                            <Setter.Value>
+                                                <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
     </Grid>
 </UserControl>

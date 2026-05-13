@@ -1,8 +1,10 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace PerfectohubRu.Forms.ViewModles
 {
+
     public partial class MainViewModel : INotifyPropertyChanged
     {
         private string _atsToken = "";
@@ -10,6 +12,8 @@ namespace PerfectohubRu.Forms.ViewModles
         private string _callsMessage = "";
         private string _knowns = "";
         private string _commons = "";
+        private ScheduleItem[] _scheduleItems = new ScheduleItem[0];
+        private ScheduleItem _selectedSchedule = null;
 
         public string AtsToken
         {
@@ -73,6 +77,26 @@ namespace PerfectohubRu.Forms.ViewModles
                     _callsMessage = value;
                     OnPropertyChanged();
                 }
+            }
+        }
+
+        public ScheduleItem[] ScheduleItems
+        {
+            get => _scheduleItems;
+            set
+            {
+                _scheduleItems = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ScheduleItem SelectedSchedule
+        {
+            get => _selectedSchedule;
+            set
+            {
+                _selectedSchedule = value;
+                OnPropertyChanged();
             }
         }
 

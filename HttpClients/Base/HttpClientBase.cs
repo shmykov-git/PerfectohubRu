@@ -80,7 +80,7 @@ namespace Shared.HttpClients.Base
                 throw new ArgumentNullException("HttpClient method cannot be null");
 
             var requestId = (uint)rnd.Next();
-            Debug.WriteLine($"HttpClient {name} {requestId} {httpMethod.Method} {args.QueryArgsType.ToJsonStr()} {query.ToJsonStr()} {args.Method.ToJsonStr()}");
+            //Debug.WriteLine($"HttpClient {name} {requestId} {httpMethod.Method} {args.QueryArgsType.ToJsonStr()} {query.ToJsonStr()} {args.Method.ToJsonStr()}");
 
             if (args.Host != null)
                 client.BaseAddress = new Uri(args.Host);
@@ -178,10 +178,10 @@ namespace Shared.HttpClients.Base
             
                 var debugContentLimit = args.Method.DebugContentLimit ?? options.DebugContentLimit;
 
-                if (debugContentLimit == null)
-                    Debug.WriteLine($"HttpClient {name} {requestId} {contentStr.Length} {contentStr.ToJsonStr()}");
-                else
-                    Debug.WriteLine($"HttpClient {name} {requestId} {contentStr.Length} {contentStr.Substring(0, Math.Min(contentStr.Length, debugContentLimit.Value)).ToJsonStr()}");
+                //if (debugContentLimit == null)
+                //    Debug.WriteLine($"HttpClient {name} {requestId} {contentStr.Length} {contentStr.ToJsonStr()}");
+                //else
+                //    Debug.WriteLine($"HttpClient {name} {requestId} {contentStr.Length} {contentStr.Substring(0, Math.Min(contentStr.Length, debugContentLimit.Value)).ToJsonStr()}");
 
                 return view;
             }

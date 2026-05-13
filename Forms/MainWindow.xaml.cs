@@ -122,13 +122,13 @@ namespace MovieIntro
         {
             if (currentSlideIndex == 3)
             {
-                if (model.ClientData.State == ClientState.New)
+                if (model.Data.State == ClientState.New)
                     return SwitchToSlide(currentSlideIndex + 1);
 
-                if (model.ClientData.State == ClientState.HasAts)
+                if (model.Data.State == ClientState.HasAts)
                     return SwitchToSlide(currentSlideIndex + 2);
 
-                if (model.ClientData.State == ClientState.HasMessage)
+                if (model.Data.State == ClientState.HasMessage)
                     return SwitchToSlide(currentSlideIndex + 3);
             }
 
@@ -172,7 +172,7 @@ namespace MovieIntro
                 }
             }
 
-            if (index >= 4 && (index - 4) < (int)model.ClientData.State)
+            if (index >= 4 && (index - 4) < (int)model.Data.State)
             {
                 if (!MoveNextButton.IsEnabled)
                 {
