@@ -41,6 +41,9 @@
     <Reference Include="Costura, Version=6.1.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
       <HintPath>packages\Costura.Fody.6.1.0\lib\netstandard2.0\Costura.dll</HintPath>
     </Reference>
+    <Reference Include="IndexRange, Version=1.0.3.0, Culture=neutral, PublicKeyToken=35e6a3c4212514c6, processorArchitecture=MSIL">
+      <HintPath>packages\IndexRange.1.0.3\lib\net47\IndexRange.dll</HintPath>
+    </Reference>
     <Reference Include="Mapster, Version=10.0.7.0, Culture=neutral, PublicKeyToken=2f39883af23c29a8, processorArchitecture=MSIL">
       <HintPath>packages\Mapster.10.0.7\lib\netstandard2.0\Mapster.dll</HintPath>
     </Reference>
@@ -52,6 +55,9 @@
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=10.0.0.7, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.10.0.7\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.TimeProvider, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.TimeProvider.8.0.0\lib\net462\Microsoft.Bcl.TimeProvider.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Configuration, Version=10.0.0.7, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Extensions.Configuration.10.0.7\lib\net462\Microsoft.Extensions.Configuration.dll</HintPath>
@@ -104,8 +110,11 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Polly, Version=7.0.0.0, Culture=neutral, PublicKeyToken=c8a3ffc3f8f825cc, processorArchitecture=MSIL">
-      <HintPath>packages\Polly.7.1.0\lib\netstandard2.0\Polly.dll</HintPath>
+    <Reference Include="Polly, Version=8.0.0.0, Culture=neutral, PublicKeyToken=c8a3ffc3f8f825cc, processorArchitecture=MSIL">
+      <HintPath>packages\Polly.8.6.6\lib\net472\Polly.dll</HintPath>
+    </Reference>
+    <Reference Include="Polly.Core, Version=8.0.0.0, Culture=neutral, PublicKeyToken=c8a3ffc3f8f825cc, processorArchitecture=MSIL">
+      <HintPath>packages\Polly.Core.8.6.6\lib\net472\Polly.Core.dll</HintPath>
     </Reference>
     <Reference Include="Polly.Extensions.Http, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c8a3ffc3f8f825cc, processorArchitecture=MSIL">
       <HintPath>packages\Polly.Extensions.Http.3.0.0\lib\netstandard2.0\Polly.Extensions.Http.dll</HintPath>
@@ -113,6 +122,9 @@
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -160,6 +172,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Bots\BotBase.cs" />
+    <Compile Include="Bots\BotStartArgs.cs" />
+    <Compile Include="Bots\RemoteBot.cs" />
     <Compile Include="Exceptions\Cases\HttpClientCase.cs" />
     <Compile Include="Exceptions\HttpClientException.cs" />
     <Compile Include="Extensions\AnimationExtensions.cs" />
@@ -181,6 +196,9 @@
     <Compile Include="Forms\Controls\SlideArrangeMessage.xaml.cs">
       <DependentUpon>SlideArrangeMessage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Controls\SlideTestBot.xaml.cs">
+      <DependentUpon>SlideTestBot.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SupportChat.xaml.cs">
       <DependentUpon>SupportChat.xaml</DependentUpon>
     </Compile>
@@ -190,13 +208,19 @@
     <Compile Include="HttpClients\Abstractions\IBeelineAtsHttpClient.cs" />
     <Compile Include="HttpClients\Abstractions\ITele2AtsHttpClient.cs" />
     <Compile Include="HttpClients\Base\AtsHttpClientBase.cs" />
-    <Compile Include="HttpClients\Base\AtsTele2RefreshToken.cs" />
+    <Compile Include="Model\MessageIn.cs" />
+    <Compile Include="Model\MessageOut.cs" />
+    <Compile Include="Model\RegisterResult.cs" />
+    <Compile Include="Model\AtsTele2RefreshToken.cs" />
     <Compile Include="HttpClients\Base\HttpClientBase.cs" />
     <Compile Include="HttpClients\BeelineAtsHttpClient.cs" />
+    <Compile Include="HttpClients\BotHttpClient.cs" />
+    <Compile Include="HttpClients\Abstractions\IBotHttpClient.cs" />
     <Compile Include="HttpClients\Options\Base\AtsHttpClientOptions.cs" />
     <Compile Include="HttpClients\Options\Base\HttpClientOptions.cs" />
     <Compile Include="HttpClients\Options\Base\MethodOptions.cs" />
     <Compile Include="HttpClients\Options\BeelineAtsApiOptions.cs" />
+    <Compile Include="HttpClients\Options\BotsApiOptions.cs" />
     <Compile Include="HttpClients\Options\Tele2AtsApiOptions.cs" />
     <Compile Include="HttpClients\Tele2AtsHttpClient.cs" />
     <Compile Include="Model\Ats\ActivePhone.cs" />
@@ -209,6 +233,7 @@
     <Compile Include="Model\Ats\Map\AtsTele2CallMap.cs" />
     <Compile Include="Model\Ats\Tele2\AtsTele2Abonent.cs" />
     <Compile Include="Model\Ats\Tele2\AtsTele2Call.cs" />
+    <Compile Include="Model\Chat.cs" />
     <Compile Include="Model\ClientData.cs" />
     <Compile Include="Extensions\ClientStateExtensions.cs" />
     <Compile Include="Model\ClientState.cs" />
@@ -219,9 +244,13 @@
     <Compile Include="Model\Enums\MarkType.cs" />
     <Compile Include="Model\Enums\UpdateTokenType.cs" />
     <Compile Include="Model\OperationResult.cs" />
+    <Compile Include="Model\Options\AuthOptions.cs" />
     <Compile Include="Model\Options\ClientOptions.cs" />
     <Compile Include="Model\Options\CronOptions.cs" />
     <Compile Include="Model\UniqueCall.cs" />
+    <Compile Include="Tools\BotManager.Calls.cs" />
+    <Compile Include="Tools\BotManager.cs" />
+    <Compile Include="Tools\BotManager.Menu.cs" />
     <Compile Include="Tools\CallsManager.cs" />
     <Compile Include="Tools\ClientDataProvider.cs" />
     <Compile Include="Tools\Filters.cs" />
@@ -260,6 +289,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\Controls\SlideArrangeMessage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Controls\SlideTestBot.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

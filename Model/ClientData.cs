@@ -1,5 +1,6 @@
 ﻿using Calls.Model.Ats;
 using Newtonsoft.Json;
+using Shared.Model.Enums;
 using System.Collections.Generic;
 
 namespace PerfectohubRu.Model
@@ -17,7 +18,10 @@ namespace PerfectohubRu.Model
         public ActivePhone[] Actives { get; set; } = new ActivePhone[0];
         public string[] Knowns { get; set; } = new string[0];
         public string[] Commons { get; set; } = new string[0];
-
+        
+        public string BotToken { get; set; }
+        public string BotId { get; set; }
+        public BotType BotType { get; set; }
 
         [JsonIgnore] public HashSet<string> AllKnowns { get; set; }
         [JsonIgnore] public bool HasCriticalError => CriticalError != null;

@@ -84,11 +84,11 @@ namespace MovieIntro.Controls
         {
             if (string.IsNullOrWhiteSpace(TokenTextBox.Text))
             {
-                await ShowError("Нужен токен облачной АТС");
+                await ShowError("Нужен токен чат бота");
                 return;
             }
 
-            var result = await Model.ValidateAndSaveAtsToken();
+            var result = await Model.ValidateAndSaveBotToken();
 
             if (result.Success)
             {

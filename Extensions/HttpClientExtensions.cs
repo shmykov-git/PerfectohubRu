@@ -16,9 +16,10 @@ namespace PerfectohubRu.Extensions
 {
     public static class HttpClientExtensions
     {
-        public static IServiceCollection AddCallsHttpClients(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddPerfectoHttpClients(this IServiceCollection services, IConfiguration configuration)
         {
             return services
+                .ConfigureHttpClient<IBotHttpClient, BotHttpClient, BotsApiOptions>(configuration)
                 .ConfigureHttpClient<IBeelineAtsHttpClient, BeelineAtsHttpClient, BeelineAtsApiOptions>(configuration)
                 .ConfigureHttpClient<ITele2AtsHttpClient, Tele2AtsHttpClient, Tele2AtsApiOptions>(configuration)
                 .AddSingleton<IAtsHttpClient>(sp =>

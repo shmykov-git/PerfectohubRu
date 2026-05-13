@@ -2,6 +2,7 @@
 {
     public enum BotType
     {
+        Unknown,
         Telegram,
         Max
     }

@@ -22,7 +22,7 @@ namespace MovieIntro
 {
     public partial class MainWindow : Window
     {
-        private int currentSlideIndex = 5; // 4-atsToken, 5-arrangeMessage
+        private int currentSlideIndex = 6; // 4-atsToken, 5-arrangeMessageб 6-botToken
         private DispatcherTimer slideTimer;
         private readonly ISlide[] slides;
         private readonly IServiceProvider sp;

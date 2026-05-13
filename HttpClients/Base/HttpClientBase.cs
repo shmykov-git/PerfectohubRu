@@ -239,6 +239,22 @@ namespace Shared.HttpClients.Base
 
                 requestMessage.Headers.Add(Values.HeaderName.Authorization, $"{Values.AuthSchema.Bearer} {token}");
             }
+
+            if (args.GetBasicAuth != null)
+            {
+                var (username, password) = args.GetBasicAuth();
+
+                if (username == null || password == null)
+                {
+                    Debug.WriteLine($"WARN: HttpClient {name} {requestId} basic auth credintials is empty");
+
+                    throw new HttpClientException(HttpClientCase.NoAuthToken, "Basic auth credintials is empty");
+                }
+
+                string credentials = $"{username}:{password}";
+                string encodedCredentials = Convert.ToBase64String(Encoding.UTF8.GetBytes(credentials));
+                requestMessage.Headers.Add(Values.HeaderName.Authorization, $"Basic {encodedCredentials}");
+            }
         }
 
         private IAsyncPolicy<HttpResponseMessage> GetPolicy(MethodOptions method, uint requestId)

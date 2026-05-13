@@ -5,6 +5,7 @@
         None = 0,
         NoAuthToken,
         BeelineAts,
-        Tele2Ats
+        Tele2Ats,
+        Bots
     }
 }

@@ -6,16 +6,17 @@ using System.Text.Json.Serialization;
 
 namespace Shared.Model.Options
 {
+
     public class ClientOptions
     {
-        public string TelegramBotToken { get; set; }
-        public string MaxBotToken { get; set; }
         public string KnownMarks { get; set; }
 
         public int RecallClientLimit { get; set; }
-        public int MaxMessageSize { get; set; }
         public AtsType AtsType { get; set; }
 
+        public AuthOptions BotAuth { get; set; }
+        public int BotPollingInterval { get; set; }
+        public int MaxMessageSize { get; set; }
 
         private Dictionary<MarkType, string> __marks;
 

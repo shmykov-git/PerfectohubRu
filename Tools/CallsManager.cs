@@ -17,7 +17,6 @@ using System.Threading.Tasks;
 
 namespace PerfectohubRu.Tools
 {
-
     public class CallsManager
     {
         private readonly IAtsHttpClient httpClient;

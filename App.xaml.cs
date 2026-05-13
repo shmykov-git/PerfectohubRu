@@ -1,4 +1,5 @@
-﻿using Mapster;
+﻿using Calls.Bot.Services;
+using Mapster;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MovieIntro;
@@ -33,10 +34,11 @@ namespace PerfectohubRu
                 .Configure<AppSettings>(configuration)
                 .AddSingleton<IConfiguration>(configuration)
                 .AddSingleton<ClientDataProvider>()
-                .AddCallsHttpClients(configuration)
+                .AddPerfectoHttpClients(configuration)
                 .AddSharedMapster(Assembly.GetExecutingAssembly())
                 .ConfigurePerfectoOptions<ClientOptions>(configuration)
                 .AddSingleton<CallsManager>()
+                .AddSingleton<BotManager>()
                 ;
 
             // Регистрация окон

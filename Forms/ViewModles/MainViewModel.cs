@@ -1,4 +1,5 @@
-﻿using Calls.HttpClients.Abstractions;
+﻿using Calls.Bot.Services;
+using Calls.HttpClients.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 using Perfecto.Deploy.Extensions;
 using PerfectohubRu.Extensions;
@@ -17,23 +18,30 @@ namespace PerfectohubRu.Forms.ViewModles
     public partial class MainViewModel
     {
         private readonly IAtsHttpClient httpClient;
+        private readonly BotManager botManager;
         private readonly CallsManager callsManager;
         private readonly ClientDataProvider dataProvider;
         private readonly IServiceProvider sp;
         private ClientData data;
 
         public MainViewModel(
+            BotManager botManager,
             CallsManager callsManager,
             ClientDataProvider clientDataProvider,
             IServiceProvider sp)
         {
+            this.botManager = botManager;
             this.callsManager = callsManager;
             this.dataProvider = clientDataProvider;
             this.sp = sp;
             data = clientDataProvider.Data;
             AtsToken = data.GetAtsToken();
+            BotToken = data.BotToken;
             Knowns = data.Knowns.SJoin("\r\n");
             Commons = data.Commons.SJoin("\r\n");
+
+            if (data.BotToken != null)
+                _ = Task.Run(botManager.Restart);
         }
 
         public ClientData ClientData => data;
@@ -48,6 +56,20 @@ namespace PerfectohubRu.Forms.ViewModles
                 return AtsType.Tele2;
 
             return AtsType.Beeline;
+        }
+
+        private BotType GetBotTokenType(string token)
+        {
+            if (token == null || token.Length <= 11)
+                return BotType.Unknown;
+
+            if (token[10] == ':' && token.Length > 40 && token.Length < 80)
+                return BotType.Telegram;
+
+            if (token.Length > 80 && token.Length < 200)
+                return BotType.Max;
+
+            return BotType.Unknown;
         }
 
         public async void RefreshCallsMessage()
@@ -129,6 +151,31 @@ namespace PerfectohubRu.Forms.ViewModles
             catch (HttpClientException)
             {
                 return new OperationResult { Error = $"Не удается установить подключение к {data.GetAtsName()}" };
+            }
+        }
+
+        public async Task<OperationResult> ValidateAndSaveBotToken()
+        {
+            var token = BotToken;
+            var botType = GetBotTokenType(token);
+            
+            if (botType == BotType.Unknown)
+                return new OperationResult { Error = "Не удалось определить тип токена чат бота" };
+
+            try
+            {
+                data.BotToken = token;
+                data.BotType = botType;
+                data.State = ClientState.HasBot;
+                dataProvider.Save();
+
+                await botManager.Restart();
+
+                return OperationResult.Successfull();
+            }
+            catch (HttpClientException)
+            {
+                return new OperationResult { Error = $"Не удается запустить бота" };
             }
         }
     }

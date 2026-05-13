@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 
 namespace Calls.HttpClients
 {
+
     public class BeelineAtsHttpClient : AtsHttpClientBase<AtsBeelineView.AtsBeelineCall>, IBeelineAtsHttpClient
     {
         private readonly BeelineAtsApiOptions options;
