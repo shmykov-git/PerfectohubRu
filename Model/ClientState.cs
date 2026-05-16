@@ -6,6 +6,7 @@
         HasAts,
         HasMessage,
         HasBot,
+        HasTestedBot,
         HasIntegration
     }
 }

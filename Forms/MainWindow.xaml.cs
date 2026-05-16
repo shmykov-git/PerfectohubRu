@@ -130,6 +130,9 @@ namespace MovieIntro
 
                 if (model.Data.State == ClientState.HasMessage)
                     return SwitchToSlide(currentSlideIndex + 3);
+
+                if (model.Data.State == ClientState.HasBot)
+                    return SwitchToSlide(currentSlideIndex + 4);
             }
 
             return SwitchToSlide(currentSlideIndex + 1);

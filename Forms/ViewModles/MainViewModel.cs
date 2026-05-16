@@ -124,6 +124,12 @@ namespace PerfectohubRu.Forms.ViewModles
             dataProvider.Save();
         }
 
+        public async Task ApproveBot()
+        {
+            data.State = ClientState.HasTestedBot;
+            dataProvider.Save();
+        }
+
         public async Task<OperationResult> ValidateAndSaveAtsToken()
         {
             var token = AtsToken;

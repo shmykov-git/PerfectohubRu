@@ -27,6 +27,8 @@ namespace PerfectohubRu.Model
 
         public int ScheduleIntervalMinutes { get; set; } = 30;
 
+        public IntegrationData IntegrationData { get; set; } = new IntegrationData();
+
         [JsonIgnore] public HashSet<string> AllKnowns { get; set; }
         [JsonIgnore] public bool HasCriticalError => CriticalError != null;
     }

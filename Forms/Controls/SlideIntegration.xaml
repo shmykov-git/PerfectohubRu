@@ -1,0 +1,421 @@
+﻿<UserControl x:Class="MovieIntro.Controls.SlideIntegration"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="#000000">
+
+    <Grid Margin="40,30,40,30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock x:Name="TitleText"
+                   Grid.Row="0"
+                   Text="ИНТЕГРАЦИЯ"
+                   FontFamily="Segoe UI"
+                   FontSize="28"
+                   FontWeight="Light"
+                   Foreground="#FFFFFF"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,30"/>
+
+        <!-- Основная область: левая и правая части -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- ЛЕВАЯ ЧАСТЬ: Поля для соединения -->
+            <Border Grid.Column="0"
+                    Background="Transparent">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Поле Адрес интеграции -->
+                    <Grid Grid.Row="0" Margin="0,0,0,15">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0"
+                                   Text="Адрес интеграции"
+                                   FontFamily="Segoe UI"
+                                   FontSize="12"
+                                   Foreground="#888888"
+                                   Margin="0,0,0,5"/>
+
+                        <Border Grid.Row="1"
+                                BorderBrush="#333333"
+                                BorderThickness="1"
+                                Background="#0A0A0A"
+                                Height="35"
+                                CornerRadius="3">
+                            <TextBox x:Name="IntegrationUrlTextBox"
+                                     FontFamily="Segoe UI"
+                                     FontSize="13"
+                                     Foreground="#FFFFFF"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     Padding="10,0,10,0"
+                                     VerticalContentAlignment="Center"
+                                     CaretBrush="#FFFFFF"/>
+                        </Border>
+                    </Grid>
+
+                    <!-- Поле Пользователь -->
+                    <Grid Grid.Row="1" Margin="0,0,0,15">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0"
+                                   Text="Пользователь"
+                                   FontFamily="Segoe UI"
+                                   FontSize="12"
+                                   Foreground="#888888"
+                                   Margin="0,0,0,5"/>
+
+                        <Border Grid.Row="1"
+                                BorderBrush="#333333"
+                                BorderThickness="1"
+                                Background="#0A0A0A"
+                                Height="35"
+                                CornerRadius="3">
+                            <TextBox x:Name="UsernameTextBox"
+                                     FontFamily="Segoe UI"
+                                     FontSize="13"
+                                     Foreground="#FFFFFF"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     Padding="10,0,10,0"
+                                     VerticalContentAlignment="Center"
+                                     CaretBrush="#FFFFFF"/>
+                        </Border>
+                    </Grid>
+
+                    <!-- Поле Пароль -->
+                    <Grid Grid.Row="2" Margin="0,0,0,20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0"
+                                   Text="Пароль"
+                                   FontFamily="Segoe UI"
+                                   FontSize="12"
+                                   Foreground="#888888"
+                                   Margin="0,0,0,5"/>
+
+                        <Border Grid.Row="1"
+                                BorderBrush="#333333"
+                                BorderThickness="1"
+                                Background="#0A0A0A"
+                                Height="35"
+                                CornerRadius="3">
+                            <PasswordBox x:Name="PasswordBox"
+                                         FontFamily="Segoe UI"
+                                         FontSize="13"
+                                         Foreground="#FFFFFF"
+                                         Background="Transparent"
+                                         BorderThickness="0"
+                                         Padding="10,0,10,0"
+                                         VerticalContentAlignment="Center"
+                                         CaretBrush="#FFFFFF"/>
+                        </Border>
+                    </Grid>
+
+                    <!-- Переключатель html/text -->
+                    <Grid Grid.Row="3" Margin="0,0,0,20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0"
+                                   Text="Формат ответа"
+                                   FontFamily="Segoe UI"
+                                   FontSize="12"
+                                   Foreground="#888888"
+                                   Margin="0,0,0,5"/>
+
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <RadioButton x:Name="HtmlRadioButton"
+                                         Content="HTML"
+                                         FontFamily="Segoe UI"
+                                         FontSize="13"
+                                         Foreground="#FFFFFF"
+                                         Margin="0,0,20,0"
+                                         VerticalAlignment="Center"
+                                         IsChecked="True">
+                                <RadioButton.Style>
+                                    <Style TargetType="RadioButton">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="RadioButton">
+                                                    <Grid>
+                                                        <Ellipse x:Name="OuterCircle" 
+                                                                 Width="14" Height="14" 
+                                                                 Stroke="#666666" 
+                                                                 Fill="Transparent"/>
+                                                        <Ellipse x:Name="InnerCircle" 
+                                                                 Width="8" Height="8" 
+                                                                 Fill="#FF3333" 
+                                                                 Visibility="Collapsed"
+                                                                 HorizontalAlignment="Center"
+                                                                 VerticalAlignment="Center"/>
+                                                        <ContentPresenter Content="{TemplateBinding Content}"
+                                                                          Margin="20,0,0,0"
+                                                                          VerticalAlignment="Center"/>
+                                                    </Grid>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsChecked" Value="True">
+                                                            <Setter TargetName="InnerCircle" Property="Visibility" Value="Visible"/>
+                                                            <Setter TargetName="OuterCircle" Property="Stroke" Value="#FF3333"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter TargetName="OuterCircle" Property="Stroke" Value="#999999"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </RadioButton.Style>
+                            </RadioButton>
+
+                            <RadioButton x:Name="TextRadioButton"
+                                         Content="TEXT"
+                                         FontFamily="Segoe UI"
+                                         FontSize="13"
+                                         Foreground="#FFFFFF"
+                                         VerticalAlignment="Center">
+                                <RadioButton.Style>
+                                    <Style TargetType="RadioButton">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="RadioButton">
+                                                    <Grid>
+                                                        <Ellipse x:Name="OuterCircle" 
+                                                                 Width="14" Height="14" 
+                                                                 Stroke="#666666" 
+                                                                 Fill="Transparent"/>
+                                                        <Ellipse x:Name="InnerCircle" 
+                                                                 Width="8" Height="8" 
+                                                                 Fill="#FF3333" 
+                                                                 Visibility="Collapsed"
+                                                                 HorizontalAlignment="Center"
+                                                                 VerticalAlignment="Center"/>
+                                                        <ContentPresenter Content="{TemplateBinding Content}"
+                                                                          Margin="20,0,0,0"
+                                                                          VerticalAlignment="Center"/>
+                                                    </Grid>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsChecked" Value="True">
+                                                            <Setter TargetName="InnerCircle" Property="Visibility" Value="Visible"/>
+                                                            <Setter TargetName="OuterCircle" Property="Stroke" Value="#FF3333"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter TargetName="OuterCircle" Property="Stroke" Value="#999999"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </RadioButton.Style>
+                            </RadioButton>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <!-- Разделитель -->
+            <Border Grid.Column="1"
+                    Background="#333333"
+                    Width="1"
+                    VerticalAlignment="Stretch"/>
+
+            <!-- ПРАВАЯ ЧАСТЬ: Сообщение, результат, кнопка отправить -->
+            <Border Grid.Column="2"
+                    Background="Transparent">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Поле Сообщение -->
+                    <Grid Grid.Row="0" Margin="0,0,0,15">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0"
+                                   Text="Сообщение"
+                                   FontFamily="Segoe UI"
+                                   FontSize="12"
+                                   Foreground="#888888"
+                                   Margin="0,0,0,5"/>
+
+                        <Border Grid.Row="1"
+                                BorderBrush="#333333"
+                                BorderThickness="1"
+                                Background="#0A0A0A"
+                                Height="80"
+                                CornerRadius="3">
+                            <TextBox x:Name="MessageTextBox"
+                                     FontFamily="Segoe UI"
+                                     FontSize="13"
+                                     Foreground="#FFFFFF"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     Padding="10,8,10,8"
+                                     TextWrapping="Wrap"
+                                     AcceptsReturn="True"
+                                     VerticalScrollBarVisibility="Auto"
+                                     CaretBrush="#FFFFFF"/>
+                        </Border>
+                    </Grid>
+
+                    <!-- Кнопка Отправить сообщение -->
+                    <Button x:Name="SendMessageButton"
+                            Grid.Row="1"
+                            Content="ОТПРАВИТЬ"
+                            Width="140" Height="35"
+                            FontFamily="Segoe UI"
+                            FontSize="12"
+                            FontWeight="SemiBold"
+                            Foreground="#FFFFFF"
+                            Background="#1A1A1A"
+                            BorderBrush="#333333"
+                            BorderThickness="1"
+                            Cursor="Hand"
+                            HorizontalAlignment="Left"
+                            Margin="0,0,0,20"
+                            Click="SendMessageButton_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    CornerRadius="3">
+                                                <ContentPresenter HorizontalAlignment="Center"
+                                                                  VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#333333"/>
+                                                    <Setter Property="BorderBrush" Value="#666666"/>
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter Property="Background" Value="#0A0A0A"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <!-- Поле Ответ -->
+                    <Grid Grid.Row="2" Margin="0,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0"
+                                   Text="Ответ"
+                                   FontFamily="Segoe UI"
+                                   FontSize="12"
+                                   Foreground="#888888"
+                                   Margin="0,0,0,5"/>
+
+                        <Border Grid.Row="1"
+                                BorderBrush="#333333"
+                                BorderThickness="1"
+                                Background="#0A0A0A"
+                                MinHeight="120"
+                                CornerRadius="3">
+                            <TextBox x:Name="ResponseTextBox"
+                                     FontFamily="Segoe UI"
+                                     FontSize="13"
+                                     Foreground="#CCCCCC"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     Padding="10,8,10,8"
+                                     TextWrapping="Wrap"
+                                     IsReadOnly="True"
+                                     VerticalScrollBarVisibility="Auto"/>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Кнопка Готово внизу -->
+        <Button x:Name="DoneButton"
+                Grid.Row="2"
+                Content="ГОТОВО"
+                Width="180" Height="45"
+                FontFamily="Segoe UI"
+                FontSize="14"
+                FontWeight="SemiBold"
+                Foreground="#FFFFFF"
+                Background="#1A1A1A"
+                BorderBrush="#333333"
+                BorderThickness="1"
+                Cursor="Hand"
+                HorizontalAlignment="Center"
+                Margin="0,20,0,0"
+                Click="DoneButton_Click">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        CornerRadius="3">
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#333333"/>
+                                        <Setter Property="BorderBrush" Value="#666666"/>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter Property="Background" Value="#0A0A0A"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+    </Grid>
+</UserControl>

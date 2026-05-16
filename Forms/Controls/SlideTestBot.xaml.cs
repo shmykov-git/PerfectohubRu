@@ -23,6 +23,7 @@ namespace MovieIntro.Controls
     /// </summary>
     public partial class SlideTestBot : UserControl, ISlide
     {
+        private MainWindow MainWindow => Window.GetWindow(this) as MainWindow;
         public MainViewModel Model => DataContext as MainViewModel;
 
         public SlideTestBot()
@@ -47,9 +48,10 @@ namespace MovieIntro.Controls
             this.AnimateFadeOut();
         }
 
-        private void DoneButton_Click(object sender, RoutedEventArgs e)
+        private async void DoneButton_Click(object sender, RoutedEventArgs e)
         {
-
+            await Model.ApproveBot();
+            await MainWindow.SwitchToNextSlide();
         }
 
         private async void ScheduleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

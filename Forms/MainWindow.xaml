@@ -30,6 +30,7 @@
                 <controls:SlideArrangeMessage x:Name="SlideArrangeMessageControl" Visibility="Collapsed"/>
                 <controls:SlideAddBot x:Name="SlideAddBotControl" Visibility="Collapsed"/>
                 <controls:SlideTestBot x:Name="SlideTestBotControl" Visibility="Collapsed"/>
+                <controls:SlideIntegration x:Name="SlideIntegrationControl" Visibility="Collapsed"/>
             </Grid>
 
             <!-- Заголовок для перетаскивания (область без кнопок) -->
@@ -133,14 +134,16 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Bottom"
                         Margin="0,0,0,20">
-                <Ellipse x:Name="Indicator1" Width="8" Height="8" Fill="#FFFFFF" Opacity="0.5" Margin="5"/>
-                <Ellipse x:Name="Indicator2" Width="8" Height="8" Fill="#FFFFFF" Opacity="0.2" Margin="5"/>
-                <Ellipse x:Name="Indicator3" Width="8" Height="8" Fill="#FFFFFF" Opacity="0.2" Margin="5"/>
-                <Ellipse x:Name="Indicator4" Width="8" Height="8" Fill="#FFFFFF" Opacity="0.2" Margin="5"/>
-                <Ellipse x:Name="Indicator5" Width="8" Height="8" Fill="#FFFFFF" Opacity="0.2" Margin="5"/>
-                <Ellipse x:Name="Indicator6" Width="8" Height="8" Fill="#FFFFFF" Opacity="0.2" Margin="5"/>
-                <Ellipse x:Name="Indicator7" Width="8" Height="8" Fill="#FFFFFF" Opacity="0.2" Margin="5"/>
-                <Ellipse x:Name="Indicator8" Width="8" Height="8" Fill="#FFFFFF" Opacity="0.2" Margin="5"/>
+                <Ellipse Width="8" Height="8" Fill="#FFFFFF" Opacity="0.5" Margin="5"/>
+                <Ellipse Width="8" Height="8" Fill="#FFFFFF" Opacity="0.2" Margin="5"/>
+                <Ellipse Width="8" Height="8" Fill="#FFFFFF" Opacity="0.2" Margin="5"/>
+                <Ellipse Width="8" Height="8" Fill="#FFFFFF" Opacity="0.2" Margin="5"/>
+                <Ellipse Width="8" Height="8" Fill="#FFFFFF" Opacity="0.2" Margin="5"/>
+                <Ellipse Width="8" Height="8" Fill="#FFFFFF" Opacity="0.2" Margin="5"/>
+                <Ellipse Width="8" Height="8" Fill="#FFFFFF" Opacity="0.2" Margin="5"/>
+                <Ellipse Width="8" Height="8" Fill="#FFFFFF" Opacity="0.2" Margin="5"/>
+                <Ellipse Width="8" Height="8" Fill="#FFFFFF" Opacity="0.2" Margin="5"/>
+                <Ellipse Width="8" Height="8" Fill="#FFFFFF" Opacity="0.2" Margin="5"/>
             </StackPanel>
 
             <!-- perfectohub.ru -->

@@ -174,7 +174,9 @@ namespace Shared.HttpClients.Base
             {
                 contentStr = await response.Content.ReadAsStringAsync();
 
-                var view = contentStr.FromJsonStr<TView>();
+                var view = typeof(TView) == typeof(string) 
+                                ? (TView)(object)contentStr 
+                                : contentStr.FromJsonStr<TView>();
             
                 var debugContentLimit = args.Method.DebugContentLimit ?? options.DebugContentLimit;
 

@@ -6,6 +6,7 @@
         NoAuthToken,
         BeelineAts,
         Tele2Ats,
-        Bots
+        Bots,
+        Integration
     }
 }

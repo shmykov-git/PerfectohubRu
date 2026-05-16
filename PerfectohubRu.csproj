@@ -178,6 +178,7 @@
     <Compile Include="Exceptions\Cases\HttpClientCase.cs" />
     <Compile Include="Exceptions\HttpClientException.cs" />
     <Compile Include="Extensions\AnimationExtensions.cs" />
+    <Compile Include="Extensions\EventExtensions.cs" />
     <Compile Include="Extensions\HttpClientExtensions.cs" />
     <Compile Include="Extensions\ClientOptionsExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
@@ -196,6 +197,9 @@
     <Compile Include="Forms\Controls\SlideArrangeMessage.xaml.cs">
       <DependentUpon>SlideArrangeMessage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Controls\SlideIntegration.xaml.cs">
+      <DependentUpon>SlideIntegration.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Controls\SlideTestBot.xaml.cs">
       <DependentUpon>SlideTestBot.xaml</DependentUpon>
     </Compile>
@@ -204,6 +208,11 @@
     </Compile>
     <Compile Include="Forms\ViewModles\MainViewModel.cs" />
     <Compile Include="Forms\ViewModles\MainViewModel.NotifyPropertyChanged.cs" />
+    <Compile Include="HttpClients\Abstractions\IIntegrationHttpClient.cs" />
+    <Compile Include="HttpClients\IntegrationHttpClient.cs" />
+    <Compile Include="HttpClients\Options\IntegrationApiOptions.cs" />
+    <Compile Include="Model\IntegrationData.cs" />
+    <Compile Include="Model\IntegrationMessage.cs" />
     <Compile Include="Model\ScheduleItem.cs" />
     <Compile Include="HttpClients\Abstractions\IAtsHttpClient.cs" />
     <Compile Include="HttpClients\Abstractions\IBeelineAtsHttpClient.cs" />
@@ -290,6 +299,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\Controls\SlideArrangeMessage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Controls\SlideIntegration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
