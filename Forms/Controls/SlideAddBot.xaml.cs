@@ -33,6 +33,8 @@ namespace MovieIntro.Controls
             ArrowImage.AnimateScale((0.3, 1), 1.6);
             ResultImage.AnimateFadeIn();
             ResultImage.AnimateScale((0.3, 1), 1.6);
+
+            SubmitButton.AnimatePulse(0.3, 1, 3, 1);
         }
 
         public async Task PlayExitAnimation()

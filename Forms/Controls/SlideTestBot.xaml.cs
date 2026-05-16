@@ -38,7 +38,8 @@ namespace MovieIntro.Controls
             Row2.AnimatePulse(0, 0.5, 1, 1);
             Row3.AnimatePulse(0, 0.5, 1, 1.5);
             Row4.AnimatePulse(0, 0.5, 1, 2);
-            DoneButton.AnimatePulse(0, 1, 3, 3);
+            Row5.AnimatePulse(0, 0.5, 1, 2);
+            DoneButton.AnimatePulse(0.3, 1, 3, 3);
         }
 
         public async Task PlayExitAnimation()

@@ -39,7 +39,7 @@ namespace PerfectohubRu.Extensions
             element.BeginAnimation(UIElement.OpacityProperty, fadeIn);
         }
 
-        public static async void AnimateFadeOut(this UIElement element, double duration = 1.5, double delay = 0)
+        public static async void AnimateFadeOut(this UIElement element, double duration = 0.3, double delay = 0)
         {
             await Task.Delay(TimeSpan.FromSeconds(delay));
             var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(duration));

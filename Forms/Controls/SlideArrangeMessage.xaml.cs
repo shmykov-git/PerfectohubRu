@@ -29,24 +29,28 @@ namespace MovieIntro.Controls
 
             TitleText.AnimateFadeIn(2, 1);
 
-            var d1 = 1.2;
-            InfoMessageText.AnimateFadeIn(1.6, d1);
-            InfoMessageText.AnimateScale((0.5, 1), 2, d1);
-            KnownsTextBox.AnimateFadeIn(1.6, d1);
-            KnownsTextBox.AnimateScale((0.5, 1), d1);
-            CommonsTextBox.AnimateFadeIn(1.6, d1);
-            CommonsTextBox.AnimateScale((0.5, 1), d1);
+            var dText = 2;
+            var dAction = 2;
+            var dHelp = 4;
+            var dDone = 4;
 
-            var d2 = 3;
-            LeftIndicatorButton.AnimateFadeIn(delay: d1);
-            KnownsIndicatorButton.AnimateFadeIn(delay: d1);
-            CommonsIndicatorButton.AnimateFadeIn(delay: d1);
-            RefreshMessageButton.AnimateFadeIn(delay: d2);
-            SaveKnownsButton.AnimateFadeIn(delay: d2);
-            SaveCommonsButton.AnimateFadeIn(delay: d2);
+            InfoMessageText.AnimateScale((0.5, 1), 1, dText);
+            CommonsTextBox.AnimateScale((0.5, 1), 1, dText);
+            KnownsTextBox.AnimateScale((0.5, 1), 1, dText);
+
+            InfoMessageText.AnimateFadeIn(1, dText);
+            KnownsTextBox.AnimateFadeIn(1, dText);
+            CommonsTextBox.AnimateFadeIn(1, dText);
+
+            LeftIndicatorButton.AnimateFadeIn(delay: dHelp);
+            KnownsIndicatorButton.AnimateFadeIn(delay: dHelp);
+            CommonsIndicatorButton.AnimateFadeIn(delay: dHelp);
+            RefreshMessageButton.AnimateFadeIn(delay: dAction);
+            SaveKnownsButton.AnimateFadeIn(delay: dAction);
+            SaveCommonsButton.AnimateFadeIn(delay: dAction);
 
             // Появление кнопки
-            DoneButton.AnimateFadeIn(0.5, 1);
+            DoneButton.AnimatePulse(0.3, 1, 3, dDone);
 
             // Фокус на поле ввода
             CommonsTextBox.Focus();
@@ -55,6 +59,10 @@ namespace MovieIntro.Controls
         public async Task PlayExitAnimation()
         {
             this.AnimateFadeOut();
+
+            InfoMessageText.AnimateFadeOut();
+            KnownsTextBox.AnimateFadeOut();
+            CommonsTextBox.AnimateFadeOut();
 
             LeftIndicatorButton.AnimateFadeOut();
             KnownsIndicatorButton.AnimateFadeOut();

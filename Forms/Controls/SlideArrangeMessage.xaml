@@ -2,7 +2,108 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              Background="#000000">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type ScrollBar}">
+            <Setter Property="Width" Value="10"/>
+            <Setter Property="MinHeight" Value="10"/>
+            <Setter Property="Background" Value="#000000"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                        <Grid Background="#000000" Opacity="{TemplateBinding Opacity}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="15"/>
+                            </Grid.RowDefinitions>
 
+                            <!-- Верхняя кнопка (вверх) -->
+                            <RepeatButton x:Name="DecreaseRepeatButton"
+                                  Grid.Row="0"
+                                  Background="#1A1A1A"
+                                  BorderBrush="#333333"
+                                  BorderThickness="1"
+                                  Focusable="False"
+                                  Command="ScrollBar.LineUpCommand">
+                                <Border Background="#1A1A1A"
+                                BorderBrush="#333333"
+                                BorderThickness="1">
+                                    <Path Data="M0,5 L5,0 L10,5 Z"
+                                  Fill="#666666"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Width="8"
+                                  Height="8"/>
+                                </Border>
+                            </RepeatButton>
+
+                            <!-- Track с ползунком -->
+                            <Track x:Name="PART_Track"
+                                   IsDirectionReversed="True"
+                           Grid.Row="1">
+                                <Track.Thumb>
+                                    <Thumb x:Name="Thumb"
+                                   Background="#444444"
+                                   BorderBrush="#555555"
+                                   BorderThickness="1"
+                                   Margin="1,0">
+                                        <Thumb.Style>
+                                            <Style TargetType="Thumb">
+                                                <Setter Property="Height" Value="40"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="Thumb">
+                                                            <Border x:Name="ThumbBorder"
+                                                            Background="{TemplateBinding Background}"
+                                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                                            CornerRadius="3"
+                                                            Margin="1,0"/>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter TargetName="ThumbBorder" Property="Background" Value="#666666"/>
+                                                                    <Setter TargetName="ThumbBorder" Property="BorderBrush" Value="#777777"/>
+                                                                </Trigger>
+                                                                <Trigger Property="IsDragging" Value="True">
+                                                                    <Setter TargetName="ThumbBorder" Property="Background" Value="#888888"/>
+                                                                    <Setter TargetName="ThumbBorder" Property="BorderBrush" Value="#999999"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </Thumb.Style>
+                                    </Thumb>
+                                </Track.Thumb>
+                            </Track>
+
+                            <!-- Нижняя кнопка (вниз) -->
+                            <RepeatButton x:Name="IncreaseRepeatButton"
+                                  Grid.Row="2"
+                                  Background="#1A1A1A"
+                                  BorderBrush="#333333"
+                                  BorderThickness="1"
+                                  Focusable="False"
+                                  Command="ScrollBar.LineDownCommand">
+                                <Border Background="#1A1A1A"
+                                BorderBrush="#333333"
+                                BorderThickness="1">
+                                    <Path Data="M0,0 L5,5 L10,0 Z"
+                                  Fill="#666666"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Width="8"
+                                  Height="8"/>
+                                </Border>
+                            </RepeatButton>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    
     <Grid x:Name="MainGrid">
         <Grid Margin="40,30,40,30">
             <Grid.RowDefinitions>
@@ -165,7 +266,7 @@
                                                             <Setter TargetName="b" Property="Background" Value="#444444"/>
                                                             <Setter TargetName="b" Property="RenderTransform">
                                                                 <Setter.Value>
-                                                                    <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                                                    <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
                                                                 </Setter.Value>
                                                             </Setter>
                                                         </Trigger>
@@ -194,10 +295,10 @@
                                        TextWrapping="Wrap"
                                        TextAlignment="Left"
                                        Padding="15,15,15,15"
-                                       LineHeight="22"
-                                       Opacity="0">
+                                       Opacity="0"
+                                       LineHeight="22">
                                 <TextBlock.RenderTransform>
-                                    <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                    <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
                                 </TextBlock.RenderTransform>
                             </TextBlock>
                         </ScrollViewer>
@@ -340,7 +441,7 @@
                                                             <Setter TargetName="b" Property="Background" Value="#444444"/>
                                                             <Setter TargetName="b" Property="RenderTransform">
                                                                 <Setter.Value>
-                                                                    <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                                                    <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
                                                                 </Setter.Value>
                                                             </Setter>
                                                         </Trigger>
@@ -370,10 +471,10 @@
                                  TextWrapping="Wrap"
                                  AcceptsReturn="True"
                                  VerticalScrollBarVisibility="Auto"
-                                 CaretBrush="#FFFFFF"
-                                 Opacity="0">
+                                 Opacity="0"
+                                 CaretBrush="#FFFFFF">
                             <TextBox.RenderTransform>
-                                <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
                             </TextBox.RenderTransform>
                             <TextBox.Style>
                                 <Style TargetType="TextBox">
@@ -557,7 +658,7 @@
                                                             <Setter TargetName="b" Property="Background" Value="#444444"/>
                                                             <Setter TargetName="b" Property="RenderTransform">
                                                                 <Setter.Value>
-                                                                    <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                                                    <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
                                                                 </Setter.Value>
                                                             </Setter>
                                                         </Trigger>
@@ -587,10 +688,10 @@
                                  TextWrapping="Wrap"
                                  AcceptsReturn="True"
                                  VerticalScrollBarVisibility="Auto"
-                                 CaretBrush="#FFFFFF"
-                                 Opacity="0">
+                                 Opacity="0"
+                                 CaretBrush="#FFFFFF">
                             <TextBox.RenderTransform>
-                                <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
                             </TextBox.RenderTransform>
                             <TextBox.Style>
                                 <Style TargetType="TextBox">
@@ -654,7 +755,6 @@
                     Cursor="Hand"
                     HorizontalAlignment="Center"
                     Margin="0,15,0,0"
-                    Opacity="0"
                     Click="DoneButton_Click">
                 <Button.Style>
                     <Style TargetType="Button">
@@ -678,7 +778,7 @@
                                             <Setter Property="Background" Value="#0A0A0A"/>
                                             <Setter Property="RenderTransform">
                                                 <Setter.Value>
-                                                    <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                                    <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
                                                 </Setter.Value>
                                             </Setter>
                                             <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
