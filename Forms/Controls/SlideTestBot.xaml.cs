@@ -1,4 +1,5 @@
 ﻿using PerfectohubRu.Controls;
+using PerfectohubRu.Extensions;
 using PerfectohubRu.Forms.ViewModles;
 using System;
 using System.Collections.Generic;
@@ -31,11 +32,18 @@ namespace MovieIntro.Controls
 
         public async Task PlayEnterAnimation()
         {
+            this.AnimateFadeIn();
+            await Task.Delay(500);
+            Row1.AnimatePulse(0, 0.5, 1, 0.5);
+            Row2.AnimatePulse(0, 0.5, 1, 1);
+            Row3.AnimatePulse(0, 0.5, 1, 1.5);
+            Row4.AnimatePulse(0, 0.5, 1, 2);
+            DoneButton.AnimatePulse(0, 1, 3, 3);
         }
 
         public async Task PlayExitAnimation()
         {
-            
+            this.AnimateFadeOut();
         }
 
         private void DoneButton_Click(object sender, RoutedEventArgs e)

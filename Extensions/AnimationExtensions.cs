@@ -103,8 +103,6 @@ namespace PerfectohubRu.Extensions
 
             var scale = new DoubleAnimation(range.from, range.to, TimeSpan.FromSeconds(duration));
 
-            //element.WithStoryboard(scale, 15, "RenderTransform.ScaleX", "RenderTransform.ScaleY");
-
             if (element.RenderTransform is ScaleTransform scaleTransform)
             {
                 scaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, scale);
@@ -112,18 +110,14 @@ namespace PerfectohubRu.Extensions
             }
         }
 
-        public static async void AnimatePulse(this UIElement element, (double from, double to) range, double duration = 0.8, int repeat = 2, double delay = 0)
+        public static async void AnimatePulse(this UIElement element, double toRange, double duration = 0.8, int repeat = 2, double delay = 0)
         {
             await Task.Delay(TimeSpan.FromSeconds(delay));
 
-            var pulse = new DoubleAnimation(range.from, range.to, TimeSpan.FromSeconds(duration));
+            var pulse = new DoubleAnimation(1, toRange, TimeSpan.FromSeconds(duration / repeat));
             pulse.AutoReverse = true;
             pulse.RepeatBehavior = new RepeatBehavior(repeat);
             element.BeginAnimation(UIElement.OpacityProperty, pulse);
-
-            await Task.Delay(TimeSpan.FromSeconds(duration * repeat + 0.1));
-            element.BeginAnimation(UIElement.OpacityProperty, null);
-            element.Opacity = range.to;
         }
     }
 }

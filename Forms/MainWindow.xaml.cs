@@ -214,7 +214,7 @@ namespace MovieIntro
                 if (indicator.Opacity > 0.2)
                     indicator.AnimateFade((indicator.Opacity, 0.2), 1);
 
-            indicators[index].AnimatePulse((0.2, 1), 0.4, 3);
+            indicators[index].AnimatePulse(0.2, 0.6, 3);
         }
 
         private async void SkipIntro()

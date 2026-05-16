@@ -51,7 +51,7 @@ namespace PerfectohubRu.Forms.ViewModles
                 new ScheduleItem { Name = "Каждые 2 часа", IntervalMinutes = 120 },
             };
 
-            SelectedSchedule = ScheduleItems.FirstOrDefault(i => i.IntervalMinutes == data.ScheduleIntervalMinutes) ?? ScheduleItems[4];
+            SelectedSchedule = ScheduleItems.FirstOrDefault(i => i.IntervalMinutes == data.ScheduleIntervalMinutes) ?? ScheduleItems[0];
 
             if (data.BotToken != null)
                 _ = Task.Run(botManager.Restart);
