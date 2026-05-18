@@ -55,6 +55,14 @@ namespace PerfectohubRu.Forms.ViewModles
 
             if (data.BotToken != null)
                 _ = Task.Run(botManager.Restart);
+
+            botManager.OnIntegrationMessage += value => IntegrationMessage = value;
+            botManager.OnIntegrationMessageResult += 
+                (value, color) => 
+                { 
+                    IntegrationMessageResult = value; 
+                    IntegrationMessageResultColor = color;
+                };
         }
 
         public ClientData Data => data;
@@ -98,6 +106,11 @@ namespace PerfectohubRu.Forms.ViewModles
                     dataProvider.Save();
                 }
             });
+        }
+
+        public async void RefreshIntegrationMessage()
+        {
+            await botManager.RefreshIntegrationMessage();
         }
 
         private Task<string[]> GetCallsMessage() => callsManager.GetUniqueCallsMessage(false, false, false, default);

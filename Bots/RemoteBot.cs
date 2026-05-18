@@ -9,6 +9,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace Calls.Api.Bots
 {
@@ -67,8 +69,11 @@ namespace Calls.Api.Bots
                 {
                     var messages = await httpClient.GetOutMessages(data.BotId);
 
-                    foreach (var message in messages)
-                        await BotOnMessage(message);
+                    _ = Application.Current.Dispatcher.BeginInvoke((Action)(async () =>
+                    {
+                        foreach (var message in messages)
+                            await BotOnMessage(message);
+                    }));
                 }
                 catch (Exception ex)
                 { 

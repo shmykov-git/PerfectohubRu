@@ -3,6 +3,178 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              Background="#000000">
 
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BorderElement"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                                          VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BorderElement" Property="Background" Value="#333333"/>
+                                <Setter TargetName="BorderElement" Property="BorderBrush" Value="#666666"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#0A0A0A"/>
+                                <Setter Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="RenderTransformOrigin" Value="0.95,0.95"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type ScrollBar}">
+            <Setter Property="Width" Value="10"/>
+            <Setter Property="MinHeight" Value="10"/>
+            <Setter Property="Background" Value="#000000"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                        <Grid Background="#000000" Opacity="{TemplateBinding Opacity}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="15"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Верхняя кнопка (вверх) -->
+                            <RepeatButton x:Name="DecreaseRepeatButton"
+                                  Grid.Row="0"
+                                  Background="#1A1A1A"
+                                  BorderBrush="#333333"
+                                  BorderThickness="1"
+                                  Focusable="False"
+                                  Command="ScrollBar.LineUpCommand">
+                                <Border Background="#1A1A1A"
+                                BorderBrush="#333333"
+                                BorderThickness="1">
+                                    <Path Data="M0,5 L5,0 L10,5 Z"
+                                  Fill="#666666"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Width="8"
+                                  Height="8"/>
+                                </Border>
+                            </RepeatButton>
+
+                            <!-- Track с ползунком -->
+                            <Track x:Name="PART_Track"
+                                   IsDirectionReversed="True"
+                           Grid.Row="1">
+                                <Track.Thumb>
+                                    <Thumb x:Name="Thumb"
+                                   Background="#444444"
+                                   BorderBrush="#555555"
+                                   BorderThickness="1"
+                                   Margin="1,0">
+                                        <Thumb.Style>
+                                            <Style TargetType="Thumb">
+                                                <Setter Property="Height" Value="40"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="Thumb">
+                                                            <Border x:Name="ThumbBorder"
+                                                            Background="{TemplateBinding Background}"
+                                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                                            CornerRadius="3"
+                                                            Margin="1,0"/>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter TargetName="ThumbBorder" Property="Background" Value="#666666"/>
+                                                                    <Setter TargetName="ThumbBorder" Property="BorderBrush" Value="#777777"/>
+                                                                </Trigger>
+                                                                <Trigger Property="IsDragging" Value="True">
+                                                                    <Setter TargetName="ThumbBorder" Property="Background" Value="#888888"/>
+                                                                    <Setter TargetName="ThumbBorder" Property="BorderBrush" Value="#999999"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </Thumb.Style>
+                                    </Thumb>
+                                </Track.Thumb>
+                            </Track>
+
+                            <!-- Нижняя кнопка (вниз) -->
+                            <RepeatButton x:Name="IncreaseRepeatButton"
+                                  Grid.Row="2"
+                                  Background="#1A1A1A"
+                                  BorderBrush="#333333"
+                                  BorderThickness="1"
+                                  Focusable="False"
+                                  Command="ScrollBar.LineDownCommand">
+                                <Border Background="#1A1A1A"
+                                BorderBrush="#333333"
+                                BorderThickness="1">
+                                    <Path Data="M0,0 L5,5 L10,0 Z"
+                                  Fill="#666666"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Width="8"
+                                  Height="8"/>
+                                </Border>
+                            </RepeatButton>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type RadioButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Grid.Column="0" x:Name="OuterCircle" 
+                                                                Width="14" Height="14" 
+                                                                Stroke="#666666" 
+                                                                Fill="Transparent"/>
+                            <Ellipse Grid.Column="0" x:Name="InnerCircle" 
+                                                                Width="8" Height="8" 
+                                                                Fill="#AA3333" 
+                                                                Visibility="Collapsed"
+                                                                HorizontalAlignment="Center"
+                                                                VerticalAlignment="Center"/>
+                            <ContentPresenter Grid.Column="1"  Content="{TemplateBinding Content}"
+                                                                        Margin="10,0,0,0"
+                                                                        VerticalAlignment="Center"
+                                              HorizontalAlignment="Left"
+                                              />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="InnerCircle" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="OuterCircle" Property="Stroke" Value="#AA3333"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="OuterCircle" Property="Stroke" Value="#999999"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    
     <Grid Margin="40,30,40,30">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -52,8 +224,8 @@
                         <TextBlock Grid.Row="0"
                                    Text="Адрес интеграции"
                                    FontFamily="Segoe UI"
-                                   FontSize="12"
-                                   Foreground="#888888"
+                                   FontSize="16"
+                                   Foreground="#CCCCCC"
                                    Margin="0,0,0,5"/>
 
                         <Border Grid.Row="1"
@@ -63,6 +235,7 @@
                                 Height="35"
                                 CornerRadius="3">
                             <TextBox x:Name="IntegrationUrlTextBox"
+                                     Text="{Binding Url, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                      FontFamily="Segoe UI"
                                      FontSize="13"
                                      Foreground="#FFFFFF"
@@ -84,8 +257,8 @@
                         <TextBlock Grid.Row="0"
                                    Text="Пользователь"
                                    FontFamily="Segoe UI"
-                                   FontSize="12"
-                                   Foreground="#888888"
+                                   FontSize="16"
+                                   Foreground="#CCCCCC"
                                    Margin="0,0,0,5"/>
 
                         <Border Grid.Row="1"
@@ -95,6 +268,7 @@
                                 Height="35"
                                 CornerRadius="3">
                             <TextBox x:Name="UsernameTextBox"
+                                     Text="{Binding Username, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                      FontFamily="Segoe UI"
                                      FontSize="13"
                                      Foreground="#FFFFFF"
@@ -116,8 +290,8 @@
                         <TextBlock Grid.Row="0"
                                    Text="Пароль"
                                    FontFamily="Segoe UI"
-                                   FontSize="12"
-                                   Foreground="#888888"
+                                   FontSize="16"
+                                   Foreground="#CCCCCC"
                                    Margin="0,0,0,5"/>
 
                         <Border Grid.Row="1"
@@ -126,7 +300,8 @@
                                 Background="#0A0A0A"
                                 Height="35"
                                 CornerRadius="3">
-                            <PasswordBox x:Name="PasswordBox"
+                            <TextBox x:Name="PasswordBox"
+                                         Text="{Binding Password, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                          FontFamily="Segoe UI"
                                          FontSize="13"
                                          Foreground="#FFFFFF"
@@ -148,53 +323,19 @@
                         <TextBlock Grid.Row="0"
                                    Text="Формат ответа"
                                    FontFamily="Segoe UI"
-                                   FontSize="12"
-                                   Foreground="#888888"
+                                   FontSize="16"
+                                   Foreground="#CCCCCC"
                                    Margin="0,0,0,5"/>
 
-                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <StackPanel Grid.Row="1" Orientation="Vertical">
                             <RadioButton x:Name="HtmlRadioButton"
                                          Content="HTML"
                                          FontFamily="Segoe UI"
                                          FontSize="13"
                                          Foreground="#FFFFFF"
-                                         Margin="0,0,20,0"
+                                         Margin="0,10,20,10"
                                          VerticalAlignment="Center"
-                                         IsChecked="True">
-                                <RadioButton.Style>
-                                    <Style TargetType="RadioButton">
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="RadioButton">
-                                                    <Grid>
-                                                        <Ellipse x:Name="OuterCircle" 
-                                                                 Width="14" Height="14" 
-                                                                 Stroke="#666666" 
-                                                                 Fill="Transparent"/>
-                                                        <Ellipse x:Name="InnerCircle" 
-                                                                 Width="8" Height="8" 
-                                                                 Fill="#FF3333" 
-                                                                 Visibility="Collapsed"
-                                                                 HorizontalAlignment="Center"
-                                                                 VerticalAlignment="Center"/>
-                                                        <ContentPresenter Content="{TemplateBinding Content}"
-                                                                          Margin="20,0,0,0"
-                                                                          VerticalAlignment="Center"/>
-                                                    </Grid>
-                                                    <ControlTemplate.Triggers>
-                                                        <Trigger Property="IsChecked" Value="True">
-                                                            <Setter TargetName="InnerCircle" Property="Visibility" Value="Visible"/>
-                                                            <Setter TargetName="OuterCircle" Property="Stroke" Value="#FF3333"/>
-                                                        </Trigger>
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter TargetName="OuterCircle" Property="Stroke" Value="#999999"/>
-                                                        </Trigger>
-                                                    </ControlTemplate.Triggers>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </RadioButton.Style>
+                                         IsChecked="{Binding IsHtml, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                             </RadioButton>
 
                             <RadioButton x:Name="TextRadioButton"
@@ -202,41 +343,8 @@
                                          FontFamily="Segoe UI"
                                          FontSize="13"
                                          Foreground="#FFFFFF"
+                                         IsChecked="{Binding IsText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                          VerticalAlignment="Center">
-                                <RadioButton.Style>
-                                    <Style TargetType="RadioButton">
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="RadioButton">
-                                                    <Grid>
-                                                        <Ellipse x:Name="OuterCircle" 
-                                                                 Width="14" Height="14" 
-                                                                 Stroke="#666666" 
-                                                                 Fill="Transparent"/>
-                                                        <Ellipse x:Name="InnerCircle" 
-                                                                 Width="8" Height="8" 
-                                                                 Fill="#FF3333" 
-                                                                 Visibility="Collapsed"
-                                                                 HorizontalAlignment="Center"
-                                                                 VerticalAlignment="Center"/>
-                                                        <ContentPresenter Content="{TemplateBinding Content}"
-                                                                          Margin="20,0,0,0"
-                                                                          VerticalAlignment="Center"/>
-                                                    </Grid>
-                                                    <ControlTemplate.Triggers>
-                                                        <Trigger Property="IsChecked" Value="True">
-                                                            <Setter TargetName="InnerCircle" Property="Visibility" Value="Visible"/>
-                                                            <Setter TargetName="OuterCircle" Property="Stroke" Value="#FF3333"/>
-                                                        </Trigger>
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter TargetName="OuterCircle" Property="Stroke" Value="#999999"/>
-                                                        </Trigger>
-                                                    </ControlTemplate.Triggers>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </RadioButton.Style>
                             </RadioButton>
                         </StackPanel>
                     </Grid>
@@ -255,9 +363,9 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <!-- Поле Сообщение -->
@@ -270,17 +378,18 @@
                         <TextBlock Grid.Row="0"
                                    Text="Сообщение"
                                    FontFamily="Segoe UI"
-                                   FontSize="12"
-                                   Foreground="#888888"
+                                   FontSize="16"
+                                   Foreground="#CCCCCC"
                                    Margin="0,0,0,5"/>
 
                         <Border Grid.Row="1"
                                 BorderBrush="#333333"
                                 BorderThickness="1"
                                 Background="#0A0A0A"
-                                Height="80"
+                                   Height="120"
                                 CornerRadius="3">
                             <TextBox x:Name="MessageTextBox"
+                                     Text="{Binding IntegrationMessage, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                                      FontFamily="Segoe UI"
                                      FontSize="13"
                                      Foreground="#FFFFFF"
@@ -290,6 +399,7 @@
                                      TextWrapping="Wrap"
                                      AcceptsReturn="True"
                                      VerticalScrollBarVisibility="Auto"
+                                     IsReadOnly="True"
                                      CaretBrush="#FFFFFF"/>
                         </Border>
                     </Grid>
@@ -300,7 +410,7 @@
                             Content="ОТПРАВИТЬ"
                             Width="140" Height="35"
                             FontFamily="Segoe UI"
-                            FontSize="12"
+                            FontSize="16"
                             FontWeight="SemiBold"
                             Foreground="#FFFFFF"
                             Background="#1A1A1A"
@@ -310,32 +420,6 @@
                             HorizontalAlignment="Left"
                             Margin="0,0,0,20"
                             Click="SendMessageButton_Click">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border Background="{TemplateBinding Background}"
-                                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                                    CornerRadius="3">
-                                                <ContentPresenter HorizontalAlignment="Center"
-                                                                  VerticalAlignment="Center"/>
-                                            </Border>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="#333333"/>
-                                                    <Setter Property="BorderBrush" Value="#666666"/>
-                                                </Trigger>
-                                                <Trigger Property="IsPressed" Value="True">
-                                                    <Setter Property="Background" Value="#0A0A0A"/>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </Button.Style>
                     </Button>
 
                     <!-- Поле Ответ -->
@@ -348,26 +432,28 @@
                         <TextBlock Grid.Row="0"
                                    Text="Ответ"
                                    FontFamily="Segoe UI"
-                                   FontSize="12"
-                                   Foreground="#888888"
+                                   FontSize="16"
+                                   Foreground="#CCCCCC"
                                    Margin="0,0,0,5"/>
 
                         <Border Grid.Row="1"
                                 BorderBrush="#333333"
                                 BorderThickness="1"
                                 Background="#0A0A0A"
-                                MinHeight="120"
+                                Height="80"
                                 CornerRadius="3">
                             <TextBox x:Name="ResponseTextBox"
+                                     Text="{Binding IntegrationMessageResult, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                                      FontFamily="Segoe UI"
                                      FontSize="13"
-                                     Foreground="#CCCCCC"
+                                     Foreground="{Binding IntegrationMessageResultColor, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                                      Background="Transparent"
                                      BorderThickness="0"
                                      Padding="10,8,10,8"
                                      TextWrapping="Wrap"
+                                     VerticalScrollBarVisibility="Auto"
                                      IsReadOnly="True"
-                                     VerticalScrollBarVisibility="Auto"/>
+                                     />
                         </Border>
                     </Grid>
                 </Grid>
@@ -378,7 +464,7 @@
         <Button x:Name="DoneButton"
                 Grid.Row="2"
                 Content="ГОТОВО"
-                Width="180" Height="45"
+                Width="200" Height="45"
                 FontFamily="Segoe UI"
                 FontSize="14"
                 FontWeight="SemiBold"
@@ -388,34 +474,8 @@
                 BorderThickness="1"
                 Cursor="Hand"
                 HorizontalAlignment="Center"
-                Margin="0,20,0,0"
+                Margin="0,20,0,30"
                 Click="DoneButton_Click">
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="Button">
-                                <Border Background="{TemplateBinding Background}"
-                                        BorderBrush="{TemplateBinding BorderBrush}"
-                                        BorderThickness="{TemplateBinding BorderThickness}"
-                                        CornerRadius="3">
-                                    <ContentPresenter HorizontalAlignment="Center"
-                                                      VerticalAlignment="Center"/>
-                                </Border>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#333333"/>
-                                        <Setter Property="BorderBrush" Value="#666666"/>
-                                    </Trigger>
-                                    <Trigger Property="IsPressed" Value="True">
-                                        <Setter Property="Background" Value="#0A0A0A"/>
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
         </Button>
     </Grid>
 </UserControl>

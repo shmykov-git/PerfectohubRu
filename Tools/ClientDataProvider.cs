@@ -2,6 +2,7 @@
 using PerfectohubRu.Model;
 using System;
 using System.IO;
+using System.Windows;
 
 namespace PerfectohubRu.Tools
 {
@@ -31,14 +32,17 @@ namespace PerfectohubRu.Tools
 
         public void Save()
         {
-            try
+            _ = Application.Current.Dispatcher.BeginInvoke((Action)(() =>
             {
-                File.WriteAllText(DataFileName, Data.ToJsonStr());
-            }
-            catch (Exception ex)
-            {
-                Data.CriticalError = ex.Message;
-            }
+                try
+                {
+                    File.WriteAllText(DataFileName, Data.ToJsonStr());
+                }
+                catch (Exception ex)
+                {
+                    Data.CriticalError = ex.Message;
+                }
+            }));
         }
 
         public ClientData Data => _clientState ?? ( _clientState = GetClientState());

@@ -36,7 +36,7 @@ namespace Calls.HttpClients
         {
             var result = await PostAsync<string>(message, new MethodArgs
             {
-                Method = options.SendMessage,
+                Method = options.SendMessage.With(("url", data.IntegrationData.Url)),
                 QueryArgsType = QueryArgsType.JsonBody,
                 GetBasicAuth = () => (data.IntegrationData.Username, data.IntegrationData.Password),
                 UseThrowCase = HttpClientCase.Integration,

@@ -1,20 +1,19 @@
 ﻿using Calls.Api.Bots;
 using Calls.Entities.Json;
 using Calls.HttpClients;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using PerfectohubRu.Extensions;
 using PerfectohubRu.Model;
 using PerfectohubRu.Tools;
-using Shared.Model.Enums;
 using Shared.Model.Options;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media;
 
 namespace Calls.Bot.Services
 {
@@ -26,13 +25,12 @@ namespace Calls.Bot.Services
         private readonly IServiceProvider sp;
         private readonly IIntegrationHttpClient integrationHttpClient;
         private RemoteBot bot = null;
-        private IConfiguration configuration;
-        private Task[] startBotTasks;
         private ClientData data;
         
         public DateTime StartTime = DateTime.Now;
 
-        public event Action<string> OnIntegrationMessageResult;
+        public event Action<string> OnIntegrationMessage;
+        public event Action<string, Brush> OnIntegrationMessageResult;
 
         public BotManager(
             IServiceProvider sp,
@@ -50,38 +48,71 @@ namespace Calls.Bot.Services
             _ = Task.Run(SchedulePolling);
         }
 
+        public async Task RefreshIntegrationMessage(string[] htmlMessage = null)
+        {
+            var integrationMessage = new IntegrationMessage
+            {
+                IsHtml = data.IntegrationData.IsHtml,
+            };
+
+            if (data.IntegrationData.IsHtml)
+            {
+                htmlMessage = htmlMessage ?? await callsManager.GetUniqueCallsMessage(false, true, true, cancellationTokenSource.Token);
+                integrationMessage.Message = htmlMessage[0];
+            }
+            else
+            {
+                var textMessage = await callsManager.GetUniqueCallsMessage(false, false, true, cancellationTokenSource.Token);
+                integrationMessage.Message = textMessage[0];
+            }
+
+            OnIntegrationMessage.Raise(integrationMessage.Message);
+
+            if (!data.IntegrationData.HasIntegration)
+            {
+                OnIntegrationMessageResult.Raise("Не подключено", Brushes.Yellow);
+
+                return;
+            }
+
+            try
+            {
+                var result = await integrationHttpClient.SendMessage(integrationMessage, cancellationTokenSource.Token);
+                OnIntegrationMessageResult.Raise(result, new SolidColorBrush(Color.FromRgb(0xCC, 0xCC, 0xCC)));
+            }
+            catch (Exception ex) 
+            {
+                Debug.WriteLine($"Error: {ex.Message}");
+                OnIntegrationMessageResult.Raise(ex.Message, Brushes.Red);
+            }
+        }
+
         public async Task SchedulePolling()
         {
             while (true) 
             { 
-                if (data.ScheduleIntervalMinutes > 0)
+                try
                 {
-                    var dayMinutes = (int)DateTime.Now.TimeOfDay.TotalMinutes;
-
-                    if (dayMinutes % data.ScheduleIntervalMinutes == 0 && bot != null)
+                    if (data.ScheduleIntervalMinutes > 0)
                     {
-                        Debug.WriteLine($"{DateTime.Now} report message");
-                        var htmlMessage = await callsManager.GetUniqueCallsMessage(false, true, true, cancellationTokenSource.Token);
-                        await bot.SendBroadCastMessage(htmlMessage[0]);
+                        var dayMinutes = (int)DateTime.Now.TimeOfDay.TotalMinutes;
 
-                        if (data.IntegrationData.HasIntegration)
+                        if (dayMinutes % data.ScheduleIntervalMinutes == 0 && bot != null)
                         {
-                            var integrationMessage = new IntegrationMessage
-                            {
-                                IsHtml = data.IntegrationData.IsHtml,
-                                Message = htmlMessage[0]
-                            };
+                            Debug.WriteLine($"{DateTime.Now} report message");
+                            var htmlMessage = await callsManager.GetUniqueCallsMessage(false, true, true, cancellationTokenSource.Token);
+                            await bot.SendBroadCastMessage(htmlMessage[0]);
 
-                            if (!data.IntegrationData.IsHtml)
+                            _ = Application.Current.Dispatcher.BeginInvoke((Action)(async () =>
                             {
-                                var textMessage = await callsManager.GetUniqueCallsMessage(false, false, true, cancellationTokenSource.Token);
-                                integrationMessage.Message = textMessage[0];
-                            }
-
-                            var result = await integrationHttpClient.SendMessage(integrationMessage, cancellationTokenSource.Token);
-                            OnIntegrationMessageResult.Raise(result);
+                                await RefreshIntegrationMessage(htmlMessage);
+                            }));
                         }
                     }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error: {ex.Message}");
                 }
 
                 var delay = 1000 * (60 - (((int)DateTime.Now.TimeOfDay.TotalSeconds) % 60));
@@ -91,7 +122,6 @@ namespace Calls.Bot.Services
 
         public async Task Restart()
         {
-            this.configuration = sp.GetRequiredService<IConfiguration>();
             this.callsManager = sp.GetRequiredService<CallsManager>();
 
             if (cancellationTokenSource != null)
