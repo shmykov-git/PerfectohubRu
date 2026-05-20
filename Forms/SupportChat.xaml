@@ -16,6 +16,178 @@
                       GlassFrameThickness="0"
                       CornerRadius="0"/>
     </WindowChrome.WindowChrome>
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BorderElement"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                                          VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BorderElement" Property="Background" Value="#333333"/>
+                                <Setter TargetName="BorderElement" Property="BorderBrush" Value="#666666"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#0A0A0A"/>
+                                <Setter Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="RenderTransformOrigin" Value="0.95,0.95"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type ScrollBar}">
+            <Setter Property="Width" Value="10"/>
+            <Setter Property="MinHeight" Value="10"/>
+            <Setter Property="Background" Value="#000000"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                        <Grid Background="#000000" Opacity="{TemplateBinding Opacity}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="15"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Верхняя кнопка (вверх) -->
+                            <RepeatButton x:Name="DecreaseRepeatButton"
+                                  Grid.Row="0"
+                                  Background="#1A1A1A"
+                                  BorderBrush="#333333"
+                                  BorderThickness="1"
+                                  Focusable="False"
+                                  Command="ScrollBar.LineUpCommand">
+                                <Border Background="#1A1A1A"
+                                BorderBrush="#333333"
+                                BorderThickness="1">
+                                    <Path Data="M0,5 L5,0 L10,5 Z"
+                                  Fill="#666666"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Width="8"
+                                  Height="8"/>
+                                </Border>
+                            </RepeatButton>
+
+                            <!-- Track с ползунком -->
+                            <Track x:Name="PART_Track"
+                                   IsDirectionReversed="True"
+                           Grid.Row="1">
+                                <Track.Thumb>
+                                    <Thumb x:Name="Thumb"
+                                   Background="#444444"
+                                   BorderBrush="#555555"
+                                   BorderThickness="1"
+                                   Margin="1,0">
+                                        <Thumb.Style>
+                                            <Style TargetType="Thumb">
+                                                <Setter Property="Height" Value="40"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="Thumb">
+                                                            <Border x:Name="ThumbBorder"
+                                                            Background="{TemplateBinding Background}"
+                                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                                            CornerRadius="3"
+                                                            Margin="1,0"/>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter TargetName="ThumbBorder" Property="Background" Value="#666666"/>
+                                                                    <Setter TargetName="ThumbBorder" Property="BorderBrush" Value="#777777"/>
+                                                                </Trigger>
+                                                                <Trigger Property="IsDragging" Value="True">
+                                                                    <Setter TargetName="ThumbBorder" Property="Background" Value="#888888"/>
+                                                                    <Setter TargetName="ThumbBorder" Property="BorderBrush" Value="#999999"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </Thumb.Style>
+                                    </Thumb>
+                                </Track.Thumb>
+                            </Track>
+
+                            <!-- Нижняя кнопка (вниз) -->
+                            <RepeatButton x:Name="IncreaseRepeatButton"
+                                  Grid.Row="2"
+                                  Background="#1A1A1A"
+                                  BorderBrush="#333333"
+                                  BorderThickness="1"
+                                  Focusable="False"
+                                  Command="ScrollBar.LineDownCommand">
+                                <Border Background="#1A1A1A"
+                                BorderBrush="#333333"
+                                BorderThickness="1">
+                                    <Path Data="M0,0 L5,5 L10,0 Z"
+                                  Fill="#666666"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Width="8"
+                                  Height="8"/>
+                                </Border>
+                            </RepeatButton>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type RadioButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Grid.Column="0" x:Name="OuterCircle" 
+                                                                Width="14" Height="14" 
+                                                                Stroke="#666666" 
+                                                                Fill="Transparent"/>
+                            <Ellipse Grid.Column="0" x:Name="InnerCircle" 
+                                                                Width="8" Height="8" 
+                                                                Fill="#AA3333" 
+                                                                Visibility="Collapsed"
+                                                                HorizontalAlignment="Center"
+                                                                VerticalAlignment="Center"/>
+                            <ContentPresenter Grid.Column="1"  Content="{TemplateBinding Content}"
+                                                                        Margin="10,0,0,0"
+                                                                        VerticalAlignment="Center"
+                                              HorizontalAlignment="Left"
+                                              />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="InnerCircle" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="OuterCircle" Property="Stroke" Value="#AA3333"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="OuterCircle" Property="Stroke" Value="#999999"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
 
     <Border Background="#0A0A0A" 
             BorderBrush="#333333" 
@@ -92,58 +264,6 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-
-                <!-- Поле Email -->
-                <Border Grid.Row="0" 
-                        BorderBrush="#333333" 
-                        BorderThickness="1" 
-                        Background="#0D0D0D" 
-                        Height="40" 
-                        CornerRadius="4"
-                        Margin="0,0,0,10">
-                    <Grid>
-                        <TextBox x:Name="EmailTextBox"
-                                 FontFamily="Segoe UI"
-                                 FontSize="13"
-                                 Foreground="#FFFFFF"
-                                 Background="Transparent"
-                                 BorderThickness="0"
-                                 Padding="12,0,12,0"
-                                 VerticalContentAlignment="Center"
-                                 CaretBrush="#FFFFFF">
-                            <TextBox.Style>
-                                <Style TargetType="TextBox">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="TextBox">
-                                                <Grid>
-                                                    <ScrollViewer x:Name="PART_ContentHost" 
-                                                                  VerticalAlignment="Center"/>
-                                                    <TextBlock Text="Электронная почта"
-                                                               FontFamily="Segoe UI"
-                                                               Foreground="#555555"
-                                                               FontSize="12"
-                                                               VerticalAlignment="Center"
-                                                               Margin="12,0,0,0"
-                                                               IsHitTestVisible="False"
-                                                               Visibility="Collapsed"
-                                                               x:Name="Watermark"/>
-                                                </Grid>
-                                                <ControlTemplate.Triggers>
-                                                    <Trigger Property="Text" Value="">
-                                                        <Setter TargetName="Watermark" 
-                                                                Property="Visibility" 
-                                                                Value="Visible"/>
-                                                    </Trigger>
-                                                </ControlTemplate.Triggers>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </TextBox.Style>
-                        </TextBox>
-                    </Grid>
-                </Border>
 
                 <!-- Список сообщений -->
                 <ListBox x:Name="MessagesListBox"
@@ -262,26 +382,18 @@
                     <!-- Кнопка Отправить -->
                     <Button x:Name="SendButton"
                             Grid.Column="1"
-                            Width="50" Height="36"
+                            Width="48" Height="36"
                             Cursor="Hand"
                             Background="#1A1A1A"
                             BorderBrush="#FF3333"
                             BorderThickness="1"
+                            Focusable="false"
                             Click="SendButton_Click">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="📤" FontSize="12" Foreground="#FF3333" Margin="0,0,5,0"/>
+                                <TextBlock Text="➤" FontSize="12" Foreground="#FF3333" Margin="0,0,5,0"/>
                             </StackPanel>
                         </Button.Content>
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#333333"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
                     </Button>
                 </Grid>
             </Border>

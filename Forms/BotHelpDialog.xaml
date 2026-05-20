@@ -19,9 +19,10 @@
     <!-- Основной контейнер с черным фоном и светлой окантовкой -->
     <Border Background="#0A0A0A" 
             BorderBrush="#333333" 
+            CornerRadius="8"
             BorderThickness="1">
 
-        <Grid>
+        <Grid Margin="4">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>

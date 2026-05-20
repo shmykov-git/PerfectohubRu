@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -61,7 +59,6 @@ namespace MovieIntro
         private async Task SendMessage()
         {
             string message = MessageTextBox.Text.Trim();
-            string email = EmailTextBox.Text.Trim();
 
             if (string.IsNullOrWhiteSpace(message))
             {
@@ -69,14 +66,8 @@ namespace MovieIntro
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(email))
-            {
-                AnimateError(EmailTextBox);
-                return;
-            }
-
             // Добавляем сообщение пользователя в чат
-            AddUserMessage(message, email);
+            AddUserMessage(message);
 
             // Очищаем поле ввода
             MessageTextBox.Clear();
@@ -85,14 +76,13 @@ namespace MovieIntro
             await Task.Delay(500);
 
             // Добавляем ответ от поддержки (для теста)
-            AddSystemMessage($"Спасибо за ваше сообщение, {email}! Наш специалист свяжется с вами в ближайшее время.");
+            AddSystemMessage($"Спасибо за ваше сообщение! Наш специалист свяжется с вами в ближайшее время.");
         }
 
-        private void AddUserMessage(string message, string email)
+        private void AddUserMessage(string message)
         {
             messages.Add(new ChatMessage
             {
-                Sender = email,
                 Message = message,
                 Time = DateTime.Now.ToString("HH:mm"),
                 IsUserMessage = true
@@ -146,46 +136,6 @@ namespace MovieIntro
                     Dispatcher.Invoke(() => border.BorderBrush = originalBrush);
                 });
             }
-        }
-    }
-
-    // Класс сообщения чата
-    public class ChatMessage : INotifyPropertyChanged
-    {
-        private string _sender;
-        private string _message;
-        private string _time;
-        private bool _isUserMessage;
-
-        public string Sender
-        {
-            get => _sender;
-            set { _sender = value; OnPropertyChanged(); }
-        }
-
-        public string Message
-        {
-            get => _message;
-            set { _message = value; OnPropertyChanged(); }
-        }
-
-        public string Time
-        {
-            get => _time;
-            set { _time = value; OnPropertyChanged(); }
-        }
-
-        public bool IsUserMessage
-        {
-            get => _isUserMessage;
-            set { _isUserMessage = value; OnPropertyChanged(); }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

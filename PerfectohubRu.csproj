@@ -191,6 +191,7 @@
     <Compile Include="Forms\BotHelpDialog.xaml.cs">
       <DependentUpon>BotHelpDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ViewModles\ChatMessage.cs" />
     <Compile Include="Forms\Controls\SlideAddBot.xaml.cs">
       <DependentUpon>SlideAddBot.xaml</DependentUpon>
     </Compile>

@@ -135,6 +135,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
         <Style TargetType="{x:Type RadioButton}">
             <Setter Property="Template">
                 <Setter.Value>

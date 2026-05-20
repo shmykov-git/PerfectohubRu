@@ -18,8 +18,12 @@
                       CornerRadius="0"/>
     </WindowChrome.WindowChrome>
 
-    <Border Background="#000000" CornerRadius="0">
-        <Grid>
+    <Border Background="#0A0A0A" 
+            CornerRadius="8"             
+            BorderBrush="#333333" 
+            BorderThickness="1"
+            >
+        <Grid Margin="4">
             <!-- Контейнер для слайдов -->
             <Grid x:Name="SlidesContainer">
                 <controls:Slide1 x:Name="Slide1Control"/>
