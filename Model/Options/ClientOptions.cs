@@ -16,6 +16,7 @@ namespace Shared.Model.Options
 
         public AuthOptions BotAuth { get; set; }
         public int BotPollingInterval { get; set; }
+        public int RefreshTokenPollingHoursInterval { get; set; }
         public int MaxMessageSize { get; set; }
 
         private Dictionary<MarkType, string> __marks;

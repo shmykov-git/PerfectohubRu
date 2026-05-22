@@ -1,6 +1,7 @@
 ﻿using Perfecto.Deploy.Extensions;
 using PerfectohubRu.Model;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 
@@ -41,6 +42,7 @@ namespace PerfectohubRu.Tools
                 catch (Exception ex)
                 {
                     Data.CriticalError = ex.Message;
+                    Debug.WriteLine($"CRITICAL: {ex.Message}");
                 }
             });
         }

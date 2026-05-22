@@ -22,7 +22,6 @@ namespace PerfectohubRu.Model
         public string[] Commons { get; set; } = new string[0];
 
         public string BotToken { get; set; }
-        public string BotRefreshToken { get; set; }
         public string BotId { get; set; }
         public BotType BotType { get; set; }
         public Dictionary<string, Chat> Chats { get; set; } = new Dictionary<string, Chat>();

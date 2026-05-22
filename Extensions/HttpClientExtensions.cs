@@ -22,7 +22,8 @@ namespace PerfectohubRu.Extensions
                 .ConfigureHttpClient<IIntegrationHttpClient, IntegrationHttpClient, IntegrationApiOptions>(configuration)
                 .ConfigureHttpClient<IBotHttpClient, BotHttpClient, BotsApiOptions>(configuration)
                 .ConfigureHttpClient<IBeelineAtsHttpClient, BeelineAtsHttpClient, BeelineAtsApiOptions>(configuration)
-                .ConfigureHttpClient<ITele2AtsHttpClient, Tele2AtsHttpClient, Tele2AtsApiOptions>(configuration)
+                //.ConfigureHttpClient<ITele2AtsHttpClient, Tele2AtsHttpClient, Tele2AtsApiOptions>(configuration)
+                .ConfigureHttpClient<ITele2AtsHttpClient, Tele2AtsTestHttpClient, Tele2AtsApiOptions>(configuration)
                 .AddSingleton<IAtsHttpClient>(sp =>
                 {
                     var data = sp.GetRequiredService<ClientDataProvider>().Data;

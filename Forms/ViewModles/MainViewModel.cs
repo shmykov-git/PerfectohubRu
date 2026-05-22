@@ -6,6 +6,7 @@ using PerfectohubRu.Extensions;
 using PerfectohubRu.Model;
 using PerfectohubRu.Tools;
 using Shared.Exceptions;
+using Shared.HttpClients.Base;
 using Shared.Model.Enums;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace PerfectohubRu.Forms.ViewModles
         private readonly BotManager botManager;
         private readonly CallsManager callsManager;
         private readonly ClientDataProvider dataProvider;
+        private readonly RefreshTokenManager refreshTokenManager;
         private readonly IServiceProvider sp;
         private ClientData data;
 
@@ -28,11 +30,13 @@ namespace PerfectohubRu.Forms.ViewModles
             BotManager botManager,
             CallsManager callsManager,
             ClientDataProvider clientDataProvider,
+            RefreshTokenManager refreshTokenManager,
             IServiceProvider sp)
         {
             this.botManager = botManager;
             this.callsManager = callsManager;
             this.dataProvider = clientDataProvider;
+            this.refreshTokenManager = refreshTokenManager;
             this.sp = sp;
             data = clientDataProvider.Data;
             AtsToken = data.GetAtsToken();
@@ -63,6 +67,12 @@ namespace PerfectohubRu.Forms.ViewModles
                     IntegrationMessageResult = value; 
                     IntegrationMessageResultColor = color;
                 };
+
+            refreshTokenManager.OnAtsTokenRefresh += () =>
+            {
+                OnPropertyChanged(nameof(AtsToken));
+                OnPropertyChanged(nameof(AtsRefreshToken));
+            };
         }
 
         public ClientData Data => data;

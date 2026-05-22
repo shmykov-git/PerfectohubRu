@@ -40,12 +40,12 @@ namespace PerfectohubRu.Forms.ViewModles
 
         public string AtsRefreshToken
         {
-            get => data.BotRefreshToken;
+            get => data.Tele2AtsRefreshToken;
             set
             {
-                if (data.BotRefreshToken != value)
+                if (data.Tele2AtsRefreshToken != value)
                 {
-                    data.BotRefreshToken = value;
+                    data.Tele2AtsRefreshToken = value;
                     dataProvider.Save();
                     OnPropertyChanged();
                 }

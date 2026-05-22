@@ -212,6 +212,7 @@
     <Compile Include="HttpClients\Abstractions\IIntegrationHttpClient.cs" />
     <Compile Include="HttpClients\IntegrationHttpClient.cs" />
     <Compile Include="HttpClients\Options\IntegrationApiOptions.cs" />
+    <Compile Include="HttpClients\Tele2AtsTestHttpClient.cs" />
     <Compile Include="Model\IntegrationData.cs" />
     <Compile Include="Model\IntegrationMessage.cs" />
     <Compile Include="Model\ScheduleItem.cs" />
@@ -266,6 +267,7 @@
     <Compile Include="Tools\ClientDataProvider.cs" />
     <Compile Include="Tools\DispatcherHelper.cs" />
     <Compile Include="Tools\Filters.cs" />
+    <Compile Include="Tools\RefreshTokenManager.cs" />
     <Compile Include="Tools\UrlHelper.cs" />
     <Compile Include="Tools\Values.cs" />
     <Page Include="Forms\BotHelpDialog.xaml">

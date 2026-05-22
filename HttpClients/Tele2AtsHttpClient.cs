@@ -28,13 +28,13 @@ namespace Calls.HttpClients
         public Tele2AtsHttpClient(
             HttpClient client, 
             IOptions<Tele2AtsApiOptions> options,
-            ClientDataProvider clientStateProvider,
+            ClientDataProvider dataProvider,
             IMapper mapper, 
             IServiceProvider sp
             ) : base(client, sp, options)
         {
             this.options = options.Value;
-            this.clientStateProvider = clientStateProvider;
+            this.clientStateProvider = dataProvider;
             this.mapper = mapper;
         }
 
@@ -106,7 +106,7 @@ namespace Calls.HttpClients
             return calls;
         }
 
-        public async Task<(string accessToken, string refreshToken)> GetRefreshToken(string refreshToken)
+        public virtual async Task<(string accessToken, string refreshToken)> GetRefreshToken(string refreshToken)
         {
             var token = await PutAsync<AtsTele2RefreshToken>(new { }, new MethodArgs
             {

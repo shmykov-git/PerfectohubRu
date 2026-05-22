@@ -39,6 +39,7 @@ namespace PerfectohubRu
                 .ConfigurePerfectoOptions<ClientOptions>(configuration)
                 .AddSingleton<CallsManager>()
                 .AddSingleton<BotManager>()
+                .AddSingleton<RefreshTokenManager>()
                 ;
 
             // Регистрация окон

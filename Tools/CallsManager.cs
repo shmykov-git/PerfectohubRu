@@ -97,12 +97,10 @@ namespace PerfectohubRu.Tools
 Количество уникальных звонков <b>{uniqueCallsCount}</b>
 Из них без ответа <b>{skippedCount}</b> (<b>{100.0 * skippedCount / uniqueCallsCount:F0}%</b>):{(splitLine ? "\n" : "")}
 {msgSkippedCalls}
-" : (uniqueCallsCount > 0 ? $@"
-{msgPeriod}
+" : (uniqueCallsCount > 0 ? $@"{msgPeriod}
 Количество уникальных звонков <b>{uniqueCallsCount}</b>
 Все звонки были обработаны {marks[MarkType.Check]}
-" : $@"
-{msgPeriod}
+" : $@"{msgPeriod}
 Звонков не было {marks[MarkType.Check]}
 "))
                 :
@@ -111,12 +109,10 @@ namespace PerfectohubRu.Tools
 Количество уникальных звонков {uniqueCallsCount}
 Из них без ответа {skippedCount} ({100.0 * skippedCount / uniqueCallsCount:F0}%):{(splitLine ? "\n" : "")}
 {msgSkippedCalls}
-" : (uniqueCallsCount > 0 ? $@"
-{msgPeriod}
+" : (uniqueCallsCount > 0 ? $@"{msgPeriod}
 Количество уникальных звонков {uniqueCallsCount}
 Все звонки были обработаны {marks[MarkType.Check]}
-" : $@"
-{msgPeriod}
+" : $@"{msgPeriod}
 Звонков не было {marks[MarkType.Check]}
 "))
 ;

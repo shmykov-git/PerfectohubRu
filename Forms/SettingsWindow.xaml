@@ -690,7 +690,7 @@
                                 Content="🖧 ОСТАНОВИТЬ НА СЕРВЕРЕ"
                                 Height="45"
                                 FontFamily="Segoe UI"
-                                FontSize="18"
+                                FontSize="12"
                                 FontWeight="SemiBold"
                                 Foreground="#FFFFFF"
                                 Background="#1A1A1A"
