@@ -19,6 +19,93 @@
     </WindowChrome.WindowChrome>
 
     <Window.Resources>
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="Background" Value="#000000"/>
+            <Setter Property="BorderBrush" Value="#333333"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton x:Name="ToggleButton"
+                                          Background="#000000"
+                                          BorderBrush="#333333"
+                                          BorderThickness="1"
+                                          Focusable="False"
+                                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                          ClickMode="Press">
+                                <ToggleButton.Style>
+                                    <Style TargetType="ToggleButton">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ToggleButton">
+                                                    <Border x:Name="Border"
+                                                            Background="#000000"
+                                                            BorderBrush="#333333"
+                                                            BorderThickness="1"
+                                                            CornerRadius="3">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*"/>
+                                                                <ColumnDefinition Width="30"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <TextBlock Grid.Column="0"
+                                                                       x:Name="SelectedText"
+                                                                       Text="{Binding SelectedItem.Name, RelativeSource={RelativeSource AncestorType=ComboBox}}"
+                                                                       Foreground="#FFFFFF"
+                                                                       VerticalAlignment="Center"
+                                                                       Margin="10,0,0,0"/>
+                                                            <Path Grid.Column="1"
+                                                                  x:Name="Arrow"
+                                                                  Data="M0,0 L5,5 L10,0 Z"
+                                                                  Fill="#666666"
+                                                                  HorizontalAlignment="Center"
+                                                                  VerticalAlignment="Center"
+                                                                  Margin="0,2,0,0"/>
+                                                        </Grid>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter TargetName="Border" Property="Background" Value="#1A1A1A"/>
+                                                            <Setter TargetName="Arrow" Property="Fill" Value="#999999"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ToggleButton.Style>
+                            </ToggleButton>
+
+                            <!-- Исправленный Popup с черным фоном -->
+                            <Popup x:Name="Popup"
+                                   IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                                   Placement="Bottom"
+                                   AllowsTransparency="True"
+                                   Focusable="False"
+                                   Width="200"
+                                   PopupAnimation="Fade">
+                                <Border Background="#000000"
+                                        BorderBrush="#333333"
+                                        BorderThickness="1"
+                                        CornerRadius="3"
+                                        Margin="0,2,0,0">
+                                    <ScrollViewer x:Name="ScrollViewer"
+                                                  MaxHeight="200"
+                                                  Background="#000000"
+                                                  BorderThickness="0">
+                                        <ItemsPresenter/>
+                                    </ScrollViewer>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -222,7 +309,7 @@
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top"
-                        Margin="0,10,10,0">
+                        Margin="0,0,10,0">
 
                 <!-- Кнопка Свернуть -->
                 <Button x:Name="MinimizeButton"
@@ -278,7 +365,6 @@
                 <Ellipse Width="8" Height="8" Fill="#FFFFFF" Opacity="0.2" Margin="5"/>
                 <Ellipse Width="8" Height="8" Fill="#FFFFFF" Opacity="0.2" Margin="5"/>
                 <Ellipse Width="8" Height="8" Fill="#FFFFFF" Opacity="0.2" Margin="5"/>
-                <Ellipse Width="8" Height="8" Fill="#FFFFFF" Opacity="0.2" Margin="5"/>
             </StackPanel>
 
             <!-- perfectohub.ru -->
@@ -308,14 +394,15 @@
                         VerticalAlignment="Bottom"
                         Margin="20,20,20,20"
                         Opacity="0">
-                <Button x:Name="ChatButton"
+                <Button x:Name="StatusButton"
+                        FontSize="16"
                 Width="25" Height="25"
                 Background="Transparent"
+                        Foreground="#CCCCCC"
                 BorderThickness="0"
+                        Content="⚙️"
                 Cursor="Hand"
-                Click="ChatButton_Click">
-                    <Image Source="/Assets/chat.png" Width="25" Height="25" Opacity="0.8"/>
-                </Button>
+                Click="StatusButton_Click"/>
             </StackPanel>
 
             <Button x:Name="MovePrevButton"

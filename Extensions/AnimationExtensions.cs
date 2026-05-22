@@ -14,24 +14,6 @@ namespace PerfectohubRu.Extensions
 
     public static class AnimationExtensions
     {
-        //private static void WithStoryboard(this UIElement element, AnimationTimeline animation, int fps, params string[] properties)
-        //{
-        //    Storyboard storyboard = new Storyboard();
-        //    storyboard.Children.Add(animation);
-
-        //    // Устанавливаем частоту кадров для Storyboard
-        //    Timeline.SetDesiredFrameRate(storyboard, fps);
-
-        //    // Привязываем анимацию к свойству
-        //    Storyboard.SetTarget(animation, element);
-            
-        //    foreach(var property in properties)
-        //        Storyboard.SetTargetProperty(animation, new PropertyPath(property));
-
-        //    // Запускаем
-        //    storyboard.Begin();
-        //}
-
         public static async void AnimateFadeIn(this UIElement element, double duration = 1.5, double delay = 0)
         {
             await Task.Delay(TimeSpan.FromSeconds(delay));
@@ -68,13 +50,13 @@ namespace PerfectohubRu.Extensions
             translateTransform.BeginAnimation(TranslateTransform.XProperty, shakeAnimation);
         }
 
-        public static async void AnimateColorFlash(this Border border, Brush brush = null, double duration = 0.5, double delay = 0)
+        public static async void AnimateColorFlash(this Brush brush, (Color from, Color to) range,
+            DependencyProperty property, double duration = 1.5, double delay = 0)
         {
             await Task.Delay(TimeSpan.FromSeconds(delay));
-            var originalBrush = border.BorderBrush;
-            border.BorderBrush = brush ?? Brushes.Red;
-            await Task.Delay(TimeSpan.FromSeconds(duration));
-            border.BorderBrush = originalBrush;
+
+            var colorAnimation = new ColorAnimation(range.from, range.to, TimeSpan.FromSeconds(duration));
+            brush.BeginAnimation(property, colorAnimation);
         }
 
         public static async void AnimateScaleX(this UIElement element, double duration = 0.3, double delay = 0)

@@ -191,6 +191,9 @@
     <Compile Include="Forms\BotHelpDialog.xaml.cs">
       <DependentUpon>BotHelpDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ViewModles\ChatMessage.cs" />
     <Compile Include="Forms\Controls\SlideAddBot.xaml.cs">
       <DependentUpon>SlideAddBot.xaml</DependentUpon>
@@ -203,9 +206,6 @@
     </Compile>
     <Compile Include="Forms\Controls\SlideTestBot.xaml.cs">
       <DependentUpon>SlideTestBot.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SupportChat.xaml.cs">
-      <DependentUpon>SupportChat.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\ViewModles\MainViewModel.cs" />
     <Compile Include="Forms\ViewModles\MainViewModel.NotifyPropertyChanged.cs" />
@@ -347,7 +347,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Forms\SupportChat.xaml">
+    <Page Include="Forms\SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

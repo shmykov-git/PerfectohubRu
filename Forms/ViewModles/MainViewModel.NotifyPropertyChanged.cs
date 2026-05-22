@@ -1,6 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using PerfectohubRu.Extensions;
+using PerfectohubRu.Model;
+using Shared.Model.Enums;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Media;
 
 namespace PerfectohubRu.Forms.ViewModles
@@ -27,6 +31,22 @@ namespace PerfectohubRu.Forms.ViewModles
                 if (_atsToken != value)
                 {
                     _atsToken = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool HasAtsRefreshToken => data.GetAtsType() == AtsType.Tele2;
+
+        public string AtsRefreshToken
+        {
+            get => data.BotRefreshToken;
+            set
+            {
+                if (data.BotRefreshToken != value)
+                {
+                    data.BotRefreshToken = value;
+                    dataProvider.Save();
                     OnPropertyChanged();
                 }
             }
@@ -212,6 +232,63 @@ namespace PerfectohubRu.Forms.ViewModles
                 OnPropertyChanged();
             }
         }
+
+        public ClientState State
+        {
+            get => data.State;
+            set
+            {
+                if (data.State != value)
+                {
+                    data.State = value;
+                    dataProvider.Save();
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(RunServerIsEnabled));
+                    OnPropertyChanged(nameof(RunServerForground));
+                }
+            }
+        }
+
+        public bool IsServerRun
+        {
+            get => data.IsServerRun;
+            set
+            {
+                if (data.IsServerRun != value)
+                {
+                    data.IsServerRun = value;
+                    dataProvider.Save();
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(RunServerIsEnabled));
+                    OnPropertyChanged(nameof(RunServerForground));
+                }
+            }
+        }
+
+        public bool CanStopServer
+        {
+            get => data.CanStopServer;
+            set
+            {
+                if (data.CanStopServer != value)
+                {
+                    data.CanStopServer = value;
+                    dataProvider.Save();
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(StopServerVisibility));
+                    OnPropertyChanged(nameof(RunServerVisibility));
+                    OnPropertyChanged(nameof(RunServerForground));
+                }
+            }
+        }
+
+        public Visibility StopServerVisibility => CanStopServer ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility RunServerVisibility => CanStopServer ? Visibility.Collapsed : Visibility.Visible;
+        public bool RunServerIsEnabled => !IsServerRun && State >= ClientState.HasBot;
+        public Brush RunServerForground => RunServerIsEnabled
+            ? new SolidColorBrush(Color.FromRgb(0xCC, 0xCC, 0xCC))
+            : new SolidColorBrush(Color.FromRgb(0x66, 0x66, 0x66));
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

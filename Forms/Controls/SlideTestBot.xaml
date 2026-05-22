@@ -19,7 +19,7 @@
         <!-- Заголовок -->
         <TextBlock x:Name="TitleText"
                    Grid.Row="0"
-                   Text="ТЕСТИРУЕМ БОТА"
+                   Text="ТЕСТИРУЕМ ЧАТ-БОТА"
                    FontFamily="Segoe UI"
                    FontSize="28"
                    FontWeight="Light"
@@ -52,7 +52,7 @@
             </Border>
 
             <TextBlock Grid.Column="1"
-                       Text="В диалоге бота введите '/start'"
+                       Text="В диалоге чат-бота введите '/start'"
                        FontFamily="Segoe UI"
                        FontSize="18"
                        Foreground="#CCCCCC"
@@ -120,7 +120,7 @@
             </Border>
 
             <TextBlock Grid.Column="1"
-                       Text="Создайте группу контроля и добавьте в нее бота как администратора (для Max)"
+                       Text="Создайте группу контроля и добавьте в нее чат-бота как администратора (для Max)"
                        FontFamily="Segoe UI"
                        FontSize="18"
                        Foreground="#CCCCCC"
@@ -189,95 +189,6 @@
           SelectedItem="{Binding SelectedSchedule, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
           SelectionChanged="ScheduleComboBox_SelectionChanged"
           Cursor="Hand">
-                <ComboBox.Style>
-                    <Style TargetType="ComboBox">
-                        <Setter Property="Background" Value="#000000"/>
-                        <Setter Property="BorderBrush" Value="#333333"/>
-                        <Setter Property="BorderThickness" Value="1"/>
-                        <Setter Property="SnapsToDevicePixels" Value="True"/>
-                        <Setter Property="OverridesDefaultStyle" Value="True"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="ComboBox">
-                                    <Grid>
-                                        <ToggleButton x:Name="ToggleButton"
-                                          Background="#000000"
-                                          BorderBrush="#333333"
-                                          BorderThickness="1"
-                                          Focusable="False"
-                                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                          ClickMode="Press">
-                                            <ToggleButton.Style>
-                                                <Style TargetType="ToggleButton">
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate TargetType="ToggleButton">
-                                                                <Border x:Name="Border"
-                                                            Background="#000000"
-                                                            BorderBrush="#333333"
-                                                            BorderThickness="1"
-                                                            CornerRadius="3">
-                                                                    <Grid>
-                                                                        <Grid.ColumnDefinitions>
-                                                                            <ColumnDefinition Width="*"/>
-                                                                            <ColumnDefinition Width="30"/>
-                                                                        </Grid.ColumnDefinitions>
-                                                                        <TextBlock Grid.Column="0"
-                                                                       x:Name="SelectedText"
-                                                                       Text="{Binding SelectedItem.Name, RelativeSource={RelativeSource AncestorType=ComboBox}}"
-                                                                       Foreground="#FFFFFF"
-                                                                       VerticalAlignment="Center"
-                                                                       Margin="10,0,0,0"/>
-                                                                        <Path Grid.Column="1"
-                                                                  x:Name="Arrow"
-                                                                  Data="M0,0 L5,5 L10,0 Z"
-                                                                  Fill="#666666"
-                                                                  HorizontalAlignment="Center"
-                                                                  VerticalAlignment="Center"
-                                                                  Margin="0,2,0,0"/>
-                                                                    </Grid>
-                                                                </Border>
-                                                                <ControlTemplate.Triggers>
-                                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                                        <Setter TargetName="Border" Property="Background" Value="#1A1A1A"/>
-                                                                        <Setter TargetName="Arrow" Property="Fill" Value="#999999"/>
-                                                                    </Trigger>
-                                                                </ControlTemplate.Triggers>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </ToggleButton.Style>
-                                        </ToggleButton>
-
-                                        <!-- Исправленный Popup с черным фоном -->
-                                        <Popup x:Name="Popup"
-                                   IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
-                                   Placement="Bottom"
-                                   AllowsTransparency="True"
-                                   Focusable="False"
-                                   Width="200"
-                                   PopupAnimation="Fade">
-                                            <Border Background="#000000"
-                                        BorderBrush="#333333"
-                                        BorderThickness="1"
-                                        CornerRadius="3"
-                                        Margin="0,2,0,0">
-                                                <ScrollViewer x:Name="ScrollViewer"
-                                                  MaxHeight="200"
-                                                  Background="#000000"
-                                                  BorderThickness="0">
-                                                    <ItemsPresenter/>
-                                                </ScrollViewer>
-                                            </Border>
-                                        </Popup>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ComboBox.Style>
-
                 <!-- Исправленный шаблон для элементов - убран отдельный Background -->
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -336,39 +247,6 @@
                     HorizontalAlignment="Center"
                     Margin="0,0,0,0"
                     Click="DoneButton_Click">
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="Button">
-                                <Border x:Name="BorderElement"
-                                            Background="{TemplateBinding Background}"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                            CornerRadius="3">
-                                    <ContentPresenter HorizontalAlignment="Center"
-                                                          VerticalAlignment="Center"/>
-                                </Border>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter TargetName="BorderElement" Property="Background" Value="#333333"/>
-                                        <Setter TargetName="BorderElement" Property="BorderBrush" Value="#666666"/>
-                                    </Trigger>
-                                    <Trigger Property="IsPressed" Value="True">
-                                        <Setter Property="Background" Value="#0A0A0A"/>
-                                        <Setter Property="RenderTransform">
-                                            <Setter.Value>
-                                                <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
         </Button>
     </Grid>
 </UserControl>

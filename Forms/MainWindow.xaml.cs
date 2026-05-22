@@ -66,20 +66,27 @@ namespace MovieIntro
             }
         }
 
-        private void ChatButton_Click(object sender, RoutedEventArgs e)
+        public void OpenSettingsWindow()
         {
-            var supportChat = sp.GetRequiredService<SupportChat>();
-            supportChat.Owner = this;
+            var settings = sp.GetRequiredService<SettingsWindow>();
+            settings.Owner = this;
 
-            if (!supportChat.IsVisible)
+            if (!settings.IsVisible)
             {
-                supportChat.PositionToRightOfOwner();
-                supportChat.Show();
+                if (!settings.IsLoaded)
+                    settings.PositionToRightOfOwner();
+
+                settings.Show();
             }
             else
             {
-                supportChat.Activate();
+                settings.Activate();
             }
+        }
+
+        private void StatusButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenSettingsWindow();
         }
 
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)

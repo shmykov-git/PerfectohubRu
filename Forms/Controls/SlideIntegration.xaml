@@ -194,8 +194,8 @@
                     Background="Transparent">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
@@ -242,7 +242,7 @@
                             Content="ОТПРАВИТЬ"
                             Width="140" Height="35"
                             FontFamily="Segoe UI"
-                            FontSize="16"
+                            FontSize="14"
                             FontWeight="SemiBold"
                             Foreground="#FFFFFF"
                             Background="#1A1A1A"
@@ -298,7 +298,7 @@
                 Content="ГОТОВО"
                 Width="200" Height="45"
                 FontFamily="Segoe UI"
-                FontSize="14"
+                FontSize="16"
                 FontWeight="SemiBold"
                 Foreground="#FFFFFF"
                 Background="#1A1A1A"

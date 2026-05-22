@@ -33,7 +33,7 @@
                     Background="#0A0A0A" 
                     MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
                 <Grid>
-                    <TextBlock Text="ℹ️ ЧАТ БОТЫ"
+                    <TextBlock Text="ℹ️ ЧАТ-БОТЫ"
                                FontFamily="Segoe UI"
                                FontSize="14"
                                FontWeight="SemiBold"
@@ -87,7 +87,7 @@
                 <StackPanel Margin="20,15,20,20">
 
                     <!-- Пояснительный текст -->
-                    <TextBlock Text="Нам потребуется чат бот для вывода сообщения:"
+                    <TextBlock Text="Нам потребуется чат-бот для вывода сообщения:"
                                FontFamily="Segoe UI"
                                FontSize="13"
                                Foreground="#DDDDDD"
@@ -107,7 +107,7 @@
                                    FontSize="13"
                                    Foreground="#CCCCCC"
                                    Margin="0,3,0,3"/>
-                        <TextBlock Text="✓ Добавляем чат бота в общую группу для уведомлений"
+                        <TextBlock Text="✓ Добавляем чат-бота в общую группу для уведомлений"
                                    FontFamily="Segoe UI"
                                    FontSize="13"
                                    Foreground="#CCCCCC"
@@ -166,7 +166,7 @@
                                            Foreground="#FFFFFF"
                                            HorizontalAlignment="Center"
                                            Margin="0,0,0,5"/>
-                                <TextBlock Text="Чат бот"
+                                <TextBlock Text="Чат-бот"
                                            FontFamily="Segoe UI"
                                            FontSize="12"
                                            Foreground="#888888"
@@ -202,7 +202,7 @@
                                            Foreground="#FFFFFF"
                                            HorizontalAlignment="Center"
                                            Margin="0,0,0,5"/>
-                                <TextBlock Text="Чат бот"
+                                <TextBlock Text="Чат-бот"
                                            FontFamily="Segoe UI"
                                            FontSize="12"
                                            Foreground="#888888"
@@ -211,7 +211,7 @@
                         </Border>
                     </Grid>
 
-                    <TextBlock Text="Следуйте инструкции по созданию бота. Полученный токен скопируйте в поле ввода"
+                    <TextBlock Text="Следуйте инструкции по созданию чат-бота. Полученный токен скопируйте в поле ввода"
                                FontFamily="Segoe UI"
                                FontSize="11"
                                Foreground="#999999"

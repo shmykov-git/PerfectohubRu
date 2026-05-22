@@ -39,9 +39,10 @@ namespace MovieIntro.Controls
             Model.RefreshIntegrationMessage();
         }
 
-        private void DoneButton_Click(object sender, RoutedEventArgs e)
+        private async void DoneButton_Click(object sender, RoutedEventArgs e)
         {
-
+            await Model.ApproveIntegration();
+            MainWindow.OpenSettingsWindow();
         }
     }
 }

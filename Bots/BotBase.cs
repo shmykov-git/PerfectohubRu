@@ -73,7 +73,7 @@ namespace Calls.Api.Bots
                 if (chats.TryGetValue(chatId, out var chat))
                     await action(this, chat, actionName, cancellationToken);
                 else
-                    await SendMessage(chatId, "⚠️ Выполните подключение бота к этому чату командой '/start'");
+                    await SendMessage(chatId, "⚠️ Выполните подключение чат-бота к этому чату командой '/start'");
             }
         }
 
@@ -102,7 +102,7 @@ namespace Calls.Api.Bots
 
             if (args.CommandArgs.Length <= 1)
             {
-                await SendMessage(args.ChatId, $"👋 Ваш АТС бот", Keyboard);
+                await SendMessage(args.ChatId, $"👋 Ваш АТС чат-бот", Keyboard);
             }
         }
 

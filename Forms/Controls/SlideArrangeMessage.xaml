@@ -183,7 +183,7 @@
                                             <TextBlock Text="• Настроить сообщение"
                                                        Foreground="#DDDDDD"
                                                        FontSize="14"/>
-                                            <TextBlock Text="• Вывести в боте"
+                                            <TextBlock Text="• Вывести в чат-боте"
                                                        Foreground="#DDDDDD"
                                                        FontSize="14"/>
                                             <TextBlock Text="• Вывести в 1С"

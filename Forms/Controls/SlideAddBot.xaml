@@ -16,7 +16,7 @@
                         VerticalAlignment="Center" 
                         Width="500">
                 <TextBlock x:Name="WelcomeText"
-                           Text="Подключаем бота"
+                           Text="Подключаем чат-бота"
                            FontFamily="Segoe UI"
                            FontSize="28"
                            FontWeight="Light"

@@ -133,14 +133,12 @@ namespace PerfectohubRu.Forms.ViewModles
 
         public async Task ApproveMessage()
         {
-            data.State = ClientState.HasMessage;
-            dataProvider.Save();
+            State = ClientState.HasMessage;
         }
 
         public async Task ApproveBot()
         {
-            data.State = ClientState.HasTestedBot;
-            dataProvider.Save();
+            State = ClientState.HasTestedBot;
         }
 
         public async Task<OperationResult> ValidateAndSaveAtsToken()
@@ -174,8 +172,9 @@ namespace PerfectohubRu.Forms.ViewModles
                 if (actives.Length == 0)
                     return new OperationResult { Error = $"Требуется настроить список абонентов в АТС" };
 
-                data.State = ClientState.HasAts;
                 dataProvider.Save();
+
+                State = ClientState.HasAts;
 
                 return OperationResult.Successfull();
             }
@@ -191,14 +190,13 @@ namespace PerfectohubRu.Forms.ViewModles
             var botType = GetBotTokenType(token);
             
             if (botType == BotType.Unknown)
-                return new OperationResult { Error = "Не удалось определить тип токена чат бота" };
+                return new OperationResult { Error = "Не удалось определить тип токена чат-бота" };
 
             try
             {
                 data.BotToken = token;
                 data.BotType = botType;
-                data.State = ClientState.HasBot;
-                dataProvider.Save();
+                State = ClientState.HasBot;
 
                 await botManager.Restart();
 
@@ -206,7 +204,7 @@ namespace PerfectohubRu.Forms.ViewModles
             }
             catch (HttpClientException)
             {
-                return new OperationResult { Error = $"Не удается запустить бота" };
+                return new OperationResult { Error = $"Не удается запустить чат-бота" };
             }
         }
 
@@ -214,6 +212,11 @@ namespace PerfectohubRu.Forms.ViewModles
         {
             data.ScheduleIntervalMinutes = item.IntervalMinutes;
             dataProvider.Save();
+        }
+
+        public async Task ApproveIntegration()
+        {
+            State = ClientState.HasIntegration;
         }
     }
 }

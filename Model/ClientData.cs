@@ -3,6 +3,7 @@ using Calls.Model.Ats;
 using Newtonsoft.Json;
 using Shared.Model.Enums;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace PerfectohubRu.Model
 {
@@ -19,8 +20,9 @@ namespace PerfectohubRu.Model
         public ActivePhone[] Actives { get; set; } = new ActivePhone[0];
         public string[] Knowns { get; set; } = new string[0];
         public string[] Commons { get; set; } = new string[0];
-        
+
         public string BotToken { get; set; }
+        public string BotRefreshToken { get; set; }
         public string BotId { get; set; }
         public BotType BotType { get; set; }
         public Dictionary<string, Chat> Chats { get; set; } = new Dictionary<string, Chat>();
@@ -28,6 +30,10 @@ namespace PerfectohubRu.Model
         public int ScheduleIntervalMinutes { get; set; } = 30;
 
         public IntegrationData IntegrationData { get; set; } = new IntegrationData();
+
+        public bool IsServerRun { get; set; }
+
+        public bool CanStopServer { get; set; }
 
         [JsonIgnore] public HashSet<string> AllKnowns { get; set; }
         [JsonIgnore] public bool HasCriticalError => CriticalError != null;

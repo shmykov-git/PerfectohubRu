@@ -86,7 +86,7 @@ namespace MovieIntro.Controls
         {
             if (string.IsNullOrWhiteSpace(TokenTextBox.Text))
             {
-                await ShowError("Нужен токен чат бота");
+                await ShowError("Нужен токен чат-бота");
                 return;
             }
 
