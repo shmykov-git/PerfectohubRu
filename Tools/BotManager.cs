@@ -103,10 +103,7 @@ namespace Calls.Bot.Services
                             var htmlMessage = await callsManager.GetUniqueCallsMessage(false, true, true, cancellationTokenSource.Token);
                             await bot.SendBroadCastMessage(htmlMessage[0]);
 
-                            _ = Application.Current.Dispatcher.BeginInvoke((Action)(async () =>
-                            {
-                                await RefreshIntegrationMessage(htmlMessage);
-                            }));
+                            DispatcherHelper.Dispatch(() => RefreshIntegrationMessage(htmlMessage));
                         }
                     }
                 }

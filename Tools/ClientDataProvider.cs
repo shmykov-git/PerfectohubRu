@@ -32,7 +32,7 @@ namespace PerfectohubRu.Tools
 
         public void Save()
         {
-            _ = Application.Current.Dispatcher.BeginInvoke((Action)(() =>
+            DispatcherHelper.Dispatch(() =>
             {
                 try
                 {
@@ -42,7 +42,7 @@ namespace PerfectohubRu.Tools
                 {
                     Data.CriticalError = ex.Message;
                 }
-            }));
+            });
         }
 
         public ClientData Data => _clientState ?? ( _clientState = GetClientState());

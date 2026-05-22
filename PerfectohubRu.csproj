@@ -264,6 +264,7 @@
     <Compile Include="Tools\BotManager.Menu.cs" />
     <Compile Include="Tools\CallsManager.cs" />
     <Compile Include="Tools\ClientDataProvider.cs" />
+    <Compile Include="Tools\DispatcherHelper.cs" />
     <Compile Include="Tools\Filters.cs" />
     <Compile Include="Tools\UrlHelper.cs" />
     <Compile Include="Tools\Values.cs" />

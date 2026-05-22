@@ -69,11 +69,11 @@ namespace Calls.Api.Bots
                 {
                     var messages = await httpClient.GetOutMessages(data.BotId);
 
-                    _ = Application.Current.Dispatcher.BeginInvoke((Action)(async () =>
+                    DispatcherHelper.Dispatch(async () =>
                     {
                         foreach (var message in messages)
                             await BotOnMessage(message);
-                    }));
+                    });
                 }
                 catch (Exception ex)
                 { 
