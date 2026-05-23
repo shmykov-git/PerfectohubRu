@@ -218,7 +218,7 @@
                                 BorderBrush="#333333"
                                 BorderThickness="1"
                                 Background="#0A0A0A"
-                                   Height="120"
+                                MinHeight="100"
                                 CornerRadius="3">
                             <TextBox x:Name="MessageTextBox"
                                      Text="{Binding IntegrationMessage, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"

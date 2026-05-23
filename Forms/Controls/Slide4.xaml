@@ -53,6 +53,22 @@
                     <ScaleTransform ScaleX="0.9" ScaleY="0.9"/>
                 </TextBlock.RenderTransform>
             </TextBlock>
+
+            <!-- Вторая строка -->
+            <TextBlock x:Name="SubText2"
+                       Text="...и не только"
+                       FontFamily="Segoe UI"
+                       FontStyle="Italic"
+                       FontSize="16"
+                       FontWeight="SemiBold"
+                       Foreground="#FFFFFF"
+                       HorizontalAlignment="Center"
+                       Margin="300,5,0,0"
+                       Opacity="0">
+                <TextBlock.RenderTransform>
+                    <ScaleTransform ScaleX="0.9" ScaleY="0.9"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
         </StackPanel>
     </Grid>
 </UserControl>

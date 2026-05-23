@@ -22,7 +22,15 @@ namespace MovieIntro
 {
     public partial class MainWindow : Window
     {
-        private int currentSlideIndex = 6; // 4-atsToken, 5-arrangeMessageб 6-botToken
+        private const int START = 0;
+        private const int CAPTION = 3;
+        private const int ATSTOKEN = 4;
+        private const int ARRANGEMESSAGE = 5;
+        private const int BOTTOKEN = 6;
+        private const int BOTMESSAGE = 7;
+        private const int INTEGRATION = 8;
+
+        private int currentSlideIndex = ATSTOKEN;
         private DispatcherTimer slideTimer;
         private readonly ISlide[] slides;
         private readonly IServiceProvider sp;
@@ -38,7 +46,24 @@ namespace MovieIntro
             // Клик по окну для пропуска вступления
             this.MouseLeftButtonDown += (s, e) => SkipIntro();
             this.KeyUp += (s, e) => SkipIntro();
-            this.Loaded += (s, e) => StartIntroSequence();
+            this.Loaded += (s, e) => 
+            {
+                StartIntroSequence();
+                model.PropertyChanged += Model_PropertyChanged;
+            };
+        }
+
+        private async void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(model.AtsToken))
+            {
+                await SwitchToSlide(ATSTOKEN);
+            }
+
+            if (e.PropertyName == nameof(model.BotToken))
+            {
+                await SwitchToSlide(BOTTOKEN);
+            }
         }
 
         public MainWindow(IServiceProvider sp, MainViewModel model) : this()
@@ -80,7 +105,7 @@ namespace MovieIntro
             }
             else
             {
-                settings.Activate();
+                settings.Hide();
             }
         }
 
@@ -152,6 +177,9 @@ namespace MovieIntro
 
         private async Task SwitchToSlide(int index)
         {
+            if (currentSlideIndex == index)
+                return;
+
             // Анимируем выход текущего слайда
             await ExitCurrentSlide();
 

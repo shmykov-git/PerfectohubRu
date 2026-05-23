@@ -1,4 +1,5 @@
 ﻿using PerfectohubRu.Controls;
+using PerfectohubRu.Extensions;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,17 +19,8 @@ namespace MovieIntro.Controls
         public async Task PlayEnterAnimation()
         {
             // Анимация для картинки
-            var imgFadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(4));
-            var imgScaleX = new DoubleAnimation(0.5, 2, TimeSpan.FromSeconds(4));
-            var imgScaleY = new DoubleAnimation(0.5, 2, TimeSpan.FromSeconds(4));
-
-            LogoImage.BeginAnimation(UIElement.OpacityProperty, imgFadeIn);
-
-            if (LogoImage.RenderTransform is ScaleTransform imgScale)
-            {
-                imgScale.BeginAnimation(ScaleTransform.ScaleXProperty, imgScaleX);
-                imgScale.BeginAnimation(ScaleTransform.ScaleYProperty, imgScaleY);
-            }
+            LogoImage.AnimateFadeIn(4);
+            LogoImage.AnimateScale((0.5, 2), 4);
 
             await Task.Delay(200);
 
