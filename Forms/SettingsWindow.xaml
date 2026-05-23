@@ -560,147 +560,239 @@
 
                 <!-- ПРАВАЯ ЧАСТЬ: Статусы и кнопка -->
                 <Border Grid.Column="2" Background="Transparent">
-                    <StackPanel>
-                        <!-- Список статусов -->
-                        <TextBlock Text="📊 СТАТУСЫ"
-                                   FontFamily="Segoe UI"
-                                   FontSize="16"
-                                   FontWeight="SemiBold"
-                                   Foreground="#888888"
-                                   Margin="0,0,0,10"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <StackPanel Grid.Row="0">
+                            <!-- Список статусов -->
+                            <TextBlock Text="📊 СТАТУСЫ"
+                                       FontFamily="Segoe UI"
+                                       FontSize="16"
+                                       FontWeight="SemiBold"
+                                       Foreground="#888888"
+                                       Margin="0,0,0,10"/>
 
-                        <Grid Margin="0,0,0,20">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
+                            <Grid Margin="0,0,0,20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
 
-                            <!-- Подключена АТС -->
-                            <Grid Grid.Row="0" Margin="0,0,0,10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                                <!-- Подключена АТС -->
+                                <Grid Grid.Row="0" Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <Ellipse x:Name="AtsStatusIndicator" 
-                                         Grid.Column="0"
-                                         Width="10" Height="10" 
-                                         Fill="#999999" 
-                                         Margin="0,0,10,0"
-                                         VerticalAlignment="Center"/>
+                                    <Ellipse x:Name="AtsStatusIndicator" 
+                                             Grid.Column="0"
+                                             Width="10" Height="10" 
+                                             Fill="#999999" 
+                                             Margin="0,0,10,0"
+                                             VerticalAlignment="Center"/>
 
-                                <TextBlock Grid.Column="1"
-                                           Text="Подключена АТС"
+                                    <TextBlock Grid.Column="1"
+                                               Text="Подключена АТС"
+                                               FontFamily="Segoe UI"
+                                               FontSize="16"
+                                               Foreground="#CCCCCC"
+                                               VerticalAlignment="Center"/>
+                                </Grid>
+
+                                <!-- Настроены сообщения -->
+                                <Grid Grid.Row="1" Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Ellipse x:Name="MessagesStatusIndicator" 
+                                             Grid.Column="0"
+                                             Width="10" Height="10" 
+                                             Fill="#999999" 
+                                             Margin="0,0,10,0"
+                                             VerticalAlignment="Center"/>
+
+                                    <TextBlock Grid.Column="1"
+                                               Text="Настроены сообщения"
+                                               FontFamily="Segoe UI"
+                                               FontSize="16"
+                                               Foreground="#CCCCCC"
+                                               VerticalAlignment="Center"/>
+                                </Grid>
+
+                                <!-- Подключен Чат-бот -->
+                                <Grid Grid.Row="2" Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Ellipse x:Name="BotStatusIndicator" 
+                                             Grid.Column="0"
+                                             Width="10" Height="10" 
+                                             Fill="#999999" 
+                                             Margin="0,0,10,0"
+                                             VerticalAlignment="Center"/>
+
+                                    <TextBlock Grid.Column="1"
+                                               Text="Подключен Чат-бот"
+                                               FontFamily="Segoe UI"
+                                               FontSize="16"
+                                               Foreground="#CCCCCC"
+                                               VerticalAlignment="Center"/>
+                                </Grid>
+
+                                <!-- Подключена интеграция -->
+                                <Grid Grid.Row="3" Margin="0,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Ellipse x:Name="IntegrationStatusIndicator" 
+                                             Grid.Column="0"
+                                             Width="10" Height="10" 
+                                             Fill="#999999" 
+                                             Margin="0,0,10,0"
+                                             VerticalAlignment="Center"/>
+
+                                    <TextBlock Grid.Column="1"
+                                               Text="Подключена интеграция"
+                                               FontFamily="Segoe UI"
+                                               FontSize="16"
+                                               Foreground="#CCCCCC"
+                                               VerticalAlignment="Center"/>
+                                </Grid>
+                            </Grid>
+                        
+                            <!-- Разделитель -->
+                            <Rectangle Height="1" Fill="#333333" Margin="0,15,0,15"/>
+                        
+                            <TextBlock Text="🖧 СЕРВЕР"
+                                       FontFamily="Segoe UI"
+                                       FontSize="16"
+                                       FontWeight="SemiBold"
+                                       Foreground="#888888"
+                                       Margin="0,0,0,10"/>
+
+                            <!-- ClientId -->
+                            <Grid Margin="0,0,0,12">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0"
+                                           Text="Идентификатор клиента"
                                            FontFamily="Segoe UI"
                                            FontSize="16"
                                            Foreground="#CCCCCC"
-                                           VerticalAlignment="Center"/>
+                                           Margin="0,0,0,5"/>
+
+                                <Border Grid.Row="1"
+                                        BorderBrush="#333333"
+                                        BorderThickness="1"
+                                        Background="#0A0A0A"
+                                        Height="35"
+                                        CornerRadius="3">
+                                    <TextBox x:Name="ClientId"
+                                             Text="{Binding ClientId, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                 FontFamily="Segoe UI"
+                                                 FontSize="14"
+                                                 Foreground="#FFFFFF"
+                                                 Background="Transparent"
+                                                 BorderThickness="0"
+                                                 Padding="10,0,10,0"
+                                                 VerticalContentAlignment="Center"
+                                                 CaretBrush="#FFFFFF"/>
+                                </Border>
                             </Grid>
 
-                            <!-- Настроены сообщения -->
-                            <Grid Grid.Row="1" Margin="0,0,0,10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                            <!-- ClientPassword -->
+                            <Grid Margin="0,0,0,12">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
 
-                                <Ellipse x:Name="MessagesStatusIndicator" 
-                                         Grid.Column="0"
-                                         Width="10" Height="10" 
-                                         Fill="#999999" 
-                                         Margin="0,0,10,0"
-                                         VerticalAlignment="Center"/>
-
-                                <TextBlock Grid.Column="1"
-                                           Text="Настроены сообщения"
+                                <TextBlock Grid.Row="0"
+                                           Text="Пароль"
                                            FontFamily="Segoe UI"
                                            FontSize="16"
                                            Foreground="#CCCCCC"
-                                           VerticalAlignment="Center"/>
+                                           Margin="0,0,0,5"/>
+
+                                <Border Grid.Row="1"
+                                        BorderBrush="#333333"
+                                        BorderThickness="1"
+                                        Background="#0A0A0A"
+                                        Height="35"
+                                        CornerRadius="3">
+                                    <TextBox x:Name="ClientPassword"
+                                             Text="{Binding ClientPassword, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                 FontFamily="Segoe UI"
+                                                 FontSize="14"
+                                                 Foreground="#FFFFFF"
+                                                 Background="Transparent"
+                                                 BorderThickness="0"
+                                                 Padding="10,0,10,0"
+                                                 VerticalContentAlignment="Center"
+                                                 CaretBrush="#FFFFFF"/>
+                                </Border>
                             </Grid>
 
-                            <!-- Подключен Чат-бот -->
-                            <Grid Grid.Row="2" Margin="0,0,0,10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                            <!-- Кнопка Запустить на сервере -->
+                            <Button x:Name="RunServerButton"
+                                    IsEnabled="{Binding RunServerIsEnabled}"
+                                    Visibility="{Binding RunServerVisibility}"
+                                    Content="ЗАПУСТИТЬ НА СЕРВЕРЕ"
+                                    Height="45"
+                                    FontFamily="Segoe UI"
+                                    FontSize="18"
+                                    FontWeight="SemiBold"
+                                    Foreground="{Binding RunServerForground}"
+                                    Background="#1A1A1A"
+                                    BorderBrush="#333333"
+                                    BorderThickness="1"
+                                    Cursor="Hand"
+                                    Margin="0,10,0,0"
+                                    Click="RunServerButton_Click">
+                            </Button>
 
-                                <Ellipse x:Name="BotStatusIndicator" 
-                                         Grid.Column="0"
-                                         Width="10" Height="10" 
-                                         Fill="#999999" 
-                                         Margin="0,0,10,0"
-                                         VerticalAlignment="Center"/>
+                            <!-- Кнопка Запустить на сервере -->
+                            <Button x:Name="StopServerButton"
+                                    Visibility="{Binding StopServerVisibility}"
+                                    Content="🖧 ОСТАНОВИТЬ НА СЕРВЕРЕ"
+                                    Height="45"
+                                    FontFamily="Segoe UI"
+                                    FontSize="12"
+                                    FontWeight="SemiBold"
+                                    Foreground="#FFFFFF"
+                                    Background="#1A1A1A"
+                                    BorderBrush="#333333"
+                                    BorderThickness="1"
+                                    Cursor="Hand"
+                                    Margin="0,10,0,0"
+                                    Click="RunServerButton_Click">
+                            </Button>
+                        </StackPanel>
 
-                                <TextBlock Grid.Column="1"
-                                           Text="Подключен Чат-бот"
+                        <TextBlock  Grid.Row="1" x:Name="ServerError" Text="Серверная ошибка"
+                                    VerticalAlignment="Bottom"
+                                    HorizontalAlignment="Center"
+                                        Opacity="1"
                                            FontFamily="Segoe UI"
                                            FontSize="16"
-                                           Foreground="#CCCCCC"
-                                           VerticalAlignment="Center"/>
-                            </Grid>
-
-                            <!-- Подключена интеграция -->
-                            <Grid Grid.Row="3" Margin="0,0,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-
-                                <Ellipse x:Name="IntegrationStatusIndicator" 
-                                         Grid.Column="0"
-                                         Width="10" Height="10" 
-                                         Fill="#999999" 
-                                         Margin="0,0,10,0"
-                                         VerticalAlignment="Center"/>
-
-                                <TextBlock Grid.Column="1"
-                                           Text="Подключена интеграция"
-                                           FontFamily="Segoe UI"
-                                           FontSize="16"
-                                           Foreground="#CCCCCC"
-                                           VerticalAlignment="Center"/>
-                            </Grid>
-                        </Grid>
-
-                        <!-- Кнопка Запустить на сервере -->
-                        <Button x:Name="RunServerButton"
-                                IsEnabled="{Binding RunServerIsEnabled}"
-                                Visibility="{Binding RunServerVisibility}"
-                                Content="🖧 ЗАПУСТИТЬ НА СЕРВЕРЕ"
-                                Height="45"
-                                FontFamily="Segoe UI"
-                                FontSize="18"
-                                FontWeight="SemiBold"
-                                Foreground="{Binding RunServerForground}"
-                                Background="#1A1A1A"
-                                BorderBrush="#333333"
-                                BorderThickness="1"
-                                Cursor="Hand"
-                                Margin="0,10,0,0"
-                                Click="RunServerButton_Click">
-                        </Button>
-
-                        <!-- Кнопка Запустить на сервере -->
-                        <Button x:Name="StopServerButton"
-                                Visibility="{Binding StopServerVisibility}"
-                                Content="🖧 ОСТАНОВИТЬ НА СЕРВЕРЕ"
-                                Height="45"
-                                FontFamily="Segoe UI"
-                                FontSize="12"
-                                FontWeight="SemiBold"
-                                Foreground="#FFFFFF"
-                                Background="#1A1A1A"
-                                BorderBrush="#333333"
-                                BorderThickness="1"
-                                Cursor="Hand"
-                                Margin="0,10,0,0"
-                                Click="RunServerButton_Click">
-                        </Button>
-                    </StackPanel>
+                                           Foreground="Red"
+                                           Margin="0,0,0,5"/>
+                    </Grid>
                 </Border>
             </Grid>
         </Grid>

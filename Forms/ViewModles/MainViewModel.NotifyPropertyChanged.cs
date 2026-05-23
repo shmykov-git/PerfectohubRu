@@ -233,6 +233,15 @@ namespace PerfectohubRu.Forms.ViewModles
             }
         }
 
+        private void NotifySeverGroup()
+        {
+            OnPropertyChanged(nameof(StopServerVisibility));
+            OnPropertyChanged(nameof(RunServerVisibility));
+            OnPropertyChanged(nameof(RunServerForground));
+            OnPropertyChanged(nameof(RunServerIsEnabled));
+            OnPropertyChanged(nameof(IsServerRun));            
+        }
+
         public ClientState State
         {
             get => data.State;
@@ -243,8 +252,7 @@ namespace PerfectohubRu.Forms.ViewModles
                     data.State = value;
                     dataProvider.Save();
                     OnPropertyChanged();
-                    OnPropertyChanged(nameof(RunServerIsEnabled));
-                    OnPropertyChanged(nameof(RunServerForground));
+                    NotifySeverGroup();
                 }
             }
         }
@@ -259,8 +267,7 @@ namespace PerfectohubRu.Forms.ViewModles
                     data.IsServerRun = value;
                     dataProvider.Save();
                     OnPropertyChanged();
-                    OnPropertyChanged(nameof(RunServerIsEnabled));
-                    OnPropertyChanged(nameof(RunServerForground));
+                    NotifySeverGroup();
                 }
             }
         }
@@ -275,20 +282,47 @@ namespace PerfectohubRu.Forms.ViewModles
                     data.CanStopServer = value;
                     dataProvider.Save();
                     OnPropertyChanged();
-                    OnPropertyChanged(nameof(StopServerVisibility));
-                    OnPropertyChanged(nameof(RunServerVisibility));
-                    OnPropertyChanged(nameof(RunServerForground));
+                    NotifySeverGroup();
                 }
             }
         }
 
         public Visibility StopServerVisibility => CanStopServer ? Visibility.Visible : Visibility.Collapsed;
         public Visibility RunServerVisibility => CanStopServer ? Visibility.Collapsed : Visibility.Visible;
-        public bool RunServerIsEnabled => !IsServerRun && State >= ClientState.HasBot;
+        public bool RunServerIsEnabled => !IsServerRun && State >= ClientState.HasBot && IsValidClientId();
+
         public Brush RunServerForground => RunServerIsEnabled
             ? new SolidColorBrush(Color.FromRgb(0xCC, 0xCC, 0xCC))
             : new SolidColorBrush(Color.FromRgb(0x66, 0x66, 0x66));
 
+        public string ClientId
+        {
+            get => data.ClientId;
+            set
+            {
+                if (data.ClientId != value)
+                {
+                    data.ClientId = value;
+                    dataProvider.Save();
+                    OnPropertyChanged();
+                    NotifySeverGroup();
+                }
+            }
+        }
+
+        public string ClientPassword
+        {
+            get => data.ClientPassword;
+            set
+            {
+                if (data.ClientPassword != value)
+                {
+                    data.ClientPassword = value;
+                    dataProvider.Save();
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -67,13 +67,16 @@ namespace Calls.Api.Bots
             {
                 try
                 {
-                    var messages = await httpClient.GetOutMessages(data.BotId);
-
-                    DispatcherHelper.Dispatch(async () =>
+                    if (data.IsLocalRun)
                     {
-                        foreach (var message in messages)
-                            await BotOnMessage(message);
-                    });
+                        var messages = await httpClient.GetOutMessages(data.BotId);
+
+                        DispatcherHelper.Dispatch(async () =>
+                        {
+                            foreach (var message in messages)
+                                await BotOnMessage(message);
+                        });
+                    }
                 }
                 catch (Exception ex)
                 { 

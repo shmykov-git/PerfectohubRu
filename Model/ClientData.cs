@@ -34,7 +34,11 @@ namespace PerfectohubRu.Model
 
         public bool CanStopServer { get; set; }
 
+        public string ClientId { get; set; }
+        public string ClientPassword { get; set; }
+
         [JsonIgnore] public HashSet<string> AllKnowns { get; set; }
         [JsonIgnore] public bool HasCriticalError => CriticalError != null;
+        [JsonIgnore] public bool IsLocalRun => !IsServerRun;
     }
 }

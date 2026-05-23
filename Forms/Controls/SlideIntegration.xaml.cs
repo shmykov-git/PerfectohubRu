@@ -17,6 +17,20 @@ namespace MovieIntro.Controls
         public SlideIntegration()
         {
             InitializeComponent();
+            this.Loaded += SlideArrangeMessage_Loaded;
+        }
+
+        private void SlideArrangeMessage_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Model.PropertyChanged += Model_PropertyChanged;
+        }
+
+        private void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Model.IsHtml) || e.PropertyName == nameof(Model.IsText))
+            {
+                Model.RefreshIntegrationMessage();
+            }
         }
 
         public async Task PlayEnterAnimation()

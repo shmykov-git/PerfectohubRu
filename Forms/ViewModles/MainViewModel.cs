@@ -1,4 +1,5 @@
 ﻿using Calls.Bot.Services;
+using Calls.HttpClients;
 using Calls.HttpClients.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 using Perfecto.Deploy.Extensions;
@@ -6,7 +7,9 @@ using PerfectohubRu.Extensions;
 using PerfectohubRu.Model;
 using PerfectohubRu.Tools;
 using Shared.Exceptions;
+using Shared.Extensions;
 using Shared.HttpClients.Base;
+using Shared.Libraries;
 using Shared.Model.Enums;
 using System;
 using System.Collections.Generic;
@@ -23,6 +26,7 @@ namespace PerfectohubRu.Forms.ViewModles
         private readonly CallsManager callsManager;
         private readonly ClientDataProvider dataProvider;
         private readonly RefreshTokenManager refreshTokenManager;
+        private readonly IPerfectoHttpClient perfectoHttpClient;
         private readonly IServiceProvider sp;
         private ClientData data;
 
@@ -31,12 +35,14 @@ namespace PerfectohubRu.Forms.ViewModles
             CallsManager callsManager,
             ClientDataProvider clientDataProvider,
             RefreshTokenManager refreshTokenManager,
+            IPerfectoHttpClient perfectoHttpClient,
             IServiceProvider sp)
         {
             this.botManager = botManager;
             this.callsManager = callsManager;
             this.dataProvider = clientDataProvider;
             this.refreshTokenManager = refreshTokenManager;
+            this.perfectoHttpClient = perfectoHttpClient;
             this.sp = sp;
             data = clientDataProvider.Data;
             AtsToken = data.GetAtsToken();
@@ -125,19 +131,29 @@ namespace PerfectohubRu.Forms.ViewModles
 
         private Task<string[]> GetCallsMessage() => callsManager.GetUniqueCallsMessage(false, false, false, default);
 
-        public void SaveKnowns()
+        public void ApproveKnowns()
         {
-            var phones = Knowns.Replace("\r", "").Split('\n').Select(v => v.Trim()).ToArray();
+            var phones = Knowns.Replace("\r", "").Split('\n')
+                .Where(v => !string.IsNullOrWhiteSpace(v))
+                .Select(v => v.ToCorrectSystemPhone())
+                .ToArray();
+
             Data.Knowns = phones;
             dataProvider.Save();
+            Knowns = phones.SJoin("\r\n");
             RefreshCallsMessage();
         }
 
-        public void SaveCommons()
+        public void ApproveCommons()
         {
-            var phones = Commons.Replace("\r", "").Split('\n').Select(v => v.Trim()).ToArray();
+            var phones = Commons.Replace("\r", "").Split('\n')
+                .Where(v => !string.IsNullOrWhiteSpace(v))
+                .Select(v => v.ToCorrectSystemPhone())
+                .ToArray();
+
             Data.Commons = phones;
             dataProvider.Save();
+            Commons = phones.SJoin("\r\n");
             RefreshCallsMessage();
         }
 
@@ -228,5 +244,10 @@ namespace PerfectohubRu.Forms.ViewModles
         {
             State = ClientState.HasIntegration;
         }
+
+        public bool IsValidClientId() => ClientId != null && Values.Regexes.ClientId.IsMatch(ClientId);
+        public Task<bool> IsAvailableClientId() => perfectoHttpClient.IsClientIdAvailable();
+
+        public bool IsValidClientPassword() => ClientPassword.Length >= 4;
     }
 }

@@ -209,8 +209,11 @@
     </Compile>
     <Compile Include="Forms\ViewModles\MainViewModel.cs" />
     <Compile Include="Forms\ViewModles\MainViewModel.NotifyPropertyChanged.cs" />
+    <Compile Include="HttpClients\Abstractions\IPerfectoHttpClient.cs" />
     <Compile Include="HttpClients\Abstractions\IIntegrationHttpClient.cs" />
+    <Compile Include="HttpClients\PerfectoHttpClient.cs" />
     <Compile Include="HttpClients\IntegrationHttpClient.cs" />
+    <Compile Include="HttpClients\Options\PerfectoApiOptions.cs" />
     <Compile Include="HttpClients\Options\IntegrationApiOptions.cs" />
     <Compile Include="HttpClients\Tele2AtsTestHttpClient.cs" />
     <Compile Include="Model\IntegrationData.cs" />
@@ -259,6 +262,7 @@
     <Compile Include="Model\Options\AuthOptions.cs" />
     <Compile Include="Model\Options\ClientOptions.cs" />
     <Compile Include="Model\Options\CronOptions.cs" />
+    <Compile Include="Model\ServerOperatonResult.cs" />
     <Compile Include="Model\UniqueCall.cs" />
     <Compile Include="Tools\BotManager.Calls.cs" />
     <Compile Include="Tools\BotManager.cs" />

@@ -51,6 +51,9 @@ namespace PerfectohubRu.Tools
                     if ((int)DateTime.Now.TimeOfDay.TotalHours % clientOptions.RefreshTokenPollingHoursInterval != 0)
                         continue;
 
+                    if (data.IsServerRun)
+                        continue;
+
                     if (data.GetAtsType() == AtsType.Tele2)
                     {
                         if (IsValidTele2RefreshToken(data.Tele2AtsRefreshToken))

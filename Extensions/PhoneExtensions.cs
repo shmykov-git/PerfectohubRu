@@ -14,20 +14,38 @@ namespace Shared.Extensions
                 return phone;
 
             if (phone.Length == 11)
+            {
+                if (phone.StartsWith("8"))
+                    return $"+7{phone.Substring(1)}";
+
                 return $"+{phone}";
+            }
 
             if (phone.Length == 10)
                 return $"+7{phone}";
 
-            var digits = Values.Regexes.OnlyDigits.Replace(phone, "");
+            return phone.ToCorrectSystemPhone();
+        }
 
-            if (digits.Length == 11)
-                return $"+{digits}";
+        public static string ToCorrectSystemPhone(this string phone)
+        {
+            if (string.IsNullOrWhiteSpace(phone))
+                return null;
 
-            if (digits.Length == 10)
-                return $"+7{digits}";
+            var cleanedPhone = Values.Regexes.OnlyDigits.Replace(phone, "");
 
-            return digits;
+            if (cleanedPhone.Length == 11)
+            {
+                if (cleanedPhone.StartsWith("8"))
+                    return $"+7{cleanedPhone.Substring(1)}";
+
+                return $"+{cleanedPhone}";
+            }
+
+            if (cleanedPhone.Length == 10)
+                return $"+7{cleanedPhone}";
+
+            return cleanedPhone;
         }
     }
 }

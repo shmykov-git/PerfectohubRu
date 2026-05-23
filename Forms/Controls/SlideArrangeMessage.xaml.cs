@@ -87,7 +87,7 @@ namespace MovieIntro.Controls
 
         private async void SaveKnownsButton_Click(object sender, RoutedEventArgs e)
         {
-            Model.SaveKnowns();
+            Model.ApproveKnowns();
             Model.RefreshCallsMessage();
             InfoMessageText.AnimateFadeIn(delay:1);
             KnownsTextBox.AnimateShake();
@@ -95,7 +95,7 @@ namespace MovieIntro.Controls
 
         private void SaveCommonsButton_Click(object sender, RoutedEventArgs e)
         {
-            Model.SaveCommons();
+            Model.ApproveCommons();
             Model.RefreshCallsMessage();
             InfoMessageText.AnimateFadeIn(delay: 1);
             CommonsTextBox.AnimateShake();

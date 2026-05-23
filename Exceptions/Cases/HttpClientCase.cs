@@ -7,6 +7,7 @@
         BeelineAts,
         Tele2Ats,
         Bots,
-        Integration
+        Integration,
+        PerfectoApi
     }
 }

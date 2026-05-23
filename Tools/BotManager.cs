@@ -93,7 +93,7 @@ namespace Calls.Bot.Services
             { 
                 try
                 {
-                    if (data.ScheduleIntervalMinutes > 0)
+                    if (data.ScheduleIntervalMinutes > 0 && data.IsLocalRun)
                     {
                         var dayMinutes = (int)DateTime.Now.TimeOfDay.TotalMinutes;
 
