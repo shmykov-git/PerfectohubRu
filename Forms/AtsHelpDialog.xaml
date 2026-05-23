@@ -74,7 +74,7 @@
                                FontSize="15"
                                Foreground="#CCCCCC"
                                TextWrapping="Wrap"
-                               Margin="0,0,0,10"
+                               Margin="0,0,0,5"
                                LineHeight="20"/>
 
                     <!-- Список преимуществ -->
@@ -89,12 +89,17 @@
                                    FontSize="15"
                                    Foreground="#AAAAAA"
                                    Margin="0,3,0,3"/>
-                        <TextBlock Text="✓ Выводим сообщение в удобном месте"
+                        <TextBlock Text="✓ Выводим сообщение в чат-боте"
                                    FontFamily="Segoe UI"
                                    FontSize="15"
                                    Foreground="#AAAAAA"
                                    Margin="0,3,0,3"/>
-                        <TextBlock Text="✓ Интеграция в Вашу систему (WebHook)"
+                        <TextBlock Text="✓ Интегрируем в Вашу систему (WebHook)"
+                                   FontFamily="Segoe UI"
+                                   FontSize="15"
+                                   Foreground="#AAAAAA"
+                                   Margin="0,3,0,3"/>
+                        <TextBlock Text="✓ Запускаем через приложение или на сервере"
                                    FontFamily="Segoe UI"
                                    FontSize="15"
                                    Foreground="#AAAAAA"
@@ -122,6 +127,7 @@
 
                         <!-- Билайн -->
                         <Border Grid.Column="0"
+                                x:Name="BeelineBlock"
                                 Background="#0D0D0D"
                                 BorderBrush="#333333"
                                 BorderThickness="1"
@@ -141,13 +147,13 @@
 
                             <StackPanel Margin="20,15,20,15">
                                 <TextBlock Text="📞" 
-                                           FontSize="48" 
+                                           FontSize="35" 
                                            HorizontalAlignment="Center"
                                            Foreground="#DD3333"
                                            Margin="0,0,0,10"/>
                                 <TextBlock Text="БИЛАЙН"
                                            FontFamily="Segoe UI"
-                                           FontSize="18"
+                                           FontSize="16"
                                            FontWeight="Bold"
                                            Foreground="#FFFFFF"
                                            HorizontalAlignment="Center"
@@ -162,6 +168,7 @@
 
                         <!-- Tele2 -->
                         <Border Grid.Column="2"
+                                x:Name="Tele2Block"
                                 Background="#0D0D0D"
                                 BorderBrush="#333333"
                                 BorderThickness="1"
@@ -181,13 +188,13 @@
 
                             <StackPanel Margin="20,15,20,15">
                                 <TextBlock Text="📞" 
-                                           FontSize="48" 
+                                           FontSize="35" 
                                            HorizontalAlignment="Center"
                                            Foreground="#DD3333"
                                            Margin="0,0,0,10"/>
                                 <TextBlock Text="TELE2"
                                            FontFamily="Segoe UI"
-                                           FontSize="18"
+                                           FontSize="16"
                                            FontWeight="Bold"
                                            Foreground="#FFFFFF"
                                            HorizontalAlignment="Center"

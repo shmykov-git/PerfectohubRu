@@ -1,4 +1,5 @@
-﻿using PerfectohubRu.Tools;
+﻿using PerfectohubRu.Extensions;
+using PerfectohubRu.Tools;
 using System;
 using System.Diagnostics;
 using System.Windows;
@@ -11,6 +12,13 @@ namespace MovieIntro
         public AtsHelpDialog()
         {
             InitializeComponent();
+            this.Loaded += AtsHelpDialog_Loaded;
+        }
+
+        private void AtsHelpDialog_Loaded(object sender, RoutedEventArgs e)
+        {
+            BeelineBlock.AnimateShake(1, 1);
+            Tele2Block.AnimateShake(1, 1.5);
         }
 
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
