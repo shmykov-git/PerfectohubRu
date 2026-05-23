@@ -34,11 +34,15 @@ namespace Calls.HttpClients
 
         public async Task<bool> IsClientIdAvailable()
         {
-            var result = await GetAsync<bool>(new MethodArgs
+            var query = new
             {
-                Method = options.IsClientIdAvailable.With(("username", data.ClientId)),
-                QueryArgsType = QueryArgsType.QueryString,
-                UseThrowCase = HttpClientCase.PerfectoApi
+                userName = data.ClientId
+            };
+
+            var result = await GetAsync<bool>(query, new MethodArgs
+            {
+                Method = options.IsClientIdAvailable,
+                QueryArgsType = QueryArgsType.QueryString
             });
 
             return result;

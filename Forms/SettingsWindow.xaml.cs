@@ -62,10 +62,16 @@ namespace MovieIntro
 
         private void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "State")
+            if (e.PropertyName == nameof(model.State))
             {
                 ShowIndicators();
                 RunServerButton.IsEnabled = model.State >= ClientState.HasBot;
+            }
+
+            if (e.PropertyName == nameof(model.ServerResultMessage))
+            {
+                ServerResultMessage.AnimateFadeIn(0.5);
+                ServerResultMessage.AnimateFadeOut(0.5, 3.5);
             }
         }
 
@@ -87,9 +93,14 @@ namespace MovieIntro
             }
         }
 
-        private void RunServerButton_Click(object sender, RoutedEventArgs e)
+        private async void RunServerButton_Click(object sender, RoutedEventArgs e)
         {
-            model.IsServerRun = true;
+            await model.RunOnServer();
+        }
+
+        private async void StopServerButton_Click(object sender, RoutedEventArgs e)
+        {
+            await model.StopOnServer();
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)

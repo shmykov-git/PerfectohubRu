@@ -18,10 +18,12 @@ namespace PerfectohubRu.Forms.ViewModles
         private string _integrationMessage = "";
         private string _integrationMessageResult = "";
         private Brush _integrationMessageResultColor = new SolidColorBrush(Color.FromRgb(0xCC, 0xCC, 0xCC));
+        private Brush _serverResultMessageColor = new SolidColorBrush(Colors.Red);
         private string _knowns = "";
         private string _commons = "";
         private ScheduleItem[] _scheduleItems = new ScheduleItem[0];
         private ScheduleItem _selectedSchedule = null;
+        private string _serverResultMessage;
 
         public string AtsToken
         {
@@ -306,6 +308,7 @@ namespace PerfectohubRu.Forms.ViewModles
                     dataProvider.Save();
                     OnPropertyChanged();
                     NotifySeverGroup();
+                    ValidateClientId();
                 }
             }
         }
@@ -319,6 +322,30 @@ namespace PerfectohubRu.Forms.ViewModles
                 {
                     data.ClientPassword = value;
                     dataProvider.Save();
+                    OnPropertyChanged();
+                    ValidatePassword();
+                }
+            }
+        }
+
+        public string ServerResultMessage
+        {
+            get => _serverResultMessage;
+            set
+            {
+                _serverResultMessage = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Brush ServerResultMessageColor
+        {
+            get => _serverResultMessageColor;
+            set
+            {
+                if (_serverResultMessageColor != value)
+                {
+                    _serverResultMessageColor = value;
                     OnPropertyChanged();
                 }
             }

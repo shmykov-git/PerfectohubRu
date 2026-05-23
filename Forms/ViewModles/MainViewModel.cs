@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace PerfectohubRu.Forms.ViewModles
 {
@@ -245,9 +246,58 @@ namespace PerfectohubRu.Forms.ViewModles
             State = ClientState.HasIntegration;
         }
 
+        public async void ValidateClientId()
+        {
+            await ReactHelper.LastActionIn(nameof(ValidateClientId), TimeSpan.FromSeconds(2));
+
+            if (!IsValidClientId())
+            {
+                ServerResultMessageColor = Brushes.Red;
+                ServerResultMessage = "Невалидный идентификатор";
+                return;
+            }
+
+            if (!await IsAvailableClientId())
+            {
+                ServerResultMessageColor = Brushes.Red;
+                ServerResultMessage = "Идентификатор используется";
+                return;
+            }
+
+            ServerResultMessageColor = Brushes.Green;
+            ServerResultMessage = "Доступно";
+        }
+
+        public async void ValidatePassword()
+        {
+            await ReactHelper.LastActionIn(nameof(ValidatePassword), TimeSpan.FromSeconds(2));
+
+            if (!IsValidClientPassword())
+            {
+                ServerResultMessageColor = Brushes.Red;
+                ServerResultMessage = "Слишком короткий";
+                return;
+            }
+
+            ServerResultMessageColor = Brushes.Green;
+            ServerResultMessage = "Пойдет";
+        }
+
         public bool IsValidClientId() => ClientId != null && Values.Regexes.ClientId.IsMatch(ClientId);
         public Task<bool> IsAvailableClientId() => perfectoHttpClient.IsClientIdAvailable();
 
         public bool IsValidClientPassword() => ClientPassword.Length >= 4;
+
+        public async Task RunOnServer()
+        {
+            
+            //IsServerRun = true;
+        }
+
+        public async Task StopOnServer()
+        {
+
+            //IsServerRun = false;
+        }
     }
 }

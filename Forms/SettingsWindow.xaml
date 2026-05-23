@@ -769,10 +769,10 @@
                             <!-- Кнопка Запустить на сервере -->
                             <Button x:Name="StopServerButton"
                                     Visibility="{Binding StopServerVisibility}"
-                                    Content="🖧 ОСТАНОВИТЬ НА СЕРВЕРЕ"
+                                    Content="ОСТАНОВИТЬ НА СЕРВЕРЕ"
                                     Height="45"
                                     FontFamily="Segoe UI"
-                                    FontSize="12"
+                                    FontSize="18"
                                     FontWeight="SemiBold"
                                     Foreground="#FFFFFF"
                                     Background="#1A1A1A"
@@ -780,18 +780,19 @@
                                     BorderThickness="1"
                                     Cursor="Hand"
                                     Margin="0,10,0,0"
-                                    Click="RunServerButton_Click">
+                                    Click="StopServerButton_Click">
                             </Button>
                         </StackPanel>
 
-                        <TextBlock  Grid.Row="1" x:Name="ServerError" Text="Серверная ошибка"
+                        <TextBlock  Grid.Row="1" x:Name="ServerResultMessage" 
+                                    Text="{Binding ServerResultMessage, Mode=OneWay}"
+                                    Foreground="{Binding ServerResultMessageColor, Mode=OneWay}"
                                     VerticalAlignment="Bottom"
                                     HorizontalAlignment="Center"
-                                        Opacity="1"
-                                           FontFamily="Segoe UI"
-                                           FontSize="16"
-                                           Foreground="Red"
-                                           Margin="0,0,0,5"/>
+                                    Opacity="1"
+                                    FontFamily="Segoe UI"
+                                    FontSize="16"                                           
+                                    Margin="0,0,0,5"/>
                     </Grid>
                 </Border>
             </Grid>
