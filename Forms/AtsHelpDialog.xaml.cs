@@ -44,7 +44,7 @@ namespace MovieIntro
         private void Tele2Link_Click(object sender, MouseButtonEventArgs e)
         {
             // Замените URL на актуальную ссылку на облачную АТС Tele2
-            string url = "https://msk.t2.ru/";
+            string url = "https://msk.t2.ru/business/corp-pbx";
             UrlHelper.OpenUrl(url);
         }
     }
