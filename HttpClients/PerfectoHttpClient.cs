@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Linq;
 using PerfectohubRu.Model;
 using PerfectohubRu.Tools;
+using Shared.Exceptions;
 using Shared.Exceptions.Cases;
 using Shared.HttpClients.Base;
 using Shared.HttpClients.Options.Base;
@@ -50,15 +51,33 @@ namespace Calls.HttpClients
 
         public async Task<ServerOperatonResult> RunOnServer()
         {
-            var result = await PostAsync<ServerOperatonResult>(data, new MethodArgs
+            try
             {
-                Method = options.RunOnServer,
-                QueryArgsType = QueryArgsType.JsonBody,
-                GetBasicAuth = () => (data.ClientId, data.ClientPassword),
-                UseThrowCase = HttpClientCase.PerfectoApi
-            });
+                var result = await PostAsync<ServerOperatonResult>(data, new MethodArgs
+                {
+                    Method = options.RunOnServer,
+                    QueryArgsType = QueryArgsType.JsonBody,
+                    UseThrowCase = HttpClientCase.PerfectoApi
+                });
 
-            return result;
+                return result;
+            }
+            catch (HttpClientException ex) when (ex.Case == HttpClientCase.PerfectoApi)
+            {
+                return new ServerOperatonResult
+                {
+                    Success = false,
+                    Error = ex.Message
+                };
+            }
+            catch (Exception ex) 
+            { 
+                return new ServerOperatonResult
+                {
+                    Success = false,
+                    Error = ex.Message
+                };
+            }
         }
 
         public async Task<ServerOperatonResult> StopOnServer()

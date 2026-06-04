@@ -1,7 +1,9 @@
 ﻿using Calls.Entities.Json;
 using Calls.Model.Ats;
 using Newtonsoft.Json;
+using PerfectohubRu.Tools;
 using Shared.Model.Enums;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 
@@ -36,6 +38,9 @@ namespace PerfectohubRu.Model
 
         public string ClientId { get; set; }
         public string ClientPassword { get; set; }
+
+        public string ClientMac => IdHelper.GetMacAddress();
+        public double ClintTimeZone => (DateTime.Now - DateTime.UtcNow).TotalHours;
 
         [JsonIgnore] public HashSet<string> AllKnowns { get; set; }
         [JsonIgnore] public bool HasCriticalError => CriticalError != null;

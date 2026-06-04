@@ -271,6 +271,7 @@
     <Compile Include="Tools\ClientDataProvider.cs" />
     <Compile Include="Tools\DispatcherHelper.cs" />
     <Compile Include="Tools\Filters.cs" />
+    <Compile Include="Tools\IdHelper.cs" />
     <Compile Include="Tools\ReactHelper.cs" />
     <Compile Include="Tools\RefreshTokenManager.cs" />
     <Compile Include="Tools\UrlHelper.cs" />

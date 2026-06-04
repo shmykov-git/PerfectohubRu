@@ -290,8 +290,19 @@ namespace PerfectohubRu.Forms.ViewModles
 
         public async Task RunOnServer()
         {
-            
-            //IsServerRun = true;
+            var result = await perfectoHttpClient.RunOnServer();
+
+            if (result.Success)
+            {
+                ServerResultMessageColor = Brushes.Green;
+                ServerResultMessage = "Запущено";
+                IsServerRun = true;
+            }
+            else
+            {
+                ServerResultMessageColor = Brushes.Red;
+                ServerResultMessage = result.Error;
+            }
         }
 
         public async Task StopOnServer()

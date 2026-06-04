@@ -429,7 +429,7 @@
                                 </Grid.RowDefinitions>
 
                                 <TextBlock Grid.Row="0"
-                                           Text="Идентификатор клиента"
+                                           Text="Имя пользователя"
                                            FontFamily="Segoe UI"
                                            FontSize="16"
                                            Foreground="#CCCCCC"
