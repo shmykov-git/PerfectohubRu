@@ -30,7 +30,7 @@ namespace MovieIntro
         private const int BOTMESSAGE = 7;
         private const int INTEGRATION = 8;
 
-        private int currentSlideIndex = ATSTOKEN;
+        private int currentSlideIndex = START;// ATSTOKEN;
         private DispatcherTimer slideTimer;
         private readonly ISlide[] slides;
         private readonly IServiceProvider sp;
