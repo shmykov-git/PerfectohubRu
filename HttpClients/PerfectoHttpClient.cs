@@ -82,15 +82,40 @@ namespace Calls.HttpClients
 
         public async Task<ServerOperatonResult> StopOnServer()
         {
-            var result = await PostAsync<ServerOperatonResult>(new MethodArgs
+            try
             {
-                Method = options.RunOnServer,
-                QueryArgsType = QueryArgsType.JsonBody,
-                GetBasicAuth = () => (data.ClientId, data.ClientPassword),
-                UseThrowCase = HttpClientCase.PerfectoApi
-            });
+                var query = new
+                {
+                    clientId = data.ClientId,
+                    clientPassword = data.ClientPassword,
+                    clientMac = data.ClientMac,
+                };
 
-            return result;
+                var result = await PostAsync<ServerOperatonResult>(query, new MethodArgs
+                {
+                    Method = options.StopOnServer,
+                    QueryArgsType = QueryArgsType.JsonBody,
+                    UseThrowCase = HttpClientCase.PerfectoApi
+                });
+
+                return result;
+            }
+            catch (HttpClientException ex) when (ex.Case == HttpClientCase.PerfectoApi)
+            {
+                return new ServerOperatonResult
+                {
+                    Success = false,
+                    Error = ex.Message
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ServerOperatonResult
+                {
+                    Success = false,
+                    Error = ex.Message
+                };
+            }
         }
     }
 }

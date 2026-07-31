@@ -40,7 +40,7 @@ namespace PerfectohubRu.Model
         public string ClientPassword { get; set; }
 
         public string ClientMac => IdHelper.GetMacAddress();
-        public double ClintTimeZone => (DateTime.Now - DateTime.UtcNow).TotalHours;
+        public TimeSpan ClientTimeZone => TimeZoneInfo.Local.GetUtcOffset(DateTime.UtcNow);
 
         [JsonIgnore] public HashSet<string> AllKnowns { get; set; }
         [JsonIgnore] public bool HasCriticalError => CriticalError != null;

@@ -297,6 +297,7 @@ namespace PerfectohubRu.Forms.ViewModles
                 ServerResultMessageColor = Brushes.Green;
                 ServerResultMessage = "Запущено";
                 IsServerRun = true;
+                CanStopServer = true;
             }
             else
             {
@@ -307,8 +308,20 @@ namespace PerfectohubRu.Forms.ViewModles
 
         public async Task StopOnServer()
         {
+            var result = await perfectoHttpClient.StopOnServer();
 
-            //IsServerRun = false;
+            if (result.Success)
+            {
+                ServerResultMessageColor = Brushes.Green;
+                ServerResultMessage = "Остановлено";
+                IsServerRun = false;
+                CanStopServer = false;
+            }
+            else
+            {
+                ServerResultMessageColor = Brushes.Red;
+                ServerResultMessage = result.Error;
+            }
         }
     }
 }
