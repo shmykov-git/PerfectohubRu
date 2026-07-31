@@ -221,7 +221,7 @@
                                Opacity="0"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
-                        Text="только одно поле"
+                        Text="Одно значение - почти готово!"
                         Foreground="Green"
                         />
                     
