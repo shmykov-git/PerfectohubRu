@@ -1,10 +1,10 @@
 name: Manual Build and Release WPF (.NET Framework 4.8)
 
 on:
-  workflow_dispatch:  # Только ручной запуск
+  workflow_dispatch:
 
 permissions:
-  contents: write  # Права на создание релиза
+  contents: write
 
 jobs:
   build-and-release:
@@ -18,21 +18,19 @@ jobs:
       uses: microsoft/setup-msbuild@v2
 
     - name: Restore NuGet packages
-      run: nuget restore PerfectohubRu.sln  # Укажите путь к вашему .sln файлу
+      run: nuget restore PerfectohubRu.slnx
 
     - name: Build the app
       run: msbuild PerfectohubRu.slnx /p:Configuration=Release /p:Platform="Any CPU"
-      # Если нужно собрать под x64, замените "Any CPU" на "x64"
 
     - name: Upload .exe to Release
       uses: softprops/action-gh-release@v1
       with:
-        files: ./PerfectohubRu/bin/Release/*.exe  # Укажите путь к вашему .exe
+        files: ./bin/Release/*.exe
         tag_name: manual-build-${{ github.run_number }}
         release_name: Manual Build #${{ github.run_number }}
         body: |
-          Сборка запущена вручную.
           .NET Framework 4.8
-          Дата: ${{ github.event.repository.updated_at }}
+          Date: ${{ github.event.repository.updated_at }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
