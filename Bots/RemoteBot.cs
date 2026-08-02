@@ -50,7 +50,7 @@ namespace Calls.Api.Bots
 
                 _ = Task.Run(() => Polling(cancellationToken));
 
-                if (registredBotId != null)
+                if (registredBotId != null && data.BotId != registredBotId)
                     Debug.WriteLine($"INFO: {BotType} @{registredBotId} старый бот остановлен");
 
                 Debug.WriteLine($"INFO: {BotType} @{data.BotId} запущен и готов к работе!");
