@@ -21,7 +21,7 @@ jobs:
       run: nuget restore PerfectohubRu.sln  # Укажите путь к вашему .sln файлу
 
     - name: Build the app
-      run: msbuild PerfectohubRu.sln /p:Configuration=Release /p:Platform="Any CPU"
+      run: msbuild PerfectohubRu.slnx /p:Configuration=Release /p:Platform="Any CPU"
       # Если нужно собрать под x64, замените "Any CPU" на "x64"
 
     - name: Upload .exe to Release
